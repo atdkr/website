@@ -1,0 +1,4780 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>陽月的單元小劇場</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #36393e;
+            color: #dcddde;
+            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+        }
+
+        .markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .preserve-whitespace {
+            white-space: pre-wrap;
+        }
+
+        .spoiler-text {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .spoiler-text--hidden {
+            cursor: pointer;
+            background-color: #202225;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .spoiler-text--hidden:hover {
+            background-color: rgba(32, 34, 37, 0.8);
+        }
+
+        .spoiler-text--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .quote {
+            display: flex;
+            margin: 0.05em 0;
+        }
+
+        .quote::before {
+            content: "";
+            margin-right: 0.5em;
+            border: 2px solid #4f545c;
+            border-radius: 3px;
+        }
+
+        .pre {
+            background-color: #2f3136;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .pre--multiline {
+            margin-top: 0.25em;
+            padding: 0.5em;
+            border: 2px solid #282b30;
+            border-radius: 5px;
+            color: #b9bbbe;
+        }
+
+        .pre--multiline.hljs {
+            background-color: #2f3136;
+            color: #b9bbbe;
+        }
+
+        .pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #7289da;
+            background-color: rgba(114, 137, 218, .1);
+            font-weight: 500;
+        }
+
+        .timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .emoji {
+            width: 1.325em;
+            height: 1.325em;
+            margin: 0 0.06em;
+            vertical-align: -0.4em;
+        }
+
+        .emoji--small {
+            width: 1em;
+            height: 1em;
+        }
+
+        .emoji--large {
+            width: 2.8em;
+            height: 2.8em;
+        }
+
+        .preamble {
+            display: grid;
+            margin: 0 0.3em 0.6em 0.3em;
+            max-width: 100%;
+            grid-template-columns: auto 1fr;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 0.6em;
+        }
+
+        .preamble__entry {
+            font-size: 1.4em;
+            color: #ffffff;
+        }
+
+        .preamble__entry--small {
+            font-size: 1em;
+        }
+
+        .chatlog {
+            max-width: 100%;
+        }
+
+        .chatlog__message-group {
+            display: grid;
+            margin: 0 0.6em;
+            padding: 0.9em 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            grid-template-columns: auto 1fr;
+        }
+
+        .chatlog__reference-symbol {
+            grid-column: 1;
+            margin: 8px 4px 4px 18px;
+            border-left: 2px solid #4f545c;
+            border-top: 2px solid #4f545c;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            grid-column: 2;
+            margin-bottom: 0.25em;
+            font-size: 0.875em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            align-items: center;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-avatar {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25em;
+        }
+
+        .chatlog__reference-name {
+            margin-right: 0.3em;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-content a:hover {
+            text-decoration: none;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-link:hover *:not(.spoiler-text) {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25em;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__author-avatar-container {
+            grid-column: 1;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+
+        .chatlog__author-avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chatlog__messages {
+            grid-column: 2;
+            min-width: 50%;
+        }
+
+        .chatlog__author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3em;
+            font-size: 0.75em;
+            color: #36393e;;
+        }
+
+        .chatlog__message {
+            padding: 0.1em 0.3em;
+            margin: 0 -0.3em;
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__content {
+            font-size: 0.95em;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15em;
+            font-size: 0.8em;
+        }
+
+        .chatlog__attachment {
+            display: inline-block;
+            position: relative;
+            margin-top: 0.3em;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.4em 0.8em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            color: #dcddde;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 10px;
+            background-color: #2f3136;
+            border: 1px solid #292b2f;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__edited-timestamp {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3em;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25em;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: #202225;
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.6em;
+            background-color: rgba(46, 48, 54, 0.3);
+            border: 1px solid rgba(46, 48, 54, 0.6);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author {
+            display: flex;
+            margin-bottom: 0.3em;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            margin-right: 0.5em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author-name {
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff
+        }
+
+        .chatlog__embed-author-name-link {
+            color: #ffffff;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.2em;
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-description {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5em;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6em;
+            font-size: 0.875em;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 150px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-field-value {
+            font-weight: 500;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            margin-left: 1.2em;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-footer-icon {
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            align-items: center;
+            margin: 0.35em 0.1em 0.1em 0.1em;
+            padding: 0.2em 0.35em;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35em;
+            font-size: 0.875em;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .chatlog__bot-tag {
+            position: relative;
+            top: -.1em;
+            margin-left: 0.3em;
+            padding: 0.05em 0.3em;
+            border-radius: 3px;
+            line-height: 1.3;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625em;
+            font-weight: 500;
+        }
+
+        .postamble {
+            margin: 1.4em 0.3em 0.6em 0.3em;
+            padding: 1em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .postamble__entry {
+            color: #ffffff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler-text--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler-text--hidden');
+            }
+            if (element && element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="icon-attachment" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://images.plurk.com/4kNId0g4x6i6QDuPMX26pO.png " alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">陽月的單元小劇場</div>
+        <div class="preamble__entry preamble__entry--small">關於某人處女喪失的小故事</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">29-Aug-21 11:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="881555724050784336" id="message-881555724050784336" title="Message sent: 29-Aug-21 11:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">在某一次行房結束的時候，跟往常一樣打算脫下保險套打個結的你發現了那本來就有些黃黃的塑料套上，除了沾在上面的腸液以外，還多了一層薄薄的血膜。
+
+隨後在月代父親的診斷下，確定是因為做愛的時候動作太過激烈，腸壁被磨損從而導致的流血。
+
+被叮囑了大概一個月左右不能做愛的同時，月代也被禁止做一切會用到腰部的動作。
+而迫不得已的月代，也只能很不情願的讓你每天下班的時候來到自己的家，幫忙做點他不能做的家務。
+
+隨後時間就來到了一個月後，雖然月代的傷已經恢復得差不多了，但由於已經形成了一種習慣，下班後你還是來到了月代家，打開了五樓的門。
+
+………這個是酒精的味道。
+打開門的一瞬間，那個讓人感覺到有些刺鼻的味道鑽進了你的鼻孔。
+
+同時，你也注意到在沙發的附近有大概是5罐的啤酒被放在了哪裡。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">29-Aug-21 11:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="881558141794414672" id="message-881558141794414672" title="Message sent: 29-Aug-21 11:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">事件的始作俑者今天也來支援家務。
+但不同以往的是，雲井一打開房門聞到那再明顯不過的撲鼻酒味，他人禁不住一愣。
+
+是發生什麼事？剛是有酒趴嗎？
+
+隨後，看到數瓶開罐的啤酒瓶堆落在沙發附近。
+於是雲井往客廳的方向走：「呃……月、月代……？」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">29-Aug-21 11:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="881559251317821501" id="message-881559251317821501" title="Message sent: 29-Aug-21 11:21 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「姆…呃………、陽一一正一？」
+當你走到沙發附近，一股無模糊糊的聲音從沙發背部傳來。
+
+「歡迎、回來～！」往那邊看過去，可以看到坐在地上拿著啤酒罐，喝了一口之後再繼續跟你說話的月代。
+
+依桌子上的啤酒罐來看，這下月代至少已經喝了五罐左右進胃裡面了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">29-Aug-21 11:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="881561013722447893" id="message-881561013722447893" title="Message sent: 29-Aug-21 11:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">唔——啊，這、這是發生了什麼事？
+
+「呃嗯，我、我回來了……」
+被戀人反常的舉止驚嚇到的雲井，過了幾秒才想到必須把啤酒撤走。
+
+「發生什麼事了嗎，月代。怎麼突然喝這麼多？」
+他擔心的彎下身，一邊揉了揉不耐酒精的醉鬼的頭，另一手嘗試將對方手中的啤酒拿走。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">29-Aug-21 11:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="881562897749254245" id="message-881562897749254245" title="Message sent: 29-Aug-21 11:36 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「阿嗚、……」已經是最的一蹋糊塗的月代，這次倒是挺老實的低下了頭讓你摸摸以及拿走手中的啤酒罐。
+
+「因、為……，好寂寞…。」
+「一個…月………。」
+月代模模糊糊的回答了你的問題，看似有說出原因，但也沒有很具體表明是因為什麼事情。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">29-Aug-21 11:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="881565064841273355" id="message-881565064841273355" title="Message sent: 29-Aug-21 11:44 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">雲井把啤酒擺到沙發前的矮桌上。
+接著蹲下身，雙手穿過對方的腋下，準備將人攙扶到沙發上。
+
+「抱歉，我回來晚了……」以為是他晚下班，才導致月代一個人縮在這喝悶酒的雲井老實的道歉。
+
+嗯？一個月是指什麼？
+「一個月？」雲井停下動作，對上月代的表情、歪了歪頭，不明白的問道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">29-Aug-21 11:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="881566573591150633" id="message-881566573591150633" title="Message sent: 29-Aug-21 11:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">月代那輕飄飄的身體很容易被你抬了起來，便放到了沙發哪邊坐著。
+
+到了沙發，月代就像一隻無脊椎的動物，軟趴趴的半躺在沙發上，而他的眼睛正有些難以對焦的看著你的臉，再次重複了剛才的話語。
+
+「姆唔、…一個月…。」他舉起了手，比了一個1的手勢在空中轉著圈圈。
+
+「好想…做…、嗚一一…」他在說了這句之後，便又放下了手。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 12:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="881570955250507916" id="message-881570955250507916" title="Message sent: 30-Aug-21 12:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">啊。
+
+當事人一點就通，畢竟他當時被嚇得不輕，實在太難忘、太深刻了。
+沒想到自己的行為會傷害到對方，還這麼嚴重……
+
+「……對、對不起，月代……」雲井在戀人身旁坐了下來。
+伸手摟過全身軟綿綿的月代，讓對方靠在自己身上，揉了揉頭髮。
+
+「你的腰……還會不舒服嗎？」想著還是聽醫生的叮囑比較好，但又不忍看月代悶到用酒釀了自己。
+
+……雖然也是有不動到腰的洩慾方式。
+但這樣不會干擾到對方靜養嗎？</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 12:15 AM</span>
+
+            <div class="chatlog__message " data-message-id="881572792884142101" id="message-881572792884142101" title="Message sent: 30-Aug-21 12:15 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊嗚……不會…，腰…不是很痛……。」液體月代靠在了你的肩膀上，並用他那紅色頭髮蹭著你。
+
+「但是裡面…，還…不行…嗚…。」雖然現在他是很想用後面把你吃掉，但還記得自己父親說過&quot;最起碼要等到最後一次檢查之後才能做&quot;的話，月代還是打消了這個念頭。
+
+「可是……，想做、啊……一一。」月代伸出了雙手抱著你，像個小孩子跟父母要玩具一般的跟你撒著嬌。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 12:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="881575476164952094" id="message-881575476164952094" title="Message sent: 30-Aug-21 12:26 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">被戀人貼近撒嬌，而這一個月也跟著禁慾的人忍耐也差不多到極限了。
+
+「唔嗯，要……做的話，」雲井思考了一下體位：「月代不動，我來的話……」
+
+好像，也只能用手幫忙了？
+他的口交技巧真的不怎麼樣。
+之前含了半天也沒能讓對方硬，真的很悲劇。</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Aug-21 04:37 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 12:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="881577383415652432" id="message-881577383415652432" title="Message sent: 30-Aug-21 12:33 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「陽…正…，終於肯…讓我插進去了嗎？」明顯示對你的話語有所誤解，月代的表情也從朦朧的狀態產生了微妙的變化。
+
+只見他嘴角微微的上揚，很高興的加大了擁抱的力度，瞇著眼睛用頭不停地磨蹭著你。
+
+「耶～～，可以進去陽正裡面了一一一」他那說話的語氣變得異常的怪異，感覺高低音並沒有好好的時候到控制，導致說出來的語氣整個就是有些棒讀。</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Aug-21 12:35 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 12:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="881581303659655168" id="message-881581303659655168" title="Message sent: 30-Aug-21 12:49 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>ㄏㄚˊ！？</strong>
+
+聽到戀人突如其來的爆言，他整個人僵了一下。
+
+不是不是不是不是，先生！
+
+「呃我？不、不是，月代你……」
+相較情緒很 High 的月代，雲井就連解釋的音量也被那一下下的磨蹭蓋了過去。
+
+而醉鬼的棒讀，他沒法分辨戀人的話是認真、還是開玩笑。
+
+「月、月代，你確定想……？」
+
+他咽了嚥口水，語氣中充滿不確定：「我呃、完全沒經驗哦……？」
+
+雖然以前有自已試過清腸，但除了清洗之上的插入則完全沒嘗試過。
+
+搞不好用自慰套幫對方釋放還比較……啊，月代家好像沒有飛機杯齁。</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Aug-21 12:52 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 12:58 AM</span>
+
+            <div class="chatlog__message " data-message-id="881583615794880582" id="message-881583615794880582" title="Message sent: 30-Aug-21 12:58 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">醉鬼月代點了點頭，在聽到你那處女宣言後，笑得比剛才更開心了。
+
+「嗯嗯……，那麼陽正的第一次是我的呢一一！」
+語畢，月代的手就已經開始有些不安份的一個又一個解開著你的鈕扣，看樣子是想把你給扒了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 01:05 AM</span>
+
+            <div class="chatlog__message " data-message-id="881585391822590002" id="message-881585391822590002" title="Message sent: 30-Aug-21 01:05 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">啊，哇、哇啊！
+
+「等等等，月代，等下——！」
+
+雲井趕忙握住那自動自發過了頭的手：「呃我、我說……也至少，洗一下再……」
+
+知識少到直接被 google 老師給的教學定型的人，感覺不按部就班，有哪裡怪怪的！</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 01:10 AM</span>
+
+            <div class="chatlog__message " data-message-id="881586616353828885" id="message-881586616353828885" title="Message sent: 30-Aug-21 01:10 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「姆嗚、陽正會嗎…？」
+感覺一般人那樣亂用很有可能會變成跟他自己現在的狀況差不多，所以月代在聽到你要洗一下的時候，倒是收起了剛才過份高興的表情，慢慢地轉為了有些擔心的樣子。
+
+「需不需要……幫忙？」歪了歪腦袋，月代模糊的雙眼直勾勾的看著你現在的表情。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 01:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="881588351050862613" id="message-881588351050862613" title="Message sent: 30-Aug-21 01:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「幫、幫忙……」
+
+不知道為什麼，就算戀人表現出絕對的關心。
+但雲井陽正卻有種草食動物對上肉食者的錯覺。
+這大概就是經驗的差距吧……
+
+「呃，就……把水灌進去，憋住後排掉……這點我還是知道的……」
+因為自己的經驗確實不如人，雲井只好很尷尬的開口解釋。
+
+也順便聽聽月代老師有沒有什麼建議……</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Aug-21 01:21 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 01:27 AM</span>
+
+            <div class="chatlog__message " data-message-id="881590807067492412" id="message-881590807067492412" title="Message sent: 30-Aug-21 01:27 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯一一一，滿分10分我給…5分…！」月代稍微的思考了一下，隨後便給你打了一個分數。
+
+看樣子你剛才的回答並不是滿分呢。
+
+隨後月代便搖晃著他現在那完全不靈光的腦袋，用模糊的口齒說明道：
+「灌腸呢一一，只是把水灌進去是很危險的喔…，要弄的話……最好用醫用的灌腸劑呢。」
+
+「現在也有些個人用的是可以重複使用啦一一，但是那個我也沒有經驗呢。」
+
+說完之後他便離開了你的身邊，踏著搖搖晃晃的步伐走進了廁所裡面拿出了一個像是眼藥水一般的瓶子，然後重新走了回來，放到了你的手上。
+
+「這個就是一一，灌腸劑喔～！」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 01:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="881595219638882334" id="message-881595219638882334" title="Message sent: 30-Aug-21 01:44 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">雲井愣愣的從月代手上接過那瓶透明無色的灌腸劑。
+
+看起來量不是很多：「唔嗯……把這全擠進去，等到忍不住後排掉嗎？老師。」
+
+大概是對方提出醫學角度的建議，雲井提問的態度也不再扭扭捏捏，聽專業醫生的話準沒錯。
+
+「那擴張，」他頓了頓，繼續發問：「一定要到……三指的粗度？」
+
+老實說，他之前放兩指就感覺不太對勁了。
+害怕把肛門搞壞的人，完全不敢再越過一線。</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Aug-21 01:52 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 01:53 AM</span>
+
+            <div class="chatlog__message " data-message-id="881597506692194355" id="message-881597506692194355" title="Message sent: 30-Aug-21 01:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯姆，這個呢…用之前要搖晃一下～就像這樣。」月代再次拿走了你手上那瓶藥劑，然後隨便的搖了三、四下左右。
+
+「然後呢一一，要趴下或者左側躺的把它灌進體內喔～」他說完之後便動手解開你的褲子，看樣子是想幫你把藥灌進去。
+
+「擴張最主要是看進去的東西尺寸有多大而已～普通的儀器的話兩指左右就足夠了……，但是陽正和我的雞雞最少要到三指，視情況有可能要四指左右呢。」
+此時的月代已經成功把你的皮帶解下來了，現在就剩褲子本體。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 02:07 AM</span>
+
+            <div class="chatlog__message " data-message-id="881600990028136458" id="message-881600990028136458" title="Message sent: 30-Aug-21 02:07 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">呃嗯？
+原本專心聽解說的人，突然被向後推倒在沙發上時還有點搞不清楚狀況。
+
+直到月代手攀上他的褲頭，俐落的解開皮帶時才驚覺接下來的發展有點不太妙。
+
+「月、月代！」
+雖然他伸手去擋，但褲頭瞬時嗖地一聲被對方褪至腿下，只剩最後一道防線內褲岌岌可危。
+
+怎麼想都不太妙吧，在沙發上。
+
+「我、這我自己來啦……！」至少去浴室弄啊啊啊！</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Aug-21 05:50 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 02:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="881602215779909683" id="message-881602215779909683" title="Message sent: 30-Aug-21 02:12 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯姆？好吧一一」本來只是怕你不會趴下來從而已的月代，聽你一說便很乾脆的放下了想把你內褲也扒下來的手。
+
+「記得要把屁股提高一點，這樣才能順利流進去喔～」他把灌腸劑重新交到了你的手上，隨後半推的把你推向廁所那邊。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 03:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="881619297376538704" id="message-881619297376538704" title="Message sent: 30-Aug-21 03:20 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊、嗯，好……」下半身只剩一條內褲的人被推入廁所。
+
+看了一眼鏡中不安的臉後又別過頭。
+把上衣和內褲全脫掉後，他學著月代剛才的動作，甩了甩那瓶栓劑。
+人跪趴在浴室地板，手往後庭探確定大概位置後，人深深呼吸一口氣。
+接著把藥瓶的開口扭開，讓前段完全沒入肛門口。
+
+「唔呃。」幾乎是即刻地，比體內溫度還低的液體緩緩流入腸子深處，怪異的感覺讓他一時之間找不到能形容此刻心情的詞彙。
+
+感覺瓶內已經空了，便把灌腸劑的瓶子拔了出來。
+
+「……。」他現在是不是要維持這個姿勢比較好？
+要是一坐直剛放進去的液體又會流光。但要等到什麼時後才能排掉……
+
+而下一秒自腹下而上的難忍生理反應已給了答案。
+
+「咕嗚！」咬牙硬撐起上半身坐起，冒著冷汗與腸道內無視本人意願的絞痛做拔河，一寸一寸的慢慢挪動到馬桶那。
+
+等他坐穩後，那緊靠自尊維持的壁壘瞬時瓦解，終於能放鬆括約肌的人抹去臉上的盜汗喘氣。
+
+等下……還有擴張要做……
+在馬桶上思考著「男同志之間作愛好麻煩、月代之前也是這麼辛苦嗎，完全不知道」——的沈思者，等體感體內的穢物都排光後這才轉而去處理後續的步驟。
+
+清洗過程，手指靠著沐浴乳的潤滑再度侵入才剛被甘油灌洗後的後庭。
+不適感與羞恥感全寫在臉上，有自知之明的雲井自然不會去看淋浴間的那面鏡子。
+
+「哈啊……」調整呼吸，抽送的手指從一根添到兩根。
+但這姿勢自己來的角度畢竟碰不到前列腺，雲井的感想也只剩下異物填塞的不適感。
+
+正因為他無法看到，此時腦中想像的畫面全是過去時，他幫月代擴張的畫面。
+現在，他的身體也是這樣嗎……
+
+在兩根手指能順暢的抽送三個指節後，雲井深深呼吸，慢慢的把第三根食指也沒入洞口。
+
+……好撐！媽啊！感覺快裂開了，應該不會真的裂開吧，救命啊！
+
+在緩慢的抽插過程，完全體驗不到跟「舒服」沾上邊的人，已經完全不對等下的性事抱任何期待了。
+
+就在雲井哭笑不得的質問自己為什麼要跳坑時，穴口也漸漸習慣了侵入物的粗度，感覺不像剛才那般難受了。
+
+哈啊……這樣準備工作算是做得差不多了吧。
+沒想過自己的肛門還有吃進三根手指潛力的人，另一手拿過水龍頭沖洗體內體外的泡沫。
+
+全身沖洗了一輪，雲井把身體擦乾後全身只留底褲的走出了浴室，找尋對方的身影。
+
+「久等了……月代。」感覺他這清理弄了很久，月代應該不會等不下去，直接睡去了吧。</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Aug-21 08:42 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 08:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="881872714476978208" id="message-881872714476978208" title="Message sent: 30-Aug-21 08:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">而在自己戀人進去廁所裡面跟和肛門抗爭的時候，被留在外面的、又沒有什麼東西可以做的月代便伸手重新拿上被對方放在桌子上的啤酒罐。
+
+酒精一口又一口地灌進自己的胃部，本來就熾熱的身軀，被進到胃裡面的酒精感染，體溫再次上升。
+
+「嗯嗚、嗚………」好熱…。
+
+反正待會肯定也要脫，那不如直接現在脫光比較省事。
+這樣想著的月代，雖然開始動起手來想把身上的衣物脫光，但是由於他動作實在太過於笨拙，在打算脫自己的褲子而彎下要的時候，還沒完全脫下來的上衣就直接卡住了他的身體。
+
+「阿呃？嗚……？？」只是感覺周圍突然變得黑暗，外加身體動不了的他，現在就像一隻被毛線困住的貓咪一般，在那張寬大的沙發上微微蠕動著。
+
+當雲井從廁所裡面出來的時候，看向客廳那邊的他能看到比自己的襯衫卡住，同時因為想去解褲子而彎下腰變成一顆球的月代在沙發上蠕動的模樣。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 08:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="881875878454390794" id="message-881875878454390794" title="Message sent: 30-Aug-21 08:19 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">左右查看的雲井遠遠看到沙發方向有一球人形布團左右扭動。
+不明白對方是做了什才把自己搞成這樣，忍不住「噗」的一聲笑出來了。
+
+他趕忙走上前解救月代陷入的困境。
+「哈哈啊，你怎麼弄成這樣啦？月代呦～」
+
+雲井拉住戀人的手，要人先放鬆別亂動，把皺成布繩的那一圈襯衫弄回原樣。
+按部就班的，幫忙一顆顆解開釦子的同時，他也注意到對方的臉比剛才更紅了。
+
+這位先生是又喝酒了嗎？啊啊……</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 08:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="881878560338493451" id="message-881878560338493451" title="Message sent: 30-Aug-21 08:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">雖然沒有看到對方的樣子，但聽這聲音還有觸碰著手的感覺，令月代意識到是自己的戀人回來了。
+
+「陽…正……嗚…」
+乖乖的停下了動作，讓戀人幫自己解開那已經皺成一團的衣服，沒過多久月代就重新看到周圍的環境了。
+
+「想說……，反正待會都會脫掉…不如現在就脫光…，還有……好熱…。」他迷迷糊糊的回應了對方，然後把視線放到了你身上剩下的布料一一內褲上。
+
+「嗚嗯……陽正也脫掉吧一一。」話說到一半，月代的手就已經放到了你內褲上，把那塊布料從你身上扒下來了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 08:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="881881463543443466" id="message-881881463543443466" title="Message sent: 30-Aug-21 08:42 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">內褲被突然扯下來的人手上動作只停了一秒，隨後像是回應那股急切的，乾脆的把懸在半空的內褲脫了。
+
+喝醉時的月代，人變得相當主動又老實這點，真的很可愛。
+
+雲井湊了上去，幫忙對方去脫上衣時嘴也貼了上去，舌尖舔著帶著點苦味和甜味的唇瓣，隨後吻入炙熱的口腔。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 08:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="881884356145184780" id="message-881884356145184780" title="Message sent: 30-Aug-21 08:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊一一、姆唔…」
+月代本來還打算脱完之後就把那個可愛的東西含入口中疼愛一番的，但這個微微張開的嘴卻被你主動上去的吻堵上，取而代之的是比自己還要稍微有些冰涼的舌頭入侵口腔的觸感。
+
+好可愛…、陽正…好可愛。
+聽著從口腔內傳來的水聲，只是覺得自己不戀人無比令人感覺憐愛的他，除了跟對方互相糾纏的舌頭以外，空出來的手也撫上了對方的背部，用羽毛触碰一般的力氣順著軀體的曲線從腰間一路滑到了屁股那邊，最終在有些結實的屁股蛋那邊輕輕的捏了一下。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 09:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="881888142968369193" id="message-881888142968369193" title="Message sent: 30-Aug-21 09:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">交換唾液的交流令他有了分享醉意的錯覺，而從月代那微張的口中呼出的熱息也被雲井咽入肺腔。
+用身體裡到外，全身感受著戀人給予的一切，這讓他很快地進入狀況。
+
+「哈呃、」直到背後突然的搔癢感讓他分心了。
+細細拂過身體輪廓的行為並沒有逗留太久，就在想著幸好這波能撐過去時，那在明顯不過的一掐又提醒了遲早要面對的事。
+
+「唔，月代……已經等不及了嗎？」
+雲井上半身稍微退了些，讓他能看清戀人現在的表情。
+口吐像是示弱又像邀請的疑問句：「手、手下留情……拜託？」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 09:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="881889993377845318" id="message-881889993377845318" title="Message sent: 30-Aug-21 09:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯哼、哈…但是……」結束了這個沒有太過深入的吻，眼神依然朦朧的月代動手擦了擦自己嘴邊的唾液，隨後把手移動到自己的胯下，捏了捏布料底下、還沒有硬起來的性器。
+
+「嗚、……還沒有硬起來…」雖然他是很期待可以進入自己戀人的體內，但是在酒精的作用下，陰莖比平常更難勃起的他現在有些力不從心的感覺。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 09:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="881894372029894666" id="message-881894372029894666" title="Message sent: 30-Aug-21 09:33 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">啊啊，這邊也喝醉了呢。
+
+低下頭看向那搓著下體的手，他很樂意幫忙分憂解勞。
+動手將月代的褲子和內褲脫掉後，雲井跨跪在對方的兩腿之間。
+
+吐了些唾液至掌心，右手撫弄著沒什麼精神的軟肉，用緩慢的速度慢慢擼動。
+另一手則在大腿根連著囊袋附近的細薄區域細細撫摸。
+
+壓低的上半身則湊上了月代的腹部，用濕軟的舌和唇在白皙的肌膚上吸吮。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 09:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="881897731583520799" id="message-881897731583520799" title="Message sent: 30-Aug-21 09:46 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">雙腿微微地抬起，非常配合的讓對方把褲子跟內褲脫下來，自己則將留在上身的襯衫脫掉，變成裸體的狀態。
+
+看著戀人用那稱不上柔軟的手心、靠著唾液的潤滑包覆著自己的陰莖，開始這不規則且緩慢的擼動，同時那一股令人麻痺的快感也在不知不覺中爬到了因酒精而融化的腦袋中。
+
+「唔啊♡、哈……陽正…的，不用嗎…？」
+因為月代主觀意識上覺得對方剛剛進去廁所裡面應該只是灌了腸而已，所以在這個前戲的階段上，也想幫對方適應一下的他一邊伸手撫摸著湊上自己腹部的頭髮一邊問道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 10:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="881903799369871391" id="message-881903799369871391" title="Message sent: 30-Aug-21 10:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯嗯……？」雲井抬頭看向月代，手上的動作也慢了下來。
+
+從表情中多少能讀出對方想幫忙的意思，不過就他們目前的姿勢有點難辦。
+
+「要……換個位置嗎？」人也暫時收手、坐起了身，眨眼思考可行的體位。
+
+嗯……怎麼想，也只能 69 了？
+
+「那，月代你往下躺一些吧？」
+
+等對方在沙發上完全躺平後，雲井人整個轉向腳的方向，半伏在月代身上。
+但也因為得留一手撐住身體重心，少了一隻手的自慰，進度比剛才慢了些。
+
+這姿勢讓他看得很清楚呢，同樣的，月代那也是吧。
+
+發覺這點後，強迫自己專心把羞恥拋諸在後。
+雲井手套弄了幾下後便停止了動作。人低下頭，伸舌舔逗柱頂的鈴口、和龜緣的部位。
+又滴了些許的唾液加以濕潤，手形成背狀的繼續擼。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 10:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="881909367522353203" id="message-881909367522353203" title="Message sent: 30-Aug-21 10:32 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯姆……」月代點了點頭，隨後拖著沉重的身軀往下移動一點。
+
+啊、這個是69呀。
+
+當戀人整個半伏在自己身上，有些軟軟的頂端碰到自己鼻尖的時候，月代這才反應過來是那個姿勢。
+
+「哈♡……、那…我開動了……嗯唔…。」見剛剛錯過的獵物現在卻送到了自己面前，很有禮貌的說了一句之後，他便抬起了雙手輕輕握住了那可愛的小東西，張開了充滿酒精的口腔，把它整個送進了嘴裡吸吮舔舐。
+
+「嗯…唔、嗚嗯…♡♡」
+含著性器的動作，在對方也同樣用舌頭舔到自己敏感的頂端時有了明顯的遲鈍，同時這種互相吞食對方的行為，也讓月代的性器有了些反應，在你的手中慢慢變得堅挺。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 11:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="881916688549957704" id="message-881916688549957704" title="Message sent: 30-Aug-21 11:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「哈、唔！唔嗯，啊……」敏感處隨著溫暖又濕滑的舔弄，腦中思考也彷彿被肉與肉的相纏融化似的。
+
+就算聲音能忍，但從規律動作被打亂的節奏能感覺到雲井的內在並不如外顯的行為那般淡定。
+
+「哼嗯、哈啊…嗯！」在半眯著喘息的視野之中，發現肉柱漸入狀況。
+因為經驗為零的關係，這讓他沒即時的把「等下自己就要被眼前的性器貫通」做聯想。
+
+在腦袋完全融化之前，單手頂不住下身傳來的快感的雲井，所幸上半身直接趴在月代的腿上。
+
+一手繼續幫對方套弄，另一手則輕柔的按揉那積攢許久的囊袋。
+
+「哼唔！哈啊……」手上動作和忍耐的呻吟並存、持續著，現在沒法一心多用的他，目前最大的願望就是自己別在開頭就繳械。
+
+「……月代，要…啊！已經，可以呵嗯，了……嗎？」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 11:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="881924126749655051" id="message-881924126749655051" title="Message sent: 30-Aug-21 11:31 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">阿啊…、陽正好可愛……好可愛啊……。
+
+聽著戀人那觸動心弦的呻吟，滿腦子幻想著待會插進去的時候，戀人的表情究竟是有多可口的他，下體就已經逐漸來到了完全狀態。
+
+但是……，只是弄這邊的話，待會陽正也還是會很辛苦吧。
+
+「嗯哼、嗚♡……哈…」想到這邊，月代這才把口中的陰莖放了出來，轉而把手撫上對方的會陰處，然後順著曲線來到了後庭口。
+
+「還沒…呢。」月代的一根手指慢慢地滑了進去內部，探索著這個沒有被任何人插入過的處女穴。
+
+可是…，在插進去的那瞬間，感受到裡面並沒有跟自己預想中的一樣緊的月代，第一時間並沒有懷疑過對方的清白，而想到是不是剛才去廁所的時候也順便擴張了才出來。
+
+「陽正……剛剛，自己弄了嗎？…」
+「自己準備之後再過來…，好可愛呢♡陽正。」感覺到對方的貼心，高興的月代這下倒是毫不留情的塞了第二根手指進入穴內，並朝著那個前列腺所在之處輕輕的按壓了幾下。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">30-Aug-21 11:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="881931113268928512" id="message-881931113268928512" title="Message sent: 30-Aug-21 11:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「唔……？」聽對方說著還沒，下身的愛撫近乎在同一時間抽離的雲井困惑的回頭。
+
+「啊，」接著，還未說出口的詢問立即被後穴探入的指節打斷了：「月……」
+
+正因意識到是戀人的手指，心裡萌生的感想與自己來時有了偏差。
+頭一次體驗，有些緊張的他不曉得這時是不是該試著放鬆——但這對零經驗者來說太難也難控了——
+到頭來，還是只能做出像是吮吸的一張一闔的反射動作。
+
+「嗯…呼嗯……」手上的動作完全停了，人趴在對方的腿上吐氣，緩解異物的侵入：「是呃嗯、月代說，唔嗯！要，我才……啊，嗚！」
+話還沒說完就感覺開口再度被撐大。
+
+正想張口換氣對於那幾下針對重點部位的攻擊，完全無法防禦：「哈啊！什、啊不嗚……！」
+
+從下半身竄延回大腦的酥麻信號，讓雲井雙腿止不住的顫抖，同樣被刺激的前方也一抽一抽的。
+
+那與失禁有些許相似的感覺，不禁讓他感到害怕和困惑：「剛、才的，什麼東西……月代？」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">31-Aug-21 12:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="881934615617609868" id="message-881934615617609868" title="Message sent: 31-Aug-21 12:13 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯…，不用怕喔…陽正。」
+「那個只是前列腺而已，…感覺有些麻麻的，對吧。」感覺到對方語氣中的困惑，希望可以緩解一下的月代一邊解釋著一邊安慰般的撫摸著戀人的大腿根部。
+
+雖然口是有在說明，但手上的動作並沒有因此而停下來。
+
+「啊…，很健康呢…♡」
+「我是說前列腺…，沒有任何異常呢。」
+看到放在自己鼻尖的陰莖一抖一抖的模樣，心裡暗自覺得待會也許不用特地關照前面了。</span>
+
+                                <span class="chatlog__edited-timestamp" title="31-Aug-21 02:27 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">31-Aug-21 12:32 AM</span>
+
+            <div class="chatlog__message " data-message-id="881939440111611954" id="message-881939440111611954" title="Message sent: 31-Aug-21 12:32 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗚、嗯有、有點……」趴伏在月代身上的雲井聲音仍有些抖。
+
+來自大腿內側的搔癢，是稍微分散了快感，還是把快感倍乘上去，從那破碎又不止的喘息中能察覺了吧。
+
+「唔啊，嗯哼嗚……」
+兩根手指的抽送還能忍耐，但每回碰到前列腺的點上時，雲井的身體還是忍不住蜷了些。
+
+「嗯、這樣！哈啊……」這算是、診斷 play 嗎？
+
+意識難以集中、快要沒有餘裕的人，斷斷續續的說：「月、月代……等哈啊！我會嗚、忍不住……」
+
+雖然是想表達「如果一直刺激前列腺，自己可能會撐不住先高潮」。
+但在破碎的字句下，或許也給人有種「快忍耐不了」的求歡邀請吧。</span>
+
+                                <span class="chatlog__edited-timestamp" title="22-Sep-21 11:30 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">31-Aug-21 01:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="881951339020697610" id="message-881951339020697610" title="Message sent: 31-Aug-21 01:19 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「所以說…，這個真的很舒服吧？陽正。」
+捲縮的身軀、支離破碎的喘息聲，這些無一不在向月代表達雲井對於前列腺的刺激是感受到快感的事實。
+
+好想繼續欺負下去…，但是那樣…對陽正的刺激會不會太大？
+弄著弄著開始擔心起對於那人的身體負擔會不會太大的他，稍顯不安地停止了手中的動作，看一下對方的反應。
+
+「嗯姆…、好吧…。」
+然而，在月代這樣擔心的時候，雲井那&quot;快忍不住&quot;的聲明，倒是讓他放棄了不安的念頭，轉而塞進去第三隻手指，模仿對方平常會做的動作，在肉穴之中緩慢地抽插著。
+
+畢竟…，那麼可愛的邀請，怎麼可能可以忍住不欺負你呢。
+
+「沒關係的…，這樣去的話，會很舒服的喔…♡」
+手上的動作慢慢加快，挖掘到體內的深處、再深處的地方，然後快速抽回到前列腺所在的地方，狠狠壓過去後，再次來到深處的循環抽插著。</span>
+
+                                <span class="chatlog__edited-timestamp" title="31-Aug-21 01:22 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">31-Aug-21 02:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="881961704232206407" id="message-881961704232206407" title="Message sent: 31-Aug-21 02:00 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">腦子快融化的人在聽到「很舒服吧？」的詢問時人雖然沒回話，倒是老實的用頭蹭了蹭對方的大腿。
+從過去的相處，雲井也逐漸摸熟了兩人在床上的相處方式，對於「快樂」的感覺也盡量不忍著藏著了。
+
+「哈嗯！啊、啊……月！」第三指放入，從開口到內裡被整個撐開。
+肉壁吞著月代的手指，在來回的磨蹭中他又用了新的部位認識戀人的手指。
+那雙曾牽起他的手、為他撫去淚水的那隻手。
+現在正侵犯著他過去從未理解、探索過的地方。
+
+「唔哈啊，可、啊……」
+正當他以為自己那聽起來有些丟人的叫聲已經不能再糟之時，月代抽送的動作讓他見識到身體和聲音的新極限：「…啊！好唔深…啊嗯！嗄呃，不、啊啊……」
+
+好脹，好麻……。
+半眯的雙眼瞥見那仍保持著勃起狀態的陽具。
+口吐著呻吟腦中卻想著如果換成眼前的肉棒，肯定能插得更深吧。
+
+「月…代……我、唔哈……啊！」
+在對方一次次的頂到深處、又快速抽離並且不放過給予刺激的過程中。
+下腹累積的酸軟，最終讓雲井連最擅長的話語都講不出來。
+
+「嗚嗯！」原本趴跪的上半身禁不住高潮的刺激整個弓起。
+而那帶著透明液體的白濁，也就這麼射在身下人的胸膛上。
+
+「我……哈啊，抱兼欠、真嗯……唔哈……」被操紅的穴口、其中的腸肉也隨著當事人的顫抖抽動著。</span>
+
+                                <span class="chatlog__edited-timestamp" title="31-Aug-21 08:39 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">31-Aug-21 08:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="882235140137443419" id="message-882235140137443419" title="Message sent: 31-Aug-21 08:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">戀人那像是求歡亦像是請求停下來的聲音，隨著自己手部的動作而鳴叫，隨之深入耳髓，扣動月代心中的弦，令到他下身挺立著的肉柱因為在這種充滿情慾的氣氛之中被晾在一旁而變得更加的腫脹、飢渴難耐。
+
+阿啊…，陽正…只是手就變成這樣了…。
+那麼…如果插進去的話，他最後會不會變得只靠前面就不能滿足了呢？
+
+就在月代在擔心對方的性癖會不會因此而改變的時候，帶有溫熱的白色體液噴射到胸口、乃至下巴的感觸才強制拉回了他的思考。
+
+「！…嗯姆、……沒關係的陽正，你做得很棒喔…。」將手指從被操紅的肉穴慢慢抽出，其中抽動的肉，在現在月代的眼中就像是還沒有滿足、邀請著自己進入一般的一張一合。
+
+好色… ，果然陽正很有這方面的潛質呢。
+不行，忍不了…，好想快點進去……。
+好想……佔有他。
+
+「………陽正，換一下姿勢吧。」畢竟現在這個體位並不能插進去，但因為被壓在了身下所以也不能主動換姿勢的月代，只能一邊用手輕輕拍著對方的背一邊說著。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">01-Sep-21 09:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="882620938846343219" id="message-882620938846343219" title="Message sent: 01-Sep-21 09:40 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">本想忍耐住的人，最後還是沉墮在初次探嚐的快感之中。
+從得到戀人的鼓勵，那股後悔的情感立刻被不好意思蓋了過去。
+
+「哈嗯……」換姿勢……？啊……是……要進入正題了嗎？
+
+大腦被方才刺激影響，導致思考轉速有些跟不上本能的行動。
+聽到指令的人抬高了腰與腿轉過身。
+可第一眼直面的，就是方才自己不看場合的釋放殘跡。
+
+唔哇……有夠糟糕的，這個畫面。
+
+看著戀人身上那一蹋糊塗的液體，臉紅乃至有點尷尬的人伏下身，為對方擦去那流到下巴的精液。
+
+「唔、抱歉了，月代……」雲井跪坐對方腹上，而當他為對方清理同時也能感覺到急不可耐的肉棍擦過尾椎。
+本來快回歸平穩的心跳又再度悄悄地攀升。
+
+月代，還沒釋放。
+要，被插進來了。
+他人生中第一次，就快沒了。
+
+「唔、等下……月代可以，隨你喜歡的來……？」雲井臉上的羞恥感不受控的溢出。
+
+沒膽自己主動自己坐下去，於是他把主動權讓了出去。
+
+當前，兩人之間的距離能從眼中窺見彼此的輪廓。
+
+「……還是，月代想我怎麼做……比較好？」他對此真的拿不定主意。
+只好從齒縫間擠出不好意思的詢問。//</span>
+
+                                <span class="chatlog__edited-timestamp" title="02-Sep-21 08:46 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">01-Sep-21 10:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="882629418563043388" id="message-882629418563043388" title="Message sent: 01-Sep-21 10:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">月代再次被騎在了身上，感受著從腹部傳來的重量，他的眼睛這才重新對上了戀人的雙眼。
+
+臉好紅……，果然這樣的…陽正也會覺得害羞吧。
+還有…，一個月沒有做…那個…很濃稠呢。
+看向對方泛紅的臉和比平常還要濃厚的精液，整個人倒是有些抽離的月代如此想道。
+
+「唔姆、………。」當雲井的背部有些擦到了月代的男根時，那種有些刺刺的、但還是會帶來快感的感覺，一下子衝到了他的腦袋裡，令那個被酒精泡壞的腦袋稍微拉回來了一點。
+
+「嗯唔…、腰…現在也不能有太大的動作呢……」相比起戀人的羞恥面容，月代倒是挺認真的思考著那個體位比較不會用到腰。
+
+………直接坐下去…，這樣還可以看到陽正的表情…。
+
+不用幾秒就決定好體位的月代，伸手撫上了戀人依舊紅潤的臉，稍微用了點力氣拉近了彼此的距離，然後再對方比較脆弱的耳邊，用那溫柔、卻帶有一點沙啞的聲音說：
+「那麼……，陽正就這樣…直接騎在身上如何？」
+「畢竟這樣我就不會傷到腰了，…不是嗎？」
+
+稍微利用了自己傷作為理由，月代有些半強制、但又帶點撒嬌意味的請求道。</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Sep-21 11:05 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">01-Sep-21 11:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="882650519104024616" id="message-882650519104024616" title="Message sent: 01-Sep-21 11:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">臉被捧起時還以為對方是想接吻。
+在兩人的鼻尖交錯、耳邊傳來戀人的請求，腦中浮現模擬畫面的雲井只感覺面頰逐漸匯集更多的血液。
+
+「唔、唔嗯，好嗯……」他抬起臉看向對方，露出半不安半妥協的表情。
+在戀人的嘴唇落下像是宣示領命的短暫一吻後，他重新直起腰桿。
+
+從上方俯視的角度代表著，對方也能同樣看清自己的模樣。
+察覺到這點的雲井把視線悄悄移開，聚焦在月代的腹部。
+
+跪坐的他抬起身子，一手往自己的後庭探去，用手指確定了菊穴的位置、另一手扶握昂挺的男根。
+
+心跳，好快。連他自己都聽到了。
+好吵。
+
+腦中敲響著像是催逼的頻率，有些乾渴的喉間咽下源自緊張的脈動，順著血管遍佈全身。
+
+經過剛才胡亂的擦拭，手掌間殘留的精液剛好作為潤滑。
+手指來回磨蹭了幾回，接著將頂端對準了自己的穴口。
+
+「…嗯、哈嗯……」雲井嘴巴微張，試著讓身體的肌肉跟著吐出的氣一同放鬆，接著，身體的重量慢慢的向下……
+
+「唔、哈啊，」月代的：「好啊嗯、大……」與手指節截然不同的粗實撐開了剛才氾濫過一回穴口，慢慢的向內探入。
+
+「呵嗯、啊……」隨著雲井的身下被逐漸被填滿，不知為何他本人感覺到胸口有股莫名的觸感正在匯積。
+
+而那是膽怯還是期待，面臨難題的他無暇思考太多，全把注意力放在正遭異物侵入的部位上。
+
+腸子貼著肉柱，給人的感覺像是內在被鑿開了。
+而剛高潮釋放一次，對於帶著些許苦悶的初食有些不得要領。
+直到吞沒的前端壓上讓他剛才欲仙欲死的神經叢時，被快感刺激的雲井反射的抬起了腰、連帶腸壁縮了一下。
+
+「哈啊！呼嗯……」短暫的停頓像是在給自己心裡建設那般，過沒多久又再度將身體慢慢放了下去。
+
+「……哈啊…嗚嗯！」幾乎將整根陰莖吞入的他，連喘息聲也逐漸變得粗沉了起來。
+
+但過去站在另一方的他，也知道這僅僅只是起頭：「唔嗯，月代……」
+
+逃避了半天的視線終於回到了戀人臉上，就定位的雲井兩手撫上身下人的腹部。
+
+「我、呼嗯……要動了？」雖然尾音上揚，但這不是問句、而是宣告。
+跪坐在戀人身上開始了抬腰、落下體重的來回。
+
+「哈啊！月、月代……好、熱……」從體內乃至臉皮，彷彿整個人為此燒起來似的，這讓他腦中一片混亂。
+
+「我、嗚嗯嗯！哈啊……」隨著一下一下、幅度不算太大的抽插，反而更能感覺男根鑽入深處。
+
+「……月代、的形狀，啊！裡面唔哈……要變成月嗯、的了……」在讓理智飛散的快感降臨之前，他還有餘裕用言語挑逗自己的戀人。
+
+目前，僅只目前。</span>
+
+                                <span class="chatlog__edited-timestamp" title="02-Sep-21 04:25 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 12:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="882668404442562561" id="message-882668404442562561" title="Message sent: 02-Sep-21 12:49 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯姆……」經過短暫的一吻，看著重新硬起腰桿、迴避著自己眼神的戀人，月代心裡默默打定了待會要怎樣玩弄對方的主意。
+
+「哈啊、……哈…」好溫…，陽正的手……。
+充血的陰莖現在連對方那有些粗糙的手觸碰到的感覺都會令月代忍不住聲音，從口中吐出比平常做愛時高亢的呻吟截然不同、&quot;男性&quot;略顯低沉的粗喘聲。
+
+但是陽正的體內，一定更加溫暖吧。
+隨著腦中浮現的想像，在對方手中的陰莖就像是無比期待著待會會發生的事情，不停的抖動、脈動著。
+
+原始的本能滲透在身體的四處。
+此刻，不只是性器，身體的每一個角落都在為接下來的交配而躁動著。
+
+啊阿…，要進去了…。
+進去……陽正的裡面了。
+
+敏感的龜頭率先感受到對方體內的溫熱。
+而從頂端小孔所分泌的黏液也與雲井方才射出來的精液混合於一體，作為純天然的潤滑液，加速了彼此結合的過程。
+
+「呃啊……，陽…正…、陽……正…♡」感受到第一次容納男根的後庭慢慢張開、最終把自己的一部分容納到溫暖的腔內，就像是想要把自己體內的液體全都吸出來一般的肉壁，這一切都令月代的腦袋頓時呈現一陣空白。
+
+微微瞇上眼睛的他，由始至終視線也沒有離開過戀人的臉。
+畢竟，這可是陽正處女喪失的瞬間，肯定是要刻印在腦海裡、一輩子都、不會忘記的。
+
+本就處於緊繃狀態的肉壁，在前端碰到某一個點的時候突然像要把陰莖咬斷似的緊吸了上來。
+
+「哈、啊阿…！…碰到…了呢♡」對於這突如其來的刺激，月代雖然還是忍不住的叫了一聲出來，但隨後也很快意識到這是什麼一個情況。
+
+對呢，這個姿勢碰到前列腺的時候…會有種被頂上來的感覺……跟平常那種輾過的感覺有些不同呢…。
+
+在月代如此想著的同時，陰莖也終於差不多整根進入到對方體內了。
+
+「陽正…♡…，…動吧。」他的眼睛始終看著對方的臉，而現在，月代也終於在插入後第一次跟自己戀人對上了眼。
+
+「阿♡…呵啊…、姆嗚……唔…」好舒服…好舒服。
+陽正…♡…原來之前…都是這樣的感覺啊。
+
+「陽正♡♡……的…裡面好舒服…♡」月代的手撫上了放在自己腹上的手，穿過對方的指縫最終十指相扣的握在了一起。
+
+「啊……、這樣…我們♡…裡面都變成了…呀啊…對方的形狀了呢♡」對於戀人那挑逗的言語，其實因為抽插的速度沒有到很大，所以還有餘力可以回應你的話語。
+
+但是只有現在這個樣子，還不足以令月代高潮呢。
+更多……還要更多的快感。
+
+「哈啊♡……陽正…，你說…我稍微動一下腰也沒關係吧…？」話氣上來說，這看似是一句疑問句。
+但實際上月代另外一隻騰出來的手，早在不知不覺間爬到了你的大腿，在話音還沒有完全落下之前，就配合著先前一直沒有作為的腰，一個往下按一個往上頂的把陰莖狠狠地塞進了你的體內，連一丁點讓你喘氣的時間也沒有留下來，就這樣略顯兇狠的操了上去。
+
+「哈啊阿一♡…你看、這樣的…，很舒服、對吧♡♡」而罪魁禍首的月代現在只是一臉壞笑的看著你驚慌失措的表情，絲毫沒有停下來的打算。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 02:06 AM</span>
+
+            <div class="chatlog__message " data-message-id="882687785864167455" id="message-882687785864167455" title="Message sent: 02-Sep-21 02:06 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">在十指交扣的瞬間，兩者之間的溫差隨著緊貼逐漸消去其中的落差。
+飽含愛意的、讓人無法逃離的枷鎖扣上了雲井陽正的右手。
+
+像是「他們」最初的相遇的場景的投射，只是這回的拘束從腳裸來到手掌。
+
+被過長瀏海遮掩額前蒸著感官超載的薄汗，止不住呻吟的嘴微張散熱。
+
+被自己丟出的情話回擊時，雲井嘴角勾起的微笑合上喉間的哼吟。
+他向來對於床上的話沒怎麼留心。對雲井來說，那只是為彼此助興的過場詞。
+
+怎會料到，竟然演變成預告？
+
+……動、腰。
+
+「但……」在腦袋處理月代的提議，還沒把醫囑搬出來的人被那下突然的一頂徹底堵住了聲音。
+
+「　、　　？！」
+
+即使實際堵住的只有兩腿之間的「嘴」，卻連本位的「嘴」也一同堵上了。
+
+腦袋好不容易從像是被電擊的空白中跳脫，而下一秒面臨的卻是毫不留情的、加速的、每一下都頂到深處的抽插。
+
+人面對過度的刺激時第一反射是「逃離」，因此在他自行抬腰想躲開那釘入過深的攻擊時，只造成「抽插幅度更大」的可笑結果。
+
+「咕嗚！嘎……哈嗚，口阿……」自食其果的愚人很快就服軟了。
+
+接下來發生的一切，是一連串、僅為剝除「理智裝飾」，最原始、赤裸的本能行為。
+
+「咿嗯、呼嗯啊！啊……！」
+整張臉紅得通透，只見本人露出一臉舒服理智蒸發的表情。
+
+即使雲井沒有用語言表示自己所承受的官能是如何刺激。
+從那尋求浮木的緊扣手指，和那止不住搖頭的臉，皆明顯地表現他是何等沉迷。
+
+在看似沒有計數的交媾迴圈中，那原先繃緊的腰，終於終於撐不住的向前彎了下來。
+
+左手撐著月代身側的沙發，當手指陷入椅背和椅墊之間、失去平衡的瞬間。
+身體重心偏移導致錯位，以及臀部為了保持重心的抬高，讓原本肆意進出的男根離開了體內。
+
+「……哈、啊……？」離高潮只差臨門一腳、硬生生被中斷的他一臉「不明白為什麼停了」。
+
+在床上向來不想忍耐的雲井又再度坐起身子。
+探手主動將脹大的陰莖塞回自己的體內。而當實體可見的空虛被填滿之時，他的唇間落下拔高的淫叫。
+
+這一輪，已經沒有思考意識的本人，配合著月代的上頂動作，主動的扭起了腰。
+
+每擦過前列腺時，腸壁就給予回饋反應的收緊一回。
+從良性逐漸發酵成惡性的墮落行為中，雲井很快就迎來第二次頂峰。
+
+這次比起第一次的量少很多，有些稀的乳白精液混著透明的前列腺液，噴灑在月代的肚子之上。</span>
+
+                                <span class="chatlog__edited-timestamp" title="07-Sep-21 01:14 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 03:05 AM</span>
+
+            <div class="chatlog__message " data-message-id="882702692772880474" id="message-882702692772880474" title="Message sent: 02-Sep-21 03:05 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">緩緩的墜下、再度推回去深處。
+如同野獸交配一般的動作，確實的將兩人的理性拉入了不見天日的深淵之中。
+
+但除了性慾以外，濃濃的愛意也參雜在其中。
+雖然這些並沒有令月代腰部的動作有所減緩呢。
+
+想變得更舒服，想讓對方變得更舒服。
+想獻給最愛的你，永遠都無法忘記的感觸。
+
+「陽正♡…啊呃、…哈啊阿……」相連的手，微微的收緊著。
+就像是為了讓他們的上半身也可以連在一起般，緊緊的相扣著。
+
+就算對方沒有用言語表達出來，這沉醉的表情以及動作也已足以說明雲井現在感覺到的快感是有多麼龐大。
+
+「很、舒服吧♡…陽啊…正♡♡」而月代只是滿臉溺愛的幫已經除了聲音以外什麼都說不出來的戀人講出了對方感受到的東西。
+「每、啊…次…插到深處，那種…姆哈♡…內臟有些被頂到的感覺♡♡」
+「連…內臟♡、都好像被，侵犯了呢…♡」
+「是吧…♡啊、…陽正…」明知道對方回答不了，但月代還是用著有些調侃的語氣拋出了根本不會被回答的疑問。
+
+也許可以稱得上扭曲的愛意正加速著雙方交歡的行為，可是當一切都在水深火熱之中的時候，由於突然的重心偏移，本該在雲井體內抽插的陰莖滑出了溫暖的肉穴。
+
+「哈、啊呃！…啊……」在發洩慾望的途中被突然中止的月代自然感覺到莫大的不適感。
+
+好想插回去…。
+就在他這樣想的下一刻，只見騎在自己身上的戀人再度撐起他自己的身體，主動把剛才還在他體內肆虐的肉棒插了回去，繼續著剛才的交配。
+
+「呃啊、…哈哈…♡♡…」墮落了呢，陽正♡
+
+看到戀人主動向自己索要快感的行為，莫名感覺到有些高興、甚至有些欣慰的月代，稍微放慢了自己腰部的動作，讓對方不知不覺間自己扭動身體。
+
+又變緊了…，陽正…快要射了嗎。
+
+「呵啊、…又射了呢…♡」而在他正這樣想著，同時也差不多要完全停止擺動腰部的時候，那個乳白色的液體又再次解放在了月代的身體上。
+
+「陽正很棒喔，第一次就可以不靠前面射兩次♡」月代撐起了自己的身體，像是給予獎賞一般的抱著了還沉迷在高潮餘韻之中的戀人。
+
+「但是……，我還沒有去呢。」月代帶有磁性的聲音鑽進了你的耳內，像是宣告著接下來還會發生的事情一般，深刻地在你腦海中迴盪著。
+
+「陽正會繼續陪著我的，對吧？」
+下一秒，本來視線還成水平的雲井，經過一陣天翻地覆，最後看到的卻是月代流著汗、依然泛紅的臉，還有……在其背後的天花板。
+
+「嗯…姆唔……♡」在你發出聲音之前，月代就先行一步的用深吻把你的嘴給堵上，隨後下身就是一陣比剛才還要激烈的抽送。
+
+明明才剛高潮過一次，但是身體卻毫無顧及自身的極限，再次迎合上對方的動作。
+
+明天會不會下不了床。
+上班怎麼辦。
+
+這種問題早已被你拋諸腦後，現在就只是想跟彼此融為一體，一次又一次的、用身體訴說著對所愛之人的愛意。</span>
+
+                                <span class="chatlog__edited-timestamp" title="02-Sep-21 03:15 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 04:06 AM</span>
+
+            <div class="chatlog__message " data-message-id="882718013206437898" id="message-882718013206437898" title="Message sent: 02-Sep-21 04:06 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">第二次高潮的餘波也體現在腸道的收縮上，神經反射的抽動，給予仍插在體內的肉棒緊縮、吸吮的包覆感。
+且透由這層行為，雲井腦中的記憶區深刻地記下了戀人的形狀。
+
+「哈啊……哈嗚！嗯哈……」在充斥著汗水、精液、其他體液的擁抱之中。
+嗅覺帶動了視覺回放，讓才剛經歷了「被戀人幹射」、腦筋逐漸清醒的雲井再度複盤前幾分鐘自己主動求愛的衝動。
+
+……老天，桌上的啤酒給我留幾口吧！真想釀了前幾分鐘的自己。
+
+獎勵的擁抱和讚賞「有潛質」的話語，落入在未經驗者耳裡，像是摻合了幾分調侃。
+用手擦去匯聚在脖頸間的汗水、這對身處賢者時間、詞彙量劇減的啞巴雲井，暫時除了喘息和搖頭之外擠不出更多的詞彙。
+
+而當那聲貼近耳廓、讓人禁不住顫抖的熱息、與灌入耳道內的宣言。
+當前反應相當遲鈍的人，連「蛤」都來不及展現，就這麼被翻壓在沙發上。
+
+「呼嗯！啊唔……」舌根被舔吸，無法給出任何回應的雲井從喉嚨深處傳來嘶啞的哀鳴。
+
+上下兩個洞同時被月代填滿、原先快要消散的高潮被強制延續加時。
+彷彿要把體內空氣排出的窒息感。讓本來體力被消耗大半的人，再度放棄了理智，投身享受戀人從裡到外填滿身體每一寸的愛意。
+
+肉與肉碰撞的啪啪聲、口腔內吸漱的滋溜聲。
+雲井感覺自己好幾次都險些失去意識，但他身下已經快被榨空的小頭跟本人相違的、再度精神了起來。
+
+啊啊……不管了啦……
+
+身體陷入沙發的雲井，用盡最後一絲力氣將雙腳勾上月代的腰側，讓已經酸軟、發腫的穴口與肆虐不斷的肉棒更加貼緊。
+
+在兩人唇瓣分開之時，他抬手撫上月代的臉頰。
+有如醉漢的朦朧雙眼直勾勾的盯著自己的戀人。
+
+在每一下挺進的嬌喘，他艱難地擠出告白：「……我哈！愛你、月……哈嗚！」
+
+「啊哈嗯！無、論什……呃麼，都沒法……分、啊！開我們……」
+
+「我、嗚！會陪……你！」所以。
+
+「把……哈、月代的，哼嗯！全部……，都給我吧……」</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 01:47 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 04:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="882729649812177006" id="message-882729649812177006" title="Message sent: 02-Sep-21 04:52 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">月代還算靈活的舌頭纏上了戀人的軟舌，在彼此糾纏的同時也掠奪著雙方口中的氧氣。
+這令人窒息的愛意，隨著肉體碰撞的聲響持續侵蝕了兩人的理智。
+
+「嗯、哼啊♡…哈……」好可愛…好可愛啊……。
+月代腦海中現在已經退化成只能用最簡單的詞彙來浮現出自己最真實的想法了。
+
+而另一方面，從剛剛開始就一直沒有休息過的腰臀，在口中動作的幹擾之下也變得沒有比起剛才來的兇狠。
+
+可是……就算是只靠前面比較高潮的月代，這下也慢慢的被推到了鄰近極限的位置。
+
+「哈…！唔姆…、哼，哈呃啊…♡」總算是放棄了繼續佔領戀人口中的位置，從深吻之中率先抽離出來的月代，還是被下腹傳來的快感刺激到稍微瞇起了眼睛。
+
+但是這一丁點的刺激，也沒有阻撓到雲井的告白傳入他的耳中。
+
+「陽、正♡…啊阿……，我也、…嗚啊…愛你喔♡」月代把支撐在沙發上的手抽離開來，隨後抱住了自己的摯愛，用著被喘息聲弄得支離破碎的語言回應對方的告白。
+
+「嗯嗚…，嗯…♡……永遠…，永遠、都不會分開的…。」灰銀色的雙眸對上了雲井那深棕色的眼睛，為了將對方此刻的模樣刻印在腦海深處一般，深情的對視著。
+
+「啊哈、嘎阿啊……！快…不行、…了一一」
+隨著下腹傳來的暖意越發明顯，知道自己已經到達極限的月代，用著最後一絲力氣再次吻了上去戀人的唇上。
+
+與此同時，在體內肆虐的兇器也終於停止了抽插的動作，絕代之的是一陣又一陣脈動的感觸，還有液體被灌注在體內的感覺。
+
+「哈啊…哈……♡」感受著大腿周圍肌肉的抽動，逐漸變成賢者模式的月代，在高潮過後精疲力盡的躺在了你的肩膀上休息了一會。
+
+等他緩了過來之後，月代才意識到自己剛才的行為會對才第一次做&quot;那邊&quot;的雲井帶來負擔的他，趕忙把頭從對方的肩膀上抬起來，眼神中充滿擔心的看向了雲井：
+「陽、陽正……，那個…沒事吧？」雖然對方肯定是&quot;有事&quot;的，但還處於賢者模式的他腦袋明顯沒有那麼靈光。</span>
+
+                                <span class="chatlog__edited-timestamp" title="02-Sep-21 04:53 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 06:04 AM</span>
+
+            <div class="chatlog__message " data-message-id="882747785370271744" id="message-882747785370271744" title="Message sent: 02-Sep-21 06:04 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">身體、心靈、乃至靈魂深處都被「綁」得死死的雲井陽正。
+從月代口中得到了永遠的誓言之時，原本因為負荷超載的性事、快要散架的五官，再度重聚成幸福的笑靨。
+
+聽到轉為高亢的呻吟的同時，吞吐著粗棒的腸道傳來了脈動。
+
+迷糊的腦袋還沒把「內射」與腸壁傳來的訊號做連結，就被對方急切的索吻再度中斷了思考。
+
+唔嗚！
+從雲井被堵住的齒縫間漏出模糊的驚叫。
+體內深處被熱液灌入的注射。隨後感覺到有複數道類似落雨降在肌膚之上、承受不住地心引力的重量緩緩滑落的搔癢感。
+
+畢竟是把廢棄物排出的器官，肉壁自然反射的做出律動。
+但在做愛的情境下，反而有種「想把對方精液鎖在體內」的錯覺。
+
+環抱著、感受戀人帶給他的微微震顫的雲井，內穴不受控的收縮。
+最終，還是守不住禁慾將近一個月的量，幾滴精液流出了體外。
+
+後穴變得好濕……這樣，豈不像極了女人的小穴……？
+他……被月代……幹成了雌性……？
+
+人生第一次用後庭高潮了兩次，還被射在裡面的人，從呆愣、變為不知該做何反應。
+再隨著月代的關切，轉化為排山倒海的羞恥。
+
+「嗚、我……」
+處女開封就戰了兩回合半、喊到嗓子有點啞的雲井看著戀人的臉。
+
+不知道為什麼，張口就是欠人教育的女高生語氣。
+
+「人家……的第一次，沒有了……」還掛著一副可憐兮兮的表情。
+
+「這樣人、人家，嫁不出去了啦……」
+
+摟著月代腰間的手稍微收緊了些，低下頭在對方的肩膀上蹭了蹭：「月代你……要負責啦……」</span>
+
+                                <span class="chatlog__edited-timestamp" title="02-Sep-21 01:02 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 06:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="882939084878802944" id="message-882939084878802944" title="Message sent: 02-Sep-21 06:44 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「誒、誒呃……嗯…」真的沒有預料到對方會是這樣子回答自己的月代，看著那副可憐兮兮的模樣，現在倒是有些慌了神。
+
+即便腦袋有些混亂，可當月代聽到&quot;要負責啦&quot;的話語，還是想都沒想的就回答了：
+「我願意…！對陽正…負責喔……」
+「剛剛我說的……也不是假的…姆嗚…」說完感覺得莫名有些羞恥的他，用頭髮蹭了過去對方的肩膀上，以掩蓋他害羞的情緒。
+
+「………………。」陽正…還硬著…。
+由於在腰間的手稍微收緊了些的緣故，現在的月代可以明顯感受到頂在自己腹上的肉刃。
+
+我自己一個人先射了……，這樣…有點不太好吧。
+
+感覺到莫大的愧疚感，月代在一陣沉默以後才緩緩的重新開口向你說道：「陽正……那個…，抱歉…只有我射了…。」
+
+「嗚嗯……，我…用口…幫你弄吧…？」
+想著如果讓自己硬多一次的話大概只會令對方變得更加辛苦，所以月代便提議用比較容易可以達到高潮的口腔來幫戀人解放。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 06:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="882942875837542440" id="message-882942875837542440" title="Message sent: 02-Sep-21 06:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「哇咿——人家好開心！」
+
+眼見戀人率直的陪著自己胡鬧，雲井忍不住笑了，抬手揉了揉月代蓬鬆的紅髮。
+
+而這一笑連動身下的肌肉，讓明確的感知到月代還在自己體內的事實。
+先不說維持著被進入狀態的求婚的構圖有多奇葩，他本人更擔心等下會面臨的問題。
+
+只要拔掉出去，雲井陽正相當有自信的肯定夾不住。
+沙發，髒定了，完蛋了★
+
+隨後，他的注意力轉移到月代的提議上。
+「唔嗯……」雖然他感覺身體已經累到射不出什麼東西了。
+放著不管小陽正也會消下去吧……
+
+但，有送上門的甜點，不吃的人是傻子。
+啊，雖然視覺上，物理上、被吃的還是自己就是了。
+
+「好啊，那～麻煩了～」沙啞中帶著輕鬆的應答。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 07:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="882946673670783027" id="message-882946673670783027" title="Message sent: 02-Sep-21 07:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「唔姆…、那…我先拔出來喔…」月代姑且還是為了不要嚇到對方而提前說了一句，隨後才慢慢抽離已經被操軟的後穴。
+
+「哈啊……，阿」方才射精的陰莖，對抽出來那一小段摩擦也覺得格外的敏感。
+正當月代想稍微緩一下的時候，親眼看著從已經合不上來的穴口中流出了一陣白色濃稠液體到沙發上的他，這下也不是悠閒喘氣的時候了。
+
+「啊啊、這………」沙發…要拿去洗了…。
+他趕忙拿了一下放在桌上的紙巾盒，抽出幾張紙，墊在了對方的屁股底下。
+
+「抱、抱歉……陽正，…射在裡面了。」終於想起自己沒有戴套的事實，現在月代顯得格外的懊悔。
+
+啊阿……哪有人第一次就射裡面的啦…。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 07:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="882950905413128192" id="message-882950905413128192" title="Message sent: 02-Sep-21 07:31 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「呼、嗯！」被擴張、撐大甬道的肉柱退出體內。
+大概也是考慮到精液流出來很不妙吧，所以雲井下意識的收緊後方。
+
+在對方完全退出去，二度感覺到無所適從的空虛的後庭，在一張一闔的開口吐出白色的體液。
+
+而且，感覺有點怪。
+
+認真去感受彷彿身體被開了洞的雲井，在月代迅速遞來紙巾時才回神，擦拭自己的胯下和沙發。
+
+抬頭見到那後悔的表情，忍不住逗弄回去：「哈哈哈，量非常多呢～月代君。」
+
+「雖然很舒服，但事後不好清理呢，以後，還是戴套ㄗ……」話剛講完，突然發現自己挖坑給自己跳的雲井趕緊收聲。
+
+他才沒有期待被插！屁股現在需要靜養，不開放預約！</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 07:35 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 08:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="882958413657690122" id="message-882958413657690122" title="Message sent: 02-Sep-21 08:01 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗚、畢畢竟…一個月…嘛……。」面對突然的調侃，臉都快燒起來的月代只能低著頭，嘴一邊碎碎唸著藉口一邊幫對方和自己清理身體上各種各樣的體液。
+
+「對呢…，等一下也要進去浴室那邊清理………誒？」很舒服…，以後……誒？
+
+本來認為戀人被自己這樣折騰了一番之後，會對&quot;要被插進去&quot;這件事情感到更加抗拒的月代，聽到你那出乎意料的說詞，身體不禁愣了一下。
+
+「陽…正…，喜歡上了嗎？…這種被插的感覺…。」月代放下了手中的紙巾，然而伸手摸上了雲井那有一些腹肌的小腹。
+右手慢慢撫過凹凸分明的肌肉群，最終握住了充血的陰莖。
+而另外一隻手也沿著陰囊的輪廓，劃過會陰處，再次來到了泛紅的穴口。
+
+「……之後要換下位子嗎？反正我…這邊也算是很舒服的…。」他緩緩的把頭抬起來，把扶起來的肉棒送到了自己的嘴邊，然後張開了嘴巴，把溫暖的男根放進嘴裡疼愛。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 08:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="882966358843867186" id="message-882966358843867186" title="Message sent: 02-Sep-21 08:33 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">噗咳！
+
+「呃、要說喜不喜歡……」
+雲井眼神飄移到藏著電視的光滑牆壁上，人整個吞吞吐吐的：「還……不……唔！」
+
+話語被突入的搔癢打斷。
+「唔、」在短暫的分心後，垂眼看著被戀人掌握的男根，以及後穴附近感受到的輕撫，身軀止不住的一抖：「月、月代……？」
+
+怎麼有股熟悉、又不好的預感？
+
+「呃、我……嗯！」龜頭被溼軟的舌面擦過時，雲井齒縫間蹦出呻吟。
+
+想著如果每次做愛都像剛才那樣、舒服到不安的浮空體驗，久了自己會變成什麼樣子。
+
+一方面好奇、一方面覺得探究這點並不是好事的人，選擇含糊其辭：「哈啊…！可、以嗯……輪……？」 
+
+雲井低頭看向幫自己口交的月代，伸手撥了對方的瀏海。
+被那雙銀灰色的眼睛注視著，會讓他感覺比平常還容易興奮。
+
+「哼、嗯！很、舒服……」</span>
+
+                                <span class="chatlog__edited-timestamp" title="02-Sep-21 08:55 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 09:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="882973718194843689" id="message-882973718194843689" title="Message sent: 02-Sep-21 09:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯、唔嗯…♡…輪…流、也ㄅ錯…♡」月代的雙眼直勾勾地穿過鮮紅色的瀏海，注視著被自己侍奉著的戀人。
+
+光靠這邊雖然也可以讓對方很舒服，但是…如果是現在的陽正，這一點根本無法滿足吧。
+
+「嗯一一、呼嗯姆…♡」光是這樣含入口中，用舌頭玩弄還不太夠刺激。
+月代把舌頭的動作從舔舐轉為吸吮，開始模仿平時抽插的速度，上下吞吐。
+
+而與此同時，從剛才開始一直很安份的左手在這個時候才終於有了動作。
+手指先是沾了一點滴漏在外面的精液，在不停開合的穴口示意般的磨蹭了幾下才三根手指插進去腔內，帶動著裡面各式各樣的體液，就像是剛才所做的一樣，一邊重點扣動前列腺一邊時不時擴大、隨後抽送。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 10:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="882991318220038196" id="message-882991318220038196" title="Message sent: 02-Sep-21 10:12 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「哈嗯、呃嗯！呼…嗯！……」被濕潤的口腔緊緊包覆住抽送，看著為了取悅自己緊縮、彈性的臉頰，雲井的換氣也跟上逐漸加快的心跳。
+
+如果說從唇齒間漏出的吸吮，是助長了慾火的苗。
+那探入腔內的鑽鑿行為，就是把靈肉泡在逐漸加熱的溫水中。
+
+當察覺到時回過神，早已萬劫不復。
+
+「哈…啊唔！月、月代……」感覺到月代的指尖抵上被操到闔不起來的菊瓣時，出聲阻止已經來不及了。
+
+「哇嗯…！哈、啊啊？……不、不……呼呃！啊！」
+不知道是今晚第幾次敗給淫欲，直不起腰的雲井上半身向後仰倒，只求舒緩聚集在下腹的的感官。
+但仰躺的姿勢反而讓手指的抽送更加順利、深入。
+而完全沒發覺這點的當事人，早已連話都說不好了。
+
+「……呼嗚、嗯！月、我…啊！哈嗯！」
+才剛遭受肉棒蹂躪的腸壁，再一次的吸附、吞吐入侵的異物。
+耳邊傳來糟糕透頂的，手指攪動肉穴內的水聲，將羞恥感和快感往上更推上一層。
+
+而對於加強性興奮十分有效的弱點，讓已經快沒東西好射的柱頂分泌透明的前列液。
+
+「這樣…哈嗯！快要、快要！……啊啊，月代……」
+嘗試過、努力過、文字卻還是組不成句子。
+雲井忍著將自己下半身侵蝕的快感坐起身：「我快……唔、哈啊……哈嗯！」
+
+坐直的那瞬間，讓體內的手指直接壓在敏感點上，再度被弄得嬌喘不斷的雲井已經抵達宣洩的邊緣。
+
+「忍嗯！不住……月、哼嗯！」</span>
+
+                                <span class="chatlog__edited-timestamp" title="14-Sep-21 10:08 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">02-Sep-21 11:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="883011120561020968" id="message-883011120561020968" title="Message sent: 02-Sep-21 11:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯哼…、嗚……♡」帶著一些窒息的感覺，隨著陰莖一次又一次的碰撞，月代口腔內的酒味逐漸被替代成雄性特有的味道。
+
+雖然每當口交的時候都會引來喉嚨深處一些無可避免的不適感，但這種如同吞食了對方欲望、令自己的大腦也記住了對方味道的感覺還是會讓月代產生無與倫比的興奮感。
+
+好想再佔有更多、更多…。
+直到…陽正的全部都屬於我為止。
+
+從脊髓傳來了陣陣的酥麻感，感覺又要起反應了。
+
+………不不不，我在想什麼…。
+
+在月代差點又再次跌入那名為&quot;情慾&quot;的沼澤之中的時候，這才想起自己只是為戀人解放剩下來的慾望而已，如果自己又再興奮起來的話，待會肯定會給對方添負擔吧。
+
+「嗯嗚…！…、嗯哼一一…，嗚咕……」稍微把嘴上進出的頻率減緩，把嘴口的重心放在&quot;吸取&quot;上的他，讓注意力集中在手指的抽插上。
+
+先前才被肉棒弄得一蹋糊塗的肉壁，對於要容納現在這三根手指簡直就是毫無壓力，況且現在還有身體主人的配合(?)。
+
+快要不行了嗎…。
+聽著雲井逐漸拔高的音調，還有那宣告的話語，明白對方已經快不行了月代毫不猶豫的就把口腔內的陰莖推到最深處，而手指也是更加賣力的在對方體內攪動著。
+
+「嗯♡嗚、唔姆…一一一」從卡在喉嚨深處的龜頭之中噴出的黏稠液體，經過一番艱難的吞嚥，那些精液才得以沒有卡在月代的喉嚨中。
+
+「嗚、哈…！……啊哈……♡」將手指跟放在口中的男根同時拔出，略顯疲倦的月代微微張開了自己的嘴巴，伸出舌頭讓戀人可以確認到自己把精液吞下去了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">03-Sep-21 07:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="883318511198408714" id="message-883318511198408714" title="Message sent: 03-Sep-21 07:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">身體被那近乎是榨取的刺激強制推送至絕頂。
+因為詞不達意，雲井原想伸手提醒，但抵到喉頭的刺激、突然加快的抽送讓一切都亂了套。
+
+「哈嗯、唔！啊……」有些過頭的性愛的盡頭，徒剩嘶啞的喘息的人在眨眼之間，確實感覺到眼角滑墜的是不同於汗水的鹹液。
+
+那是「辛」苦，還是「幸」福。
+骨幹重疊卻僅只「一」線之差詮釋意義的兩極。
+從中萌生淚水又屬於哪一方呢？
+
+肯定是全都有吧。
+因為他是如此深愛明津月代的一切。
+
+「……！」在臨界點前，咬著下唇的雲井陽正，把由體貼包裝的，來自戀人的溫柔和佔有慾全吞了下去
+
+「哈呃、咕嗚！」射精的短短幾秒，彷彿將靈從肉上撕下的空白期。
+
+胸口劇烈起伏只為減緩皮下的躁動，當色彩再度融入眼簾，第一眼就是跪在兩腿之間的月代，吐舌證明自己剛給人招待了什麼。
+
+居然全喝下去了。
+「唔……嗯，月代……好色……」除此感想外再無其他。
+
+「很舒服、很棒喔……月代……」人有些虛脫的雲井抬手溫柔的揉了揉戀人的頭。
+
+經臨壓抑了一個月的久違性事，身體感覺到吃不消的人腦中除了飢餓和疲倦這兩項需求，其餘的什麼都不管了。
+
+「呼唔——先去，一起洗澡吧……」
+雲井動了動身子，腰下明顯的發酸讓人不禁懷疑明天是不是還能出勤……果然還是請假吧？</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">03-Sep-21 08:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="883323113046163477" id="message-883323113046163477" title="Message sent: 03-Sep-21 08:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「唔嗯……、我也…很舒服喔，陽正。」把張開的嘴巴合上，此刻除了感受這濃厚的幸福感以外什麼都不想做的月代，臉上揚起了開心的笑顏，稍微把頭抬起來享受戀人的撫摸。
+
+「阿、…陽正，腰…不會感到酸嗎？」一說到要去洗澡，月代首先聯想到的是通常做完愛之後腰部那明顯的無力感。
+
+畢竟是第一次做受方，腰間的感覺應該會很難受吧？
+
+雖然不排除那個只是因為自己平常沒什麼運動所以才會導致那樣的情況，但不免還是有些擔心的月代，開始構想著怎樣才能把人搬過去浴室那邊。
+
+背過去……，唔…可是陽正有點重呢…。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">03-Sep-21 08:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="883326250700132382" id="message-883326250700132382" title="Message sent: 03-Sep-21 08:23 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「呃嗯，是有點酸，但還能動。」雲井站起身動了動身子。
+
+啊啊……大概是做太多次導致體內還記著被侵入的感覺。
+這股空虛感要多久才能退掉啊……應、應該退的掉吧？
+
+想著自己的身體適應性也太好了的雲井，苦笑的搖搖頭。
+
+「那……月代幫我拿衣服，我先進浴室吧？」他還沒搞懂要怎麼把衣櫥從牆壁弄出來，只好如此提議。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">03-Sep-21 08:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="883328220244631562" id="message-883328220244631562" title="Message sent: 03-Sep-21 08:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯…好吧…。」還坐在沙發上的月代表示瞭解的點了點頭，然後順手抽了一些紙巾去擦拭自己身體上的精液。
+
+「陽正，不要勉強喔……。」大概弄好之後，還是有些不放心的他在你走進去浴室之前特別再叮囑了一句。
+
+嗯…拿衣服之前，這邊也得先處理呢…。
+低頭看著那已經明顯濕了一片的沙發，無奈的月代也只能一邊懊悔當初自己為什麼不戴套一邊把沙發那一塊濕掉的部分拆下來了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">03-Sep-21 08:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="883334031343775745" id="message-883334031343775745" title="Message sent: 03-Sep-21 08:54 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯嗯～會的啦～」揮揮手表示聽到後雲井進了浴室。
+
+調了溫度燒高的熱水沖洗、放鬆劇烈運動後的身體。
+坐在椅子上享受背後沖刷的感覺，雲井舒服的瞇起眼睛。
+
+……對了，等下後面也要洗。
+
+雖然同是身體分泌的液體，但留著還是不好吧？像之前，月代就有清掉。
+
+看了一眼按摩浴缸的方向。
+不禁想起了上一回他們在浴室做的模樣，如今整個立場反過來了呢……
+
+想著要麻煩對方把自己體內的殘留物挖出來，有些不好意思的人決定先自己動手試試。
+
+雲井的手指探到被擴大的穴口，繞著腸壁一圈後抽出，結果見到令他意外的東西。
+
+不同於精液的濃稠勾芡，有些起泡的白色泡沫。
+
+「唔啊……」剛剛是有多激烈啊。
+
+沒膽回想的人，按了一下洗髮乳，想把糟糕的畫面連同泡沫一起沖走。</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 11:33 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">03-Sep-21 09:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="883349798198067230" id="message-883349798198067230" title="Message sent: 03-Sep-21 09:56 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">在客廳那邊，總算是把沙發哪些處理好的月代，拖著有些疲倦的身軀、手拿著屬於兩人的衣物來到了浴室裡。
+
+「抱歉久等了，已經快洗完了嗎陽正？」把分別整齊的放到架子上，打開浴室門進去裡面的月代一邊看著你按洗髮乳的樣子一邊坐到你的旁邊打開了水龍頭開始沖洗身體。
+
+「啊…，陽正…裡面已經洗了嗎？」知道體內那個位置很難自己一個人清洗乾淨，想著你應該大概洗了遍身體的月代便如此問道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">03-Sep-21 10:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="883351792174374913" id="message-883351792174374913" title="Message sent: 03-Sep-21 10:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">聽到浴室門口傳來聲響，雲井轉頭應了聲：「還沒，才剛洗頭而已。」
+
+時間上稍微有點久，月代是去整理殘局了嗎？唔啊，辛苦了——
+
+「嗯，裡面也還沒……」
+他停下搓頭的動作：「有點難搆到，等下月代能幫我嗎？」</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 01:30 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 12:01 AM</span>
+
+            <div class="chatlog__message " data-message-id="883381183415726132" id="message-883381183415726132" title="Message sent: 04-Sep-21 12:01 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯…好喔，那麼等陽正洗完頭之後再弄一下那邊吧。」畢竟總不能頭上頂著泡沫去清洗裡面嘛。
+
+這樣想著的月代，在身體足夠濕潤的時候伸手擠了點沐浴乳，簡單的搓揉一下就開始清洗上半身。
+
+待對方把頭上的泡沫洗去的時候，月代也剛剛好的洗完上半身了。
+「那………，陽正先趴下來吧。」
+為了讓自己心態上轉換過來，月代滿腦子想著&quot;這是清潔而已、這是清潔而已&quot;來讓自己保持冷靜。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 08:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="883506118951850024" id="message-883506118951850024" title="Message sent: 04-Sep-21 08:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">腦中轉著等下的清潔，對應的部位像是回應似的收放。
+明知不是期待的反應，只是沒什麼經驗的他，對於控制肌肉還不得要領。
+但本人還是為此感到尷尬的加快了洗頭的速度。
+
+把頭洗好、在寧靜被打破後，他抬頭看向月代，表情有那麼一絲不好意思：「嗯那，再、再麻煩了……」
+
+把水龍頭關上後，浴室裡變得更加地安靜了。
+
+四肢著地的拍跪在冰冷的地板上，雲井低頭看著磁磚縫隙間水流的方向，人盡量不去想待會即將要發生的事。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 04:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="883636657461551126" id="message-883636657461551126" title="Message sent: 04-Sep-21 04:56 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">……怎麼這個…，感覺好像有點似曾相識…？
+
+看著戀人背對著天花板趴在浴室地板的模樣，一時之間還聯想不到什麼的月代腦袋稍微運轉了一下之後才想起自己之前好像也有幹過類似的事情。
+只是，現在位置交換了而已。
+
+牛…、不不不…還是算了…。
+雖然有一瞬間打算玩一下之前自己被弄的那個play(?)，但這樣無疑會讓整個狀況變得更加的麻煩，所以月代還是把這個歪腦筋甩開了。
+
+月代來到對方的身後，蹲下來直面著那個還沒完全閉合、甚至還可以清除看到裡面鮮紅肉壁的穴口。
+
+「嗯.…，那麼…我開始弄了喔…。」示意般的說了一句之後，他的兩根手指再次進入了這個無比熟悉的肉穴之中。
+這次他的目的只是把自己留在裡面的精液挖出來而已，並不是為了讓戀人快速燃起欲火因此這次手指的動作沒有像剛才一樣特別的去碰前列腺，而是沿著腸壁、用檢查一般的力道去把&quot;自己的孩子們&quot;弄出來。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 05:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="883642664707309648" id="message-883642664707309648" title="Message sent: 04-Sep-21 05:20 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「唔！哼呃……」當比體內溫度稍微低了些的手指伸入腸內，雲井的身子反射性的一抖發出哼叫。
+
+感覺到手指沿著肉壁刮圈，雖然還不知道該怎麼放鬆後庭的他也只能張口換氣，讓自己的身體不那麼緊繃：「嗯嗚……」
+
+比起插入更溫柔的力道、卻也更全面探索，縱使已經累到不行了，但心底確實地萌生了不滿足。
+
+自己的胃口絕對是被養壞了……月代你真的要負責啦……嗚、
+
+「唔嗯！」雖然只是清潔腸內，不是刻意去碰。
+但在對方指結抵上前列腺的附近時，他被刺激到的雲井還是忍不住叫出聲。
+
+腸道也緊縮了一下，柔軟的內裡用不重的力道纏上腔中的異物。</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 05:26 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 05:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="883647089521877053" id="message-883647089521877053" title="Message sent: 04-Sep-21 05:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">無論再怎樣對自己下暗示，終究月代也無法完全無視戀人那令人心癢的喘息聲。
+
+「嗯唔…、陽正…差不多要好了喔……。」表面上是告知對方的話語，但其實也算是向自己說&quot;這只是清潔&quot;的告誡。
+
+手指又在穴內轉了一圈，更多黏稠的精液被慢慢攪出體外。
+
+………果然，一個月沒有解放…真的會比較濃稠阿…。
+月代看著流出體外的白液，不禁如此感嘆道。
+
+隨後，集中精神的月代過了一會才將對方體內的精液全部挖出，而手指著才得以離開那個剛才又被自己折騰了一會、再次變得有些泛紅的後穴。
+
+「呼……，這樣應該沒問題了…。」熬過那各種各方面上有些難受的十幾分鐘，看了一下自己沒有起反應的月代這才終於鬆了一口氣。
+
+「陽正……，有沒有哪裡覺得不舒服的？」怕自己還有什麼東西遺漏的他，一邊把雲井從四肢著地的姿勢調整回來一邊擔心的問道。</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 05:42 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 05:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="883649579785023498" id="message-883649579785023498" title="Message sent: 04-Sep-21 05:47 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">聽到月代說出「沒問題」後，從剛才一直憋著的人這才放下懸在心口的緊張，整個人放鬆的喘氣。
+
+「嗯、嗯……裡面，沒有不舒服……」雲井在攙扶下調整回坐姿，抬頭看向月代。
+
+自己的裡裡外外，已經被對方全看光了，於是他也把羞恥心拋諸腦後。
+
+「對了……後面那邊，應該……還回得去吧？」第一次被捅的人，向經驗者請教。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 05:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="883651387718782986" id="message-883651387718782986" title="Message sent: 04-Sep-21 05:55 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「誒？…」月代用了幾秒鐘來思考對方究竟是問後面那個開合可不可以回得去，還是說在問心態上的事情。
+
+「呃……，可以？…畢竟只是這樣進進出出而已，括約肌並不會因此有什麼不可逆的影響…。」最終他還是選擇用比較好回答的、身體方面的事情回應了你。
+
+「只是…如果長期習慣了這樣的話，進去的時候因為不會太過於緊張，所以會給人有&quot;好像比較鬆&quot;的錯覺啦。」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 06:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="883653295195947028" id="message-883653295195947028" title="Message sent: 04-Sep-21 06:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊，原來如此，太好了。」聽到對方的回答，雲井表情放鬆不少：「能變回去就好……」
+
+如果後面鬆到夾不住，感覺會很慘啊，日常方面。
+唉……但被開發的性癖已經回不去了吧。
+他禁不住自己吐槽自己。
+
+坐回小凳子上的人一手挑過一旁的沐浴乳，準備繼續洗身體。
+
+「月代那要我幫忙洗嗎？」雖然剛看對方好像已經洗得差不多了。</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 06:12 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 06:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="883656551569715270" id="message-883656551569715270" title="Message sent: 04-Sep-21 06:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯……，我這邊就只剩頭髮跟下半身沒有洗而已…。」月代坐回到雲井旁邊的小凳子上，打算繼續洗身體的他在再次擠了點沐浴乳到自己手上，在掌心上磨蹭到發泡。
+
+「姆唔……，還是先不用了…。」覺得讓對方幫忙自己洗下身會有些不妙的感覺，再加上剛才的激烈運動，現在還是讓陽正休息會比較好的月代搖了搖頭拒絕。
+
+「是說…，陽正身體真的沒問題嗎？」
+「就是腰之類的……，沒有酸痛的感覺嗎？」
+微微彎下身，把沐浴乳塗在自己的大腿上。
+其實很怕你是在勉強的月代，再次向你確認道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 06:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="883659148070375425" id="message-883659148070375425" title="Message sent: 04-Sep-21 06:25 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「腰的話……」人這麼說的同時，自己伸手往背後，用指關節揉了揉腰間，頓時強烈的酸痛在患處爆開，不禁令當事人的臉皺了起來。
+
+「唔嗯……感覺明天起床報應就會來了吧，啊哈哈。」
+在一陣打哈哈後雲井繼續搓洗身體。
+
+從臉到脖子，再一路向下的逐一清洗。
+把沾黏在肌膚上的汗水和體液去除，整個人神清氣爽。</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 06:28 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 06:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="883661432711938109" id="message-883661432711938109" title="Message sent: 04-Sep-21 06:35 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗚…、抱歉…為陽正，果然……我做得太過火了…。」 
+看這個樣子，估計明天是真的起不了床了吧。
+雖然想為對方做點什麼，可月代又不會按摩之類的，如果胡亂去按的話也有弄巧成拙的風險。
+
+「明天……如果感覺不舒服的話那就…休息1天吧。」把身體洗乾淨，伸手開始洗頭髮的月代，現在除了後悔以外什麼都做不了。
+
+啊阿……，為什麼要喝醉之後才去做啦…。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 06:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="883664392934293534" id="message-883664392934293534" title="Message sent: 04-Sep-21 06:46 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊嗯、沒事的啦！休息休息就好了。」
+看月代的表情似乎相當自責，雲井攤攤手用肢體語言表示「真的沒關係啦」。
+
+上半身清洗完畢，便接著搓洗下半身。
+等腳底板也洗好，雲井去拿蓮蓬頭時碰到剛好月代伸出的手。
+
+「耶～那～我先幫你沖沖？」滿身泡沫的人問道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 06:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="883667312400543795" id="message-883667312400543795" title="Message sent: 04-Sep-21 06:58 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「姆……。」月代沒有完全放下心來，但現在臉上也比剛才那個充滿自責的表情好了一點。
+
+伸手去擠洗髮乳到時候雖然有碰到對方的手，但也沒有太在意的月代，只是繼續的將洗髮乳沾在頭髮上搓揉出泡沫，當你開口說話的時候，他才向你這邊看過去。
+
+「陽正還是先沖一下身後再說吧，你現在全身都是泡泡喔一一。」頭上頂著一個由泡沫製造的帽子，月代看著滿身泡沫的雲井，感覺有些可愛的他，頂著臉上那藏不住的笑意向你回應道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 07:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="883669225166741525" id="message-883669225166741525" title="Message sent: 04-Sep-21 07:06 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯哈哈，那好哦～」看月代頭頂著泡泡帽的雲井也笑了，可惜那量不足以讓他給對方捏個貓貓耳。
+
+他起身將全身的泡沫沖乾淨後，把蓮蓬頭掛回去，人先去一旁用毛巾擦乾身體、換上乾淨衣服等月代洗完澡。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 07:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="883672389186117632" id="message-883672389186117632" title="Message sent: 04-Sep-21 07:18 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯一一。」月代專心的搓揉著自己的頭髮，在你把衣服換上的時候就已經把頭洗完了。
+
+將蓮蓬頭放回原本的位置，走出淋浴間用毛巾擦乾身體的月代，現在倒是想起了晚餐的事情。
+「陽正，今天晚餐…其實是炒飯喔。」
+「那個做好之後就一直放在飯鍋裡面保溫…，你可以先去吃也沒關係喔，不用等我。」
+
+等一下穿完衣服之後就打算去繼續沙發的事情，然後順便去叫自己父親上來吃飯的月代，因為判斷自己應該會弄一段時間，所以便這樣向你說道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 07:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="883677535693586453" id="message-883677535693586453" title="Message sent: 04-Sep-21 07:39 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「喔喔！是炒飯啊！」把衣服穿好，正在擦頭髮的人向浴室裡說道。
+
+「那～我先出去了～」說完雲井就頂著毛巾走了出去。
+
+人往廚房的方向走，找他們的晚餐。
+想說能先幫忙擺盤，等人到齊再一起吃飯。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 07:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="883679242636910613" id="message-883679242636910613" title="Message sent: 04-Sep-21 07:45 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">而當雲井頭頂著毛巾，走出浴室放廚房方向走的時候。
+出現在你視線盡頭的並不是空無一物的餐桌，而是已經把一碗炒飯拿出來吃的、月代父親。
+
+「姆唔、嗯……」一臉&quot;等你們很久了&quot;的父親，嘴巴被炒飯塞得有些股起來。
+
+再看一下現在的時間，可以發現現在已經比平常吃飯的時間晚了差不多3個小時左右了。</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 07:49 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 08:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="883692889396346911" id="message-883692889396346911" title="Message sent: 04-Sep-21 08:40 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">走向廚房的人見到眼前的光景，完全傻愣住了。
+為什麼月代父親……呃呃呃，人是從什麼時候……
+他們剛才……是在離大門最近的沙發那……聲音、不！不會吧！
+
+「……您、您好。」感覺兩頰的熱度竄到耳際，整個人心虛到不行的雲井草草打過招呼後人快步走向廚房。
+
+人就在廚房那弄東弄西的裝忙，完全不敢坐到餐桌上。
+
+嗚嗚，月代快來救我啊，氣氛好尷尬。
+
+雲井拿著盤子，試著將發燙的掌心降溫。
+
+明明又不是第一次被月代父親撞見兩人辦事。
+但這次他是站在被吃的那方，在面對家長方面……有股難以言喻的羞恥感。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 08:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="883695790512558091" id="message-883695790512558091" title="Message sent: 04-Sep-21 08:51 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「唔一一，這次沒有出血吧？」將口中的炒飯嚥下，月代父親開口的第一句話就是這個。
+
+可是由於他沒有說明白是誰流血，你也不好判斷他究竟是在問你有沒有流血還是問月代的。
+
+在氣氛異常尷尬的時候，換好衣服的月代這才從浴室裡面出來了。
+
+「阿、…………」本來還打算直接走過去沙發那邊繼續處理的他，在看到自己的父親跟戀人在廚房那邊的狀態，整個人頓時停止了思考。
+
+………誒、？？什麼時候…誒？？？
+是、是肚子餓了所以自己上來吃晚飯了嗎？？？
+
+也沒有聽到剛才父親對你說的話，現在還沒有把自己父親出現跟剛才的性事掛上關聯的月代，把髒掉的沙發套藏起來，有些心虛的走了過去廚房那邊幫忙裝飯。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 09:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="883708718116659201" id="message-883708718116659201" title="Message sent: 04-Sep-21 09:42 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「呃哈哈……沒有，月代呃……謝謝您的關心……」隨著十分心虛的回答，雲井腦中止不住方才的性事回放。
+
+雖然被插的是自己，但在正常位抽送時，月代的腰動得挺激烈的……希望沒有影響到對方靜養。
+
+他把裝好的炒飯，其中一盤交給月代，自己則拿著另一盤。
+用在尷尬泥沼中行徑的緩慢速度，人慢慢走到餐桌坐下。
+
+「……我開動了……」人完全不敢看月代父親那邊，默默地開吃。</span>
+
+                                <span class="chatlog__edited-timestamp" title="04-Sep-21 09:43 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 10:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="883715156750770206" id="message-883715156750770206" title="Message sent: 04-Sep-21 10:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊…嗯……？」月代接過炒飯，用十分擔心的樣子看著你。
+
+難道…父親剛是說了什麼奇怪的話嗎？
+
+腦中浮現著沒有實質證據的猜測，可是在這種異常尷尬的氣氛之中問出來，感覺也只是會令氣氛更加尷尬的他，最終還是閉上嘴跟著你一起回到了餐桌坐下。
+
+「我開動了…。」這次是坐在父親正對面的月代，聽到你開始吃飯的聲音也一起開吃了。
+
+…………今天…好靜。
+也許是被這種過於肅靜的氛圍所影響，感覺自己點說點什麼來緩和一下的月代，有些艱難的開了口：「爸…、呃………很抱歉今天晚了開飯…」
+
+好吧，一開口就是道歉的確不是什麼很好的開頭。
+深刻感覺到自己搞砸了的月代，也開始不敢看自己父親那邊了。
+
+「沒，就只是看多本書的時間而已，也沒有很久。」月代父親也不太在意的回應著，隨後空氣又回到了肅靜的狀態。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 11:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="883732654397202483" id="message-883732654397202483" title="Message sent: 04-Sep-21 11:18 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「……。」平時話多的雲井處在相當尷尬的立場，人整個很孬的吃飯。
+
+……知道他們兩個在客廳，不好打擾所以忍著餓回自己房間看書嗎。
+也太溫柔了啦，明津先生——
+
+感受到對方貼心的同時，心裡滿是羞恥的人繼續吃著晚飯。
+
+對不起啊月代——這氣氛下我真的不敢開話題啊！
+嗚嗚嗚……明明應該聽醫囑好好靜養的，結果一時衝動開了快車……真的不是故意的啦，醫生！
+
+雲井抬眼偷瞥了看不出表情的月代父親一眼，接著很心虛的垂下頭吃飯。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 11:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="883738422601211905" id="message-883738422601211905" title="Message sent: 04-Sep-21 11:40 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">又是一陣要命的沉默。
+在兩個人想不出話題、一個人本身話就很少的情況下，率先打破沉默的居然是月代父親吃完飯時放下筷子的聲音。
+
+「月，記得明天早上要檢查喔。」父親最後說了一句之後，這才離開了房間。
+
+「阿、…嗯。」………話說回來，差點忘了呢…。
+感覺自己好像休息太久導致記憶力衰退的月代，有些呆的點了點頭回應了自己的父親之後，才得以從這個剛剛氣氛中獲得了一絲喘息的空間。
+
+「陽正…，父親他……在我出來之前是不是有說什麼？」終於可以把自己心裡疑惑問出來的他，看向了自己戀人那邊說道。
+
+畢竟，平常話多的人突然沉默下來肯定是有什麼理由的，而月代認為問題應該是出在自己還沒有從浴室出來前的那段時間。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Sep-21 11:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="883741864371552266" id="message-883741864371552266" title="Message sent: 04-Sep-21 11:54 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">在月代父親離去後，雲井這才鬆了口氣，恢復平日的吃飯速度吃飯。
+
+「唔……就是……」他把炒飯嚥下去，有些尷尬的解釋自己理解到的情況。
+
+「你爸，應該是聽到了，我們剛才，在客廳……」已經想辦法調整措辭，但聽起來還是很露骨。
+
+「然後他問說，有沒有出血……月代你後面感覺會痛嗎？」
+先入為主認為對方是擔心兒子，雲井才會把疑問拋向月代：「因為你也有用到腰……」
+
+光是講述，腦內回想起剛才的事，覺得臉頰發燙的他咬著湯匙邊緣，別讓自己發出丟人扭捏的聲音。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 12:11 AM</span>
+
+            <div class="chatlog__message " data-message-id="883746029948772422" id="message-883746029948772422" title="Message sent: 05-Sep-21 12:11 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「誒、阿.........」沒想到自己人生之中會被自己父親抓到兩次這種場合的月代，聽到你所說的話，整個人石化在那邊停止了咀嚼的動作。
+
+誒、誒誒？？？
+不不、不是吧……，難道爸…差點就在我們辦事辦到一半的時候打開門了嗎？？
+
+雖然著眼點有些許奇怪，但月代還是逃不過臉蛋燒起來的命運。
+
+「誒呃、啊嗯…我是覺得……父親問的應該是…陽正有沒有出血吧……。」出血就是被插入才會有可能發生的事情，如果爸是這樣發問的話，那麼所指的對像大概就不是指自己了吧。
+「畢竟…如果真是這樣的話，他應該有聽得出哪邊是……嗯…。」
+
+說完自己的猜測，月代便開始回應你的問題：「嗯……現在也沒有覺得痛之類的…，基本都已經會痊癒了所以應該不會有什麼問題吧？」</span>
+
+                                <span class="chatlog__edited-timestamp" title="05-Sep-21 03:56 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 12:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="883748010675281981" id="message-883748010675281981" title="Message sent: 05-Sep-21 12:19 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">哐噹，手中的湯匙掉回盤子裡。
+
+「呃……嘿——？」
+聽完月代的推論，開始考慮移居波蘭可能性的的雲井臉上笑容整個凝固了：「這、這樣啊——啊哈哈……」
+
+原本想說身體痠痛要不要蹭過夜的。果然，還是回家睡吧，不然明早又會再度面臨尷尬修羅場。
+
+「……嗯、嗯，月代你身體沒事就太好了。」把話題轉移走，只想盡早忘記的雲井繼續吃起晚餐。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 12:32 AM</span>
+
+            <div class="chatlog__message " data-message-id="883751352411488286" id="message-883751352411488286" title="Message sent: 05-Sep-21 12:32 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯……，我現在倒是很擔心陽正你身體究竟有沒有事呢。」
+覺得比起已經休息了一個月的自己，現在剛剛失去處子之身的雲井身體狀況才才更令人擔憂的月代一邊無奈地說著一邊吃著只剩一點的炒飯。
+
+這種身體上的疲勞往往不是立即就會顯現在身上，一想到誰也不能保證明天雲井還能不能靠自己站起來，月代臉上擔心的情緒越發明顯。
+
+「還是說……今天就在這邊過夜吧，最起碼如果真的出了什麼事情也有人可以在旁邊看著。」他吃下最後一口飯，並表情嚴肅的看著你這邊說道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 12:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="883753043307413554" id="message-883753043307413554" title="Message sent: 05-Sep-21 12:39 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">啊，被看穿自己想逃回家了。
+這果然是無形之中培養出來的默契吧。
+
+咀嚼口中的飯，抬頭看向戀人認真的表情，模糊不清的說：「唔嗯……好……」
+
+最後他還是乖乖妥協了。
+雖然他現在感覺身體沒什麼大礙，但過一晚後的變數他也無法估量。
+
+「那就打擾了。」把最後一口飯吞下，說了聲「我吃飽了」的雲井動手把餐盤疊好。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 12:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="883754597162823741" id="message-883754597162823741" title="Message sent: 05-Sep-21 12:45 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯，剩下的我來做吧。」月代點了點頭之後，並開始收拾桌子上的東西，把髒的碗碟拿過去流理台那邊洗了。
+
+「陽正先去床上躺著也沒關係喔，現在還是讓身體休息一下吧。」
+也許之前有太多戀人在自己洗碗的途中總是在旁邊蹓躂、就是不去休息的經驗，這次月代在開始洗碗之前就這樣說了一句，希望對方可以快點去躺著。</span>
+
+                                <span class="chatlog__edited-timestamp" title="05-Sep-21 12:46 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 12:54 AM</span>
+
+            <div class="chatlog__message " data-message-id="883756996753506315" id="message-883756996753506315" title="Message sent: 05-Sep-21 12:54 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">聽聞叮囑的雲井也很聽話到接受了對方的好意：「嗯——那，等你喔～月代。」
+
+人離開餐桌，走向印象藏著床的那面牆，手東摸西摸，把床弄了出來。
+
+他趴躺在床上讓腰伸展休息。
+被剛才餐桌上的一下，繃緊的神經栽在柔軟的棉被堆中，慢慢放鬆了下來。
+
+「啊，柴柴……」看到棉被裡的那一條長長柴犬抱枕。
+
+心中冒出想「擁抱什麼」衝動的雲井，想也沒想的就整個手腳並用的抱了上去，閉上眼休息。</span>
+
+                                <span class="chatlog__edited-timestamp" title="05-Sep-21 01:06 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 01:06 AM</span>
+
+            <div class="chatlog__message " data-message-id="883759890642911232" id="message-883759890642911232" title="Message sent: 05-Sep-21 01:06 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">那個軟綿綿的柴犬君，不愧是平常就是被月代抱著睡覺的。
+抱上去休息的你，從那個抱枕上聞到一絲絲月代的味道，令你可以更加放鬆的休息。
+
+過了一陣子，終於洗完碗的月代把手擦乾淨之後便來到了床邊，看到了這有些修羅場的一幕。
+
+嗯………，怎麼感覺好像被搶走了？
+各種各方面的。
+
+月代一方面感覺自己的抱枕好像被戀人佔走了，可是另一方面又感覺戀人好像被抱枕搶走(?)了，整個心情非常複雜的他，頂著那的張微妙的表情伸出手指輕輕戳了戳雲井的臉頰。
+
+「陽正一一，柴柴君好抱嗎？」故意用這有些寂寞的聲音呼喊著自己戀人的他，雖然感覺對方有可能已經睡著了，但還是嘗試了一下。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 01:14 AM</span>
+
+            <div class="chatlog__message " data-message-id="883761926088306708" id="message-883761926088306708" title="Message sent: 05-Sep-21 01:14 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">嗯唔唔……姆咕姆咕……
+快睡過去的雲井，感覺到臉頰癢癢的，硬是撐開快沾成一線的眼臉。
+
+「嗯唔……月代，你……來啦。」連講話語氣也是浮浮的，看來真的是累壞了吧。
+
+沒聽清楚對方的前一句話，但也能看出月代臉上的表情有些微妙，但腦袋太睏想不出因果的他，一副傻乎乎的臉。
+
+接著，他把手中的抱枕舉起，在對方的臉上蹭了一下。
+
+「啊嘿嘿，柴柴啾！」柴柴啾是什麼東西啦，三十歲兒。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 01:22 AM</span>
+
+            <div class="chatlog__message " data-message-id="883763876401917983" id="message-883763876401917983" title="Message sent: 05-Sep-21 01:22 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯姆姆……，今天陽正要跟柴柴君一起睡嗎，不要我了？」
+用手機把室內的燈光調暗後，月代坐到了床上，伸手繞過柴犬抱枕，摸了摸處於半夢半醒的戀人的頭髮。
+
+也許是真的有些賭氣了，月代的臉現在難得的鼓了起來。
+
+「陽一一正一一，想跟柴柴一起睡的話，我就下去跟爸爸一起睡了喔？」
+戳戳、戳戳戳。
+月代的另一隻手正在輕輕地戳著你的臉龐。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 01:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="883767124164771872" id="message-883767124164771872" title="Message sent: 05-Sep-21 01:35 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯唔唔～木有啊……」恍惚中模模糊糊的回答。
+
+瞇瞇眼雲井臉頰被戳了好幾下，這才看清那張鼓鼓的臉。
+
+「啊……」月代，好可愛……吃柴柴的醋了？
+再怎麼掉智商，還是知道戀人該優先哄的雲井放開手上的抱枕，用腳把柴柴推到棉被裡後。
+
+伸手拍拍月代的頭安撫，接著摟了上去磨蹭：「怎麼會～人家只想跟月代睡嘛～」
+
+「月代不要離開人家嘛～」用女性的詞語、三八的語氣撒嬌。</span>
+
+                                <span class="chatlog__edited-timestamp" title="07-Sep-21 01:30 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="696007887595634698" style="color: #FFFFFF">明津月代</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 01:43 AM</span>
+
+            <div class="chatlog__message " data-message-id="883769200387186769" id="message-883769200387186769" title="Message sent: 05-Sep-21 01:43 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯姆…，那麼我就不下去了。」被摟著撒嬌的月代，這下才放下自己莫名吃醋的心，跟著別人一起躺到了床上相擁。
+
+騰出一隻手把被子蓋在彼此的身上，然後再把室內的燈設定為過幾分鐘之後才慢慢完全關掉。
+
+「我才不會離開你呢一一，就跟剛才說的一樣…&quot;永遠都不會分開&quot;喔。」月代在你的耳邊低語著，隨後雙手抱緊了你，在你懷中蹭了一下。
+
+「晚安喔，陽正。」周圍的燈光逐漸黯淡下來，他在這樣說了一句之後便閉上眼睛，打算跟你一起墜入夢鄉了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="249554242057142274" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-21 01:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="883771403894149151" id="message-883771403894149151" title="Message sent: 05-Sep-21 01:52 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">聽著耳畔的低語，雲井也回以幸福的微笑。
+滿是憐愛的收緊臂彎，擁著打算在自己懷中安睡的戀人。
+
+「嗯——晚安了，月代……」
+
+在無光的黑夜中，雲井陽正的手一下、一下的，用不重的力道順著背部的肋骨。
+
+直到人失去意識，陷入深沉睡眠。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">End.</div>
+</div>
+
+</body>
+
+</html>
