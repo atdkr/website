@@ -1,0 +1,3501 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>陽月的單元小劇場 - 關於見岳母的小事</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #36393e;
+            color: #dcddde;
+            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+        }
+
+        .markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .preserve-whitespace {
+            white-space: pre-wrap;
+        }
+
+        .spoiler-text {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .spoiler-text--hidden {
+            cursor: pointer;
+            background-color: #202225;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .spoiler-text--hidden:hover {
+            background-color: rgba(32, 34, 37, 0.8);
+        }
+
+        .spoiler-text--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .quote {
+            display: flex;
+            margin: 0.05em 0;
+        }
+
+        .quote::before {
+            content: "";
+            margin-right: 0.5em;
+            border: 2px solid #4f545c;
+            border-radius: 3px;
+        }
+
+        .pre {
+            background-color: #2f3136;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .pre--multiline {
+            margin-top: 0.25em;
+            padding: 0.5em;
+            border: 2px solid #282b30;
+            border-radius: 5px;
+            color: #b9bbbe;
+        }
+
+        .pre--multiline.hljs {
+            background-color: #2f3136;
+            color: #b9bbbe;
+        }
+
+        .pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #dee0fc;
+            background-color: rgba(88, 101, 242, .3);
+            font-weight: 500;
+        }
+
+        .mention:hover {
+            background-color: #5865f2;
+            color: #ffffff
+        }
+
+        .timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .emoji {
+            width: 1.325em;
+            height: 1.325em;
+            margin: 0 0.06em;
+            vertical-align: -0.4em;
+        }
+
+        .emoji--small {
+            width: 1em;
+            height: 1em;
+        }
+
+        .emoji--large {
+            width: 2.8em;
+            height: 2.8em;
+        }
+
+        .preamble {
+            display: grid;
+            margin: 0 0.3em 0.6em 0.3em;
+            max-width: 100%;
+            grid-template-columns: auto 1fr;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 0.6em;
+        }
+
+        .preamble__entry {
+            font-size: 1.4em;
+            color: #ffffff;
+        }
+
+        .preamble__entry--small {
+            font-size: 1em;
+        }
+
+        .chatlog {
+            max-width: 100%;
+        }
+
+        .chatlog__message-group {
+            display: grid;
+            margin: 0 0.6em;
+            padding: 0.9em 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            grid-template-columns: auto 1fr;
+        }
+
+        .chatlog__reference-symbol {
+            grid-column: 1;
+            margin: 8px 4px 4px 18px;
+            border-left: 2px solid #4f545c;
+            border-top: 2px solid #4f545c;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            grid-column: 2;
+            margin-bottom: 0.25em;
+            font-size: 0.875em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            align-items: center;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-avatar {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25em;
+        }
+
+        .chatlog__reference-name {
+            margin-right: 0.3em;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-content a:hover {
+            text-decoration: none;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-link:hover *:not(.spoiler-text) {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25em;
+            font-size: 0.8em;
+            unicode-bidi: bidi-override;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__author-avatar-container {
+            grid-column: 1;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+
+        .chatlog__author-avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chatlog__messages {
+            grid-column: 2;
+            min-width: 50%;
+            direction: ltr;
+        }
+
+        .chatlog__author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3em;
+            font-size: 0.75em;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+            color: #36393e;
+        }
+
+        .chatlog__message {
+            padding: 0.1em 0.3em;
+            margin: 0 -0.3em;
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__content {
+            font-size: 0.95em;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15em;
+            font-size: 0.8em;
+        }
+
+        .chatlog__attachment {
+            display: inline-block;
+            position: relative;
+            margin-top: 0.3em;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.4em 0.8em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            color: #dcddde;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 10px;
+            background-color: #2f3136;
+            border: 1px solid #292b2f;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__edited-timestamp {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3em;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25em;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: #202225;
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.6em;
+            background-color: rgba(46, 48, 54, 0.3);
+            border: 1px solid rgba(46, 48, 54, 0.6);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author {
+            display: flex;
+            margin-bottom: 0.3em;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            margin-right: 0.5em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author-name {
+            font-size: 0.875em;
+            font-weight: 600;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+            color: #ffffff
+        }
+
+        .chatlog__embed-author-name-link {
+            color: #ffffff;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.2em;
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-description {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5em;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6em;
+            font-size: 0.875em;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 150px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-field-value {
+            font-weight: 500;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            margin-left: 1.2em;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-footer-icon {
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            align-items: center;
+            margin: 0.35em 0.1em 0.1em 0;
+            padding: .125rem .375rem;
+            background-color: #2f3136;
+            border-radius: 8px;
+            border-color: transparent;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        .chatlog__reaction:hover {
+            border-color: hsla(0,0%,100%,.2);
+            border-width: 1px;
+            border-style: solid;
+            background-color: transparent;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35em;
+            font-size: 0.875em;
+            color: #b9bbbe;
+        }
+
+        .chatlog__reaction:hover .chatlog__reaction-count {
+            color: #dcddde;
+        }
+
+        .chatlog__bot-tag {
+            position: relative;
+            top: -.1em;
+            margin-left: 0.3em;
+            padding: 0.05em 0.3em;
+            border-radius: 3px;
+            line-height: 1.3;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625em;
+            font-weight: 500;
+        }
+
+        .postamble {
+            margin: 1.4em 0.3em 0.6em 0.3em;
+            padding: 1em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .postamble__entry {
+            color: #ffffff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler-text--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler-text--hidden');
+            }
+            if (element && element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="icon-attachment" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://images.plurk.com/4kNId0g4x6i6QDuPMX26pO.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">陽月的單元小劇場</div>
+        <div class="preamble__entry preamble__entry--small">關於見岳母的小事</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">03-Oct-21 09:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="894213909052030986" id="message-894213909052030986" title="Message sent: 03-Oct-21 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">來到與母親約好共進午餐的日子。
+雲井抓了提早一個小時的時間開車來到月代家。
+
+他今天依舊維持平日的襯衫加西裝外套打扮。
+雖然有想過穿得休閒一點，但也擔心跟月代的服裝風格落差太大。
+
+感覺月代很重視今天的會面啊，希望平安順利。
+
+雲井心裡想著，一邊出了電梯，走向熟悉的房門。
+
+「我來了呦，月代～」人打開診所五樓的房門，踏入客廳尋找戀人的身影：「準備好了嗎？」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">03-Oct-21 10:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="894225815280177152" id="message-894225815280177152" title="Message sent: 03-Oct-21 10:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">打開門後，雲井可以看到月代人站在餐桌前，正把一個神秘的東西裝到像是運送蛋糕用的箱子裡面的模樣。
+
+「姆、陽正，我差不多可以了。」穿著淺灰色的西裝外套，裡面卻是穿著比較休閒的T shirt、下面再加一件牛仔褲的月代看到你的樣子後便顯得有些慌張。
+
+阿、我這樣穿會不會有點太隨便了……？
+看樣子月代是因為看到對方那正式的衣服跟自己這身有點休閒的裝扮所產生的對比，從而感覺到這一絲不妙呢。
+
+「阿呃、我……我是不是去換件衣服比較好？」把餐桌上印著竹風軒標籤的袋子跟裝著巧克力瑞士捲的箱子放在一旁， 月代帶著不安的表情向自己戀人說著。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">03-Oct-21 10:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="894229362738610206" id="message-894229362738610206" title="Message sent: 03-Oct-21 10:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">啊、默契大考驗，失敗！嗶嗶——
+
+一開門就被不同的風格逗笑的雲井，笑著一邊擺手一邊走向餐桌：「誒——這樣就很好了，月代穿這樣也很好看，不用換啦～」
+
+來到月代身邊，正視對方全套穿著後，兩手用讓人放鬆的力道拍了拍月代的肩頭：「輕鬆就好，輕鬆就好～放輕鬆～」
+
+接著把話題轉到桌上擺著的東西上：「準備見面禮辛苦了，老媽她一定會很開心的！」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">03-Oct-21 10:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="894232162428129330" id="message-894232162428129330" title="Message sent: 03-Oct-21 10:39 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「我、我還是去換一下吧……。」感覺這樣穿過去的話很大可能就會令場面變得有些尷尬的月代， 最終還是打算走過去衣櫃那邊換件衣服了。
+
+「嗯嗚，希望會合伯母口味呢……。」打開衣櫃，把自己的襯衫還有西裝褲拿出來的他一邊回應著雲井一邊把自己的上衣脫掉。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">03-Oct-21 10:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="894235636859547718" id="message-894235636859547718" title="Message sent: 03-Oct-21 10:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「唔嗯……」雖然我覺得老媽不會介意……
+看月代相當在意的模樣，雲井也不再勸阻。
+換個衣服而已，時間也還很充裕……
+
+「嗯，她會愛死的！只要是甜食她都很愛。」
+雲井好奇的湊過去看用來搬運蛋糕的箱子。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">03-Oct-21 10:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="894237158578225193" id="message-894237158578225193" title="Message sent: 03-Oct-21 10:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">那個搬運蛋糕用的箱子雖然外表上是完全密封看不到裡面裝著的是什麼，但從這個長方形的形狀來看裡面裝著的也許是瑞士卷吧？
+
+「姆……話說回來，伯母她現在已經到哪裡了？」很快就把上衣跟褲子換好的月代在走回去客廳的同時也如此問道。
+萬一伯母已經提前到了的話，那麼自己且不是已經遲到了？</span>
+
+                                <span class="chatlog__edited-timestamp" title="03-Oct-21 10:59 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">03-Oct-21 11:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="894240890627948564" id="message-894240890627948564" title="Message sent: 03-Oct-21 11:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">嗯嗯？這盒是……瑞士捲嗎？還是戚風蛋糕之類的？
+
+雲井好奇地研究沒有印著竹風軒 logo 的盒子。
+人還沒意識到這是月代手作點心的他，聽到提問，把手機拿出來確認了下時間。
+
+「啊哈哈，不用擔心，她本地人，人不會迷路的啦～」以為對方是擔心母親找不到路的他笑著擺擺手。
+
+「等下從這過去，還有十五分鐘，嗯……也差不多該出發了。」
+算了算停車、前往餐館的時間，應該是不會超過約定時間後，雲井轉了轉車鑰匙：「那～走吧走吧～」</span>
+
+                                <span class="chatlog__edited-timestamp" title="03-Oct-21 11:16 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">03-Oct-21 11:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="894243318685388882" id="message-894243318685388882" title="Message sent: 03-Oct-21 11:23 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「阿、……嗯。」
+聽著這個問非所答的回應，並沒有打算糾正對方而只是有些無奈地點了點頭的月代，走了過去玄關處穿好鞋子之後便小心翼翼地拿著桌上的袋子和箱子，跟著戀人來到了地下的停車場。
+
+月代坐進副駕駛座，把箱子跟袋子都放到了自己腿上以免待會有什麼意外令到這兩袋東西受到影響。
+
+「呼……，陽正…我現在的臉沒有怪怪的吧？」深呼吸將自己臉上的肌肉放鬆，心中的不安情緒卻久久無法消失的月代便向雲井這樣問了一句。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 07:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="894544099208749056" id="message-894544099208749056" title="Message sent: 04-Oct-21 07:18 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">入座後發動汽車、打開車內燈，繫好安全帶的雲井再度確認了一次手機，沒有收到母親的訊息。
+
+猶豫了幾秒，他決定提早傳個訊確認人目前到哪了。
+「嗯嗯？」聽到提問，雲井轉頭看向月代。
+
+雖然對方看起來很鎮定，但心底肯定很緊張吧。
+為了配合氣氛換衣服、，還小心翼翼的保護見面禮……
+
+「嗯！沒有沒有。一點也不怪喔～」
+雲井伸長手，將那看起來有點拘束的襯衫領口稍微調了個看起來比較能放鬆的角度：「輕鬆點嘛～就只是吃吃飯，聊聊天而已啦～」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 07:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="894552195234689085" id="message-894552195234689085" title="Message sent: 04-Oct-21 07:51 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯、嗯…！」確認過自己的臉沒有因過度緊張而垮掉，月代便乖乖的定著讓對方幫自己調整襯衫領口。
+
+也許是拘束的領口比起剛才更為鬆懈了一點，月代現在就像是從壓力的窒息感中解放一樣，整個人變得輕鬆了一點。
+
+繫好安全帶後，隨著車輛的移動，正午的陽光也透過車窗打在了月代的身上。
+
+……總感覺好像少了點什麼。
+
+看著前面的街景，沒有戴假髮就沐浴在陽光之中的月代不禁心裡感到有些不踏實。
+明明已經沒有漏帶什麼，但他還是感覺到這就像是出門沒穿衣服一樣的、感覺好像暴露了什麼在外一般詭異的心情。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 08:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="894557089333145661" id="message-894557089333145661" title="Message sent: 04-Oct-21 08:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">人一面注意路況開車，時不時透過後照鏡留意鄰座的月代。
+
+在陽光的照射下，透光的紅色髮絲閃閃發亮。
+「……月代今天很漂亮喔。」雲井語帶笑意的說。
+
+這是他第一次見到月代用最原本的模樣在戶外行動，知曉理由的他自然明白其背後代表的意義。
+
+此時他聽到口袋裡的手機響了一聲，但正在開車中，因此沒有立刻拿出來查看。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 08:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="894559871834419210" id="message-894559871834419210" title="Message sent: 04-Oct-21 08:21 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「……是嗎…？」只是低著頭不敢看車外景色的月代，一邊點了點頭一邊回應了雲井後沒過幾秒就被對方的手機的聲音拉住了注意力。
+
+是伯母的訊息嗎？
+也許是太過於在意待會的見面，導致他現在聽到這個也許是工作傳來的信息音也會潛意識的想到哪邊去。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 08:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="894562788171739177" id="message-894562788171739177" title="Message sent: 04-Oct-21 08:33 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯吶，偶爾像現在這樣不戴假髮出門逛逛，也不錯吧～」
+對於戀人勇於做自己的表現抱持著鼓勵的態度，像是要把自己的自信分一些出去的雲井點了點頭。
+
+在面臨下一個紅燈的等待，雲井這才翻出手機，可正當他一喚醒螢幕……
+
+「蛤、」相當熟悉的口癖又冒出來了。
+雲井面露無奈的說：「姆嗯……老媽說：『她到了，也幫我們佔好位了』。」
+
+「動作也太快了吧，齁……」跟紅綠燈秒數拼手速的人草草寫了十字以內的回信，送出。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 08:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="894564800703635486" id="message-894564800703635486" title="Message sent: 04-Oct-21 08:41 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯……雖然現在還沒有到很習慣…，但是之後應該可以慢慢改善的。」慢慢地把頭抬起來，這下終於肯直視街景的他語氣中帶有一絲不確定、卻有決心的說著。
+
+可接下來他聽到的消息就宛如一棍子打了過去她的自信心那邊一樣，令月代重新回到了有些慌亂的狀態。
+
+「誒、誒……已經到了…？！」雖然的確預想到也許會有這種情況發生，可真的沒想到是提前那麼早伯母就已經抵達了的他，現在滿腦子懊悔著為什麼自己要花時間去換衣服搞到他們遲到了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 08:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="894568702081646602" id="message-894568702081646602" title="Message sent: 04-Oct-21 08:56 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯啊，說是期待到一路上沒少踩油門的樣子，啊哈哈……真會開玩笑……」
+
+又不是第一次遠足的小學生……嗯，是開玩笑的吧？超速罰單要記得繳哦？老媽。
+
+看月代的表情，大概是因為讓長輩等候感到焦慮著急了吧。
+
+雲井一邊駕車，一邊安慰的說：「嗯……但我們也沒遲到，沒那麼嚴重啦。老媽她……會自己找事情做的。」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 09:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="894571188280500264" id="message-894571188280500264" title="Message sent: 04-Oct-21 09:06 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「是嗎……。」看現在這個位置，感覺大概也不用多久就可以到達目的地的月代並不擔心會讓對方等太久，但心裡還是會有一點過意不去而已。
+
+開口的一句什麼辦呢……。
+看著前面車輛的樣子，月代思緒慢慢飄到待會應該要道歉先，還是簡單打聲招呼之後先把禮物送出去比較好。
+
+可是畢竟他們的到達還是差了一點，先表示歉意也許會比較好吧……。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 09:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="894579092433797130" id="message-894579092433797130" title="Message sent: 04-Oct-21 09:37 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">幸好沿途車況順暢，用沒多久就抵達了目的地。
+在餐廳周圍停好車，你們重回曾經一起來過的那間義大利餐廳。
+
+中午時段來用餐的人不少，服務生們在場內外忙進忙出的。
+靠近門口櫃檯的服務生拿著菜單準備帶位時，靠窗座位的四人座位區，有名女性舉起手朝站在店門口的人揮了揮。
+
+「啊，我們是一起的。」從雲井的說明來看，靠窗而坐的女人就是他的母親了。
+
+收到指示的服務生禮貌的為你們帶位，附上菜單後先行離開。
+
+「呀！好久不見，以及初次見面啊～」有著和雲井相似眼眸的中年婦女瞇眼微笑。
+
+她穿著一襲湖水綠的圓領襯衫，全身沒有多餘的飾品裝飾。
+長至耳下不過肩的栗色微捲的短髮，仔細看的話可以發現有幾根銀白色的頭髮隱沒其中。
+
+「雨森汐，不才小犬承蒙您照顧了，月代君。」
+入座的雲井一臉想插話的表情，但他很克制的沒有脫口而出。</span>
+
+                                <span class="chatlog__edited-timestamp" title="05-Oct-21 02:47 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 09:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="894584415462781011" id="message-894584415462781011" title="Message sent: 04-Oct-21 09:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">走進似曾相識的餐廳內部，此刻除了要見家長的緊張感以外，月代還要克制住自己那快忍不住低下來的頭跟著戀人一起走向靠窗的位置前。
+
+「您、您好！初次見面……我叫明津月代…，那個…非常抱歉讓您久等了。」對上那雙與雲井相似的眼眸，月代感覺從一開始就已經非常吵雜的心音，現在已經快到彷彿都快要停下來一般的鼓動著。
+
+「不、不敢當……，這邊才是平時總是承蒙令嗣的照顧了…… 。」拼命控制著自己說話的語調不會飄起來的月代，說話有些彆扭的一邊點著頭一邊說著，然後才把自己手中的兩個見面禮慢慢送到了對方的面前。
+
+「還、還有這個……，小小心意……希望會合您的胃口。」緊張到完全忘記了自己要坐下來的事情的月代，提著禮物的手已經有些發抖的等待伯母的回應。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 10:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="894592304495603783" id="message-894592304495603783" title="Message sent: 04-Oct-21 10:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯哈哈，是我早到了吶～」來的途中超速有感的人笑著應答。
+
+坐在雨森對坐的雲井抬頭看向戀人緊張的模樣，沒有打斷月代努力的打招呼，轉而用鼓勵的眼神默默支持對方。
+
+「啊啦，」正打算點頭招呼你坐下的雲井母親看向你遞出的禮物，既欣喜又意外的眨眨眼。
+虛掩的嘴角微微勾起：「謝謝呀，還讓你費心了～」
+
+她伸手接下見面禮。
+其中一個提袋有著熟悉的店名，另一個則完全看不出其內容物，但從外型和說詞，應該也是吃的吧？
+
+「呼嗯，坐吧坐吧，你們應該餓了吧～」
+她一邊招呼，一邊將眼前摺成天鵝的餐巾拆開撲在大腿上：「今天阿姨請客哦，想吃什麼儘量點喔？」
+
+在一旁看著雙方互動氣氛不錯的雲井也放鬆的打開菜單。
+「嘿——有什麼好事分享嗎？老媽。」既然有人自願請客，他自然沒在跟人客氣的。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 10:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="894595756068053032" id="message-894595756068053032" title="Message sent: 04-Oct-21 10:44 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「阿、好的……，謝謝伯母！」在雲井母親的提醒下午終於意識到自己沒有坐下的月代，帶著滿臉不好意思的表情坐在了雲井的旁邊。
+
+雖然他本想拒絕對方的請客，但想到拒絕長輩的請客或許有些失禮的他最終還是放棄了這個念頭，轉而看向雲井和雲井母親交談的模樣。
+
+陽正…，在性格還有舉止上真的有點像伯母呢。
+看著語氣輕鬆寫意談話的兩人，感覺他們真的非常相似的月代在一旁默默地想道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">04-Oct-21 11:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="894600465919123466" id="message-894600465919123466" title="Message sent: 04-Oct-21 11:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「呼呼，要不猜猜看啊～」雨森打鬧的語句隨著細長的食指轉啊轉的吊人胃口。
+
+「那～猜對能加碼點心嗎？」習慣家人說話步調的雲井也用胡話應對。
+
+他看了看菜單，點了熟悉的主餐和沒嘗試過的新甜點：「我要肉醬義大利麵，跟千層酥。」
+
+「只要分我一口，你要全部都點一輪也可以喔～」她沒有翻開菜單，大概是早就決定好要點什麼了吧？
+
+以及不愧是母子，各方面都有點彼此的影子在。</span>
+
+                                <span class="chatlog__edited-timestamp" title="05-Oct-21 02:52 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-21 08:14 AM</span>
+
+            <div class="chatlog__message " data-message-id="894739168134053949" id="message-894739168134053949" title="Message sent: 05-Oct-21 08:14 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「……。」在旁邊看著兩位打賭的月代雖然先前覺得好像在他們母子說話的時候擦嘴有些失禮，可現在聽到要他們去點餐一般的說詞也令他隨時懷疑起自己的判斷。
+
+呃……我要開口嗎？
+可是第一句就點餐什麼的……，總感覺有哪裡不對。
+
+最後還是決定嚥下自己想講出來的話語，判斷這個場合不是自己搭話的月代，在旁邊繼續一言不發的看著雲井和雲井母親的對話。</span>
+
+                                <span class="chatlog__edited-timestamp" title="05-Oct-21 08:22 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-21 02:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="894841298702454835" id="message-894841298702454835" title="Message sent: 05-Oct-21 02:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「唔嗯，不要小看你兒子啊……」若不是會面聊天的場合，雲井可能真的幹得出來，一口氣甜點制霸之類。
+
+但考慮到自己只顧著吃，很可能會導致讓月代一人全攬所有的接球工作，不太事宜……還有，餐點一多，代表時間可能會被拉得很長。
+
+「……還是算了。對了，月代要點什麼？」於是他轉向關心安安靜靜、還沒點餐的戀人。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-21 06:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="894897361296425020" id="message-894897361296425020" title="Message sent: 05-Oct-21 06:42 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">本來還以為他們會繼續討論甜品全爭霸的事情的月代，被這個突然的提問弄得瞬間有些手足無措。
+
+「誒、呃阿……我我…跟陽正一樣就可以了…。」由於剛才月代全身的感官都集中在他們母子倆的對話之中，導致了現在突然叫他點餐也不知道該點什麼，最後還是乾脆放棄思考的直接跟戀人點同一樣東西了。
+
+「所、所以陽正……這下要一口氣的把之前沒試過的甜點都試一次嗎？」隨後統感覺自己應該要說點什麼的月代，終於在這時有加入話題的打算了。
+
+畢竟一直坐在這裡不說話也只會顯得自己很突兀而已……。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-21 07:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="894902988982870026" id="message-894902988982870026" title="Message sent: 05-Oct-21 07:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">伸手去拿餐巾的雲井止住了動作，面帶猶豫的搔搔臉。
+「啊嗯……不，果然還是算了，留到以後來時再慢慢點吧？」
+
+「呀～自家人的客氣什麼呢～」以為兒子是在顧慮自己的荷包，雨森重新打開了菜單。
+
+「是說咧～你們這樣吃得飽嗎？要不要再點個窯烤披薩？」
+
+其捲舌音就像那轉了向的菜單那般，她將列有八吋薄片披薩的那頁，轉向你們的方向詢問道。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">05-Oct-21 07:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="894908190305714196" id="message-894908190305714196" title="Message sent: 05-Oct-21 07:25 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「是嗎……？」本來還真以為對方會趁著這個機會乾脆把剩下沒吃完的甜點都吃一輪的月代，現在倒是顯得有些出乎意料之外。
+
+嘛……，也許是陽正不想讓伯母花那麼多錢吧？
+終究並不知道對方心思的他，還是跟兩森得出了相同的結論。
+
+「嗯……，我是覺得這個份量已經挺足夠的了…。」平時就有在控制自己飲食的月代，雖然理由中的其中一個是不太想突然吃那麼多導致熱量失衡，但現在由於今天這一頓是對方母親的請客，令他拒絕再吃更多的理由又增加了一個呢。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">06-Oct-21 11:24 AM</span>
+
+            <div class="chatlog__message " data-message-id="895149559603413002" id="message-895149559603413002" title="Message sent: 06-Oct-21 11:24 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯呀，這樣啊～」見沒有要追加的餐，雨森便伸手招來服務生點餐。
+
+「兩份肉醬義大利麵、一份薄餅包。甜點的部分——兩份千層酥、一份奶油酥卷、還有。」
+
+大概是考慮到沒有飲料配點心，於是她轉向你問道：「你比較喜歡熱紅茶，還是果汁呢？月代君。」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">10-Oct-21 08:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="896732155483394068" id="message-896732155483394068" title="Message sent: 10-Oct-21 08:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「……。」一看到服務生靠近這邊的桌子，還沒有完全習慣沒戴假髮出門的月代，很自然地就低下的頭並且靠了過去自己戀人的身邊。
+
+好像……有視線在看著自己，是服務生嗎？還是說其他的客人？
+……啊啊，果然…這頭髮很引人注目呀。
+
+「呃、阿……」月代心理上的壓力逐漸增大，快壓得自己喘不過氣的他對於伯母的詢問反應得有些慢。
+「果…汁……就可以了。」如同漂流在大海的人會尋求可以依靠的東西一般，現在迷失於壓力之中的他也伸手抱住了雲井的手臂，頂著那張有些青白的臉、有些艱難地說著。</span>
+
+                                <span class="chatlog__edited-timestamp" title="10-Oct-21 09:00 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">10-Oct-21 09:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="896746053125144607" id="message-896746053125144607" title="Message sent: 10-Oct-21 09:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「「？」」
+雲井、雨森、服務生，同時因為你突然的舉動感到困惑，而那股「被人注視著的感覺」也因此愈發明顯。
+
+幸好服務生在沒有多加停留，確認過餐點品項就離去了。
+
+「還好嗎？月代。」聽出話中的勉強，大約推測到你正處於相當緊張的情緒下，雲井伸出左手摸摸你的頭：「沒事的、沒事的哦，放輕鬆……」
+
+「是身體不舒服嗎？月代君。」雲井的母親眨了眨眼，關心地詢問。</span>
+
+                                <span class="chatlog__edited-timestamp" title="10-Oct-21 10:02 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">10-Oct-21 09:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="896750827618857001" id="message-896750827618857001" title="Message sent: 10-Oct-21 09:27 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「……。」月代抓著手臂的力度又再次增強，甚至可以感覺到自己身體在不停顫抖的他被越發明顯的視線弄得完全慌了陣腳。
+
+搞砸了。
+這下，伯母肯定覺得我是個很奇怪的人吧……。
+
+「陽、…陽正……。」聽到戀人的聲音，已經快被壓力壓垮的他，像是為了保護理智的最後一根稻草一般抬頭看向了雲井。
+
+「對不起……。」月代對於自己搞到現在氣氛尷尬的事情道了歉，接著慢慢的深呼吸著試圖讓自己冷靜一點。
+
+現在沒有人看著了，沒事的……沒事的……。
+陽正也還在旁邊，不會出什麼事的。
+月代如此在心裡安慰著自己，在整理好之後才回應了雲井母親的詢問：
+「現在已經沒事了……，抱歉讓您擔心了。」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">10-Oct-21 10:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="896765670669303838" id="message-896765670669303838" title="Message sent: 10-Oct-21 10:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">也不是什麼需要道歉的事情啦。
+你彷彿能從那對褐色的雙眼中讀出雲井想說的話。
+
+「你努力過、也做得很好喔，月代。」鄰座的他輕拍你的手給予鼓勵與支持。
+等你尋回平靜、向雨森解釋後，雲井也補了一句：「月代只是有點緊張……」
+
+說完，人就瞇眼向對坐的老媽使了個眼色，彷彿在說「拜託等下聊天時別把人逼急了」
+
+啊，真不想被名字縮寫是 KY 的人提醒。
+
+「沒錯沒錯，月代君你放輕鬆就好～」
+接到自家兒子雞婆的提醒，雨森笑笑的說，接著轉頭從皮包內取出對折的書類資料，推向對座。
+
+如人所願的，雨森將話題帶開：「這些是你提到的預售屋的建屋規劃、建設地段、周圍地圖。」
+
+沒想到對方會直接在飯桌上拿出資料，雲井的表情有些愣住。
+
+「買房子大概是一般人一生中買過最貴的東西了。我呢～會建議你們好好考慮過後再決定，這是看房這麼多年的經驗談～」雨森瞇眼笑著說道。</span>
+
+                                <span class="chatlog__edited-timestamp" title="10-Oct-21 11:31 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">10-Oct-21 10:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="896768022411370516" id="message-896768022411370516" title="Message sent: 10-Oct-21 10:35 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯……。」月代在雲井的鼓勵下終於把手鬆開，重新整頓好姿勢看向對方的母親。
+
+本以為一切都可以重新邁向正軌，可當他看到伯母拿出來的文件之後，整個人再次變成了與剛才有些不同的混亂的狀態。
+
+誒、誒？
+房子……預售屋？？？？？
+誒？？？買房子……？！？！
+月代呆呆的看著桌上的資料，突然被推銷房子的他現在已經驚到連話都說不出來了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">10-Oct-21 11:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="896777470458621953" id="message-896777470458621953" title="Message sent: 10-Oct-21 11:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯……吼、老媽～」所有的無奈匯聚成一聲抱怨。
+尷尬的雲井伸手去取桌上的文件，同時注意到身旁的人異樣安靜。
+
+啊、對。
+他完全沒跟人家提過有考慮買房的事情呢。
+
+面對月代錯愕的側臉，他搖了搖頭解釋：「呃、就只是先瞭解、研究研究，沒有說……嗯唔，也沒有要馬上決定啦～」
+
+「只是剛好看到建案的廣告，所以就想說問問看……」對上母親臉上壞笑的表情，雲井兩眼轉了一圈。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">10-Oct-21 11:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="896784257794584577" id="message-896784257794584577" title="Message sent: 10-Oct-21 11:40 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">『這樣進展會不會有點太快了？』
+現在月代錯愕的腦海中的一句響起的這是這句話。
+
+也許是社會一般的固有常識所以才會導致他看到&quot;要買房子&quot;就會很自然的聯想到&quot;結婚&quot;吧。
+對於要不要跟旁邊這個人結婚這件事情，雖然現在的月代答案毫無疑問是『yes』的，可是這如此快速的進展也給他帶來了不少的不確定性在其中。
+
+一般來說，只交往不過一年的情侶應該也不會那麼快就談及婚嫁。
+『這樣真的可以嗎？』月代在性格上並不像自己父親那般可以如此義無反顧地一頭栽進愛情的其中，多多少少還是對自己會不會下錯判斷這件事情感到一些不安的他，做不到在此時此地就下定決心這種事情。
+
+可正當月代想說考慮一下的時候，看向雲井的他還是無法軟下心來撥對方一盆冷水。
+
+「嗯、嗯……只是看一下的話……。」月代看向對方手中的資料，想著把話題轉一下的他接著說：「這個是……之前說要在百貨公司附近建的住宅區？」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">11-Oct-21 12:16 AM</span>
+
+            <div class="chatlog__message " data-message-id="896793414367059978" id="message-896793414367059978" title="Message sent: 11-Oct-21 12:16 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯、嗯對，就是那附近的預建地區。」
+雲井點點頭，說：「等百貨建成之後，房價會再漲上去吧？就……先有個概念也好？」或是心理準備。
+
+「嗯嘛，如果用途不是投資的話，可以不用急著下手啦～」雨森看著對坐的互動補充說道。
+
+「等建好特新成屋也是一種選擇。房子是否符合買主的期待是最首要的事項。二來、價格也不會說相差太多。」
+
+「嗯唔，這樣啊……」對近年房地產業變化沒什麼概念的雲井，愣愣的點頭聽講。
+
+而在餐點上桌之前，服務生終於把水杯送上了。
+一般來說在入座時就該給上的，看來外場是真的忙翻了吧？
+
+一名外表看起來還是學生的年輕服務人員，在透明玻璃杯乘上八分滿的礦泉水。
+他向你們微笑致歉後便匆匆離開，去服務下一桌客人了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">11-Oct-21 12:30 AM</span>
+
+            <div class="chatlog__message " data-message-id="896796959115993169" id="message-896796959115993169" title="Message sent: 11-Oct-21 12:30 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯……，也是呢。」月代聽著另外兩位的話，從剛開始就一直被示意圖吸引的他始終還是沒有充資料上移開過視線。
+
+怎麼感覺，這個配置好像在哪裡見過……。
+想不起來……。
+
+想來想去他還是找不到既視感的源頭，於是就像是放棄尋找一般的把話題帶到了其他地方去：
+「買主的期待嗎……，陽正有沒有什麼覺得房子裡面一定要有的東西？」
+
+當月代正想往對方那邊看過去的時候，透明玻璃杯應放在桌上的聲音又吸引了他的注意力。
+
+阿、……。
+月代雖然並沒有看向聲音傳來的方向，但心臟還是跳得非常劇烈，連帶著自己的表情也變得僵硬起來了。
+
+「……。」經過幾秒鐘的呆滯，確認過對方已經離開後月代才放鬆了一點。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">11-Oct-21 03:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="897030343780073502" id="message-897030343780073502" title="Message sent: 11-Oct-21 03:58 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">注意到月代的好奇視線，雲井把書類放在對方容易觀看的位置上。
+
+聽聞母親的建議和月代詢問，他也不禁認真思考了起來。
+
+「嗯姆，房子的話……」家具和室內裝潢之類的都還好打理，真要說哪邊會讓人在意的話……嗯？
+
+就在雲井正要開口時，同時注意到了月代些許僵硬的不自然反應。
+
+……還是會緊張的吧？
+
+等送水服務生離開後，本垂放在腿側的手便向你牽來。
+有桌子遮掩，普通來說不細看也發現不了你們彼此相牽的手。
+
+「我會看像是座落地段、鄰居之類的……」雖然聊得是房子，但從相握的手心傳來的則是陪伴。
+
+「唔，畢竟買房定居後沒法說搬就搬，周圍環境也是很重要的……」
+稍微解釋了聽起來或許給人有些岔題的回答：「住再來就是房子格局吧，太奇葩的也  NG。」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">11-Oct-21 04:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="897036899351400498" id="message-897036899351400498" title="Message sent: 11-Oct-21 04:24 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯、嗯……。」 感覺到對方握緊了自己的左手，在心情上雖然能緩解對於外界的緊張感，可這也讓月代害羞得臉頰開始肉眼可見的泛紅。
+
+月代把手稍微鬆開，讓手指穿過對方的手掌縫隙讓雙連著的手變成十指相扣的狀態後他便像是沒事發生一樣的繼續說著關於房子的事情。
+
+「地段的話，從位置上來看離警局有些遠呢……反倒是跟診所那邊的距離比較近。」嘛……雖然還是比本來陽正家跟自己家的距離近，但這樣還是多少有些不方便吧？
+
+「鄰居……現在還不好做判斷呢，但是這種獨棟式的建築物的話，鄰居的影響應該也不會到很大……？」
+「格局來看這也不是很奇怪……，所以我覺得這間也還好呢。」月代說完後便用右手翻一下資料下面有沒有其他資料可以用來參考。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">11-Oct-21 07:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="897085097105297448" id="message-897085097105297448" title="Message sent: 11-Oct-21 07:35 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">坐在對面的雨森雖然看不透檯面下的動作，但從兒子男朋友臉上的反應，多少明白讀出點什麼。
+
+同時也不禁感嘆，自己的兒子是真的很喜歡被依賴的感覺呢……
+
+因為不想再被護著小男友的人囉嗦，她的視線很收斂的沒有看太過頭，轉飄向窗外——改從玻璃鏡向看兩人研究房子——
+
+「嗯姆，我覺得這點距離還在『不會麻煩』的範圍內。」
+當然，是以乘車為前提的考慮。
+
+不過這麼一來他也得把買車的事考慮進來了，總不能開著別人家的車開一輩子。
+
+「唔嗯……確實沒辦法先知道鄰居是哪些人……嗯，」只能祈禱不要跟怪人做鄰居了。
+
+你翻了其他頁，看到了更加豪華的三層式獨棟別墅的平面圖。
+
+一樓是廚房、餐廳、客廳，客房。
+二樓是書房，娛樂室。
+三樓是主臥，露天陽台。
+
+再其他張設計圖，也有針對給小家庭住戶做的設計。
+
+空間規劃與你最先看的版本幾乎差不多，只是多增設了二樓、以及對應住戶人數的房間。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">11-Oct-21 07:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="897091108864159794" id="message-897091108864159794" title="Message sent: 11-Oct-21 07:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯……也有三層式的呢，可是只有兩個人住的話應該不會用到那麼大的空間……。」月代單手翻了翻資料，除了看其他的價錢以外，主要看注意有沒有什麼是給小家庭做的房子。
+
+阿、但是也不排除之後會領養小孩之類的……。
+是不是應該要把這個也納入考慮之中呢？可是也不知道陽正會不會有這種打算……。
+
+「……。」陷入煩惱的旋渦之中的月代，開始一言不發的來回看著多人家庭用的跟小家庭用的建築方案。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">11-Oct-21 10:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="897131046112489512" id="message-897131046112489512" title="Message sent: 11-Oct-21 10:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">也對，三層樓感覺光是打掃就好累人啊……
+
+頭湊過去看建設格局藍圖的雲井安靜地點點頭。
+
+就在你無比煩惱「哪一種家比較適合你們共住」之時，餐點也終於上桌了。
+
+兩盤飄著熱氣的紅色肉醬上頭灑有少許融化的起司粉。
+以及切成一小段、一小段的義式香腸，份量一如既往的足。
+
+雨森點的料理像是口袋造型的烤餅，開口塞著生菜、番茄、醃漬肉片。
+份量比起正餐，更像是下午茶點心。
+
+同時，很大一壺的現榨柳橙汁也送上了，當然，三人份的飲料杯也隨之附上。
+
+「開吃吧，你們應該餓了吧～」一直用體貼距離看著小情侶互動的雲井母親，拿起自己的那份餐點吃了起來。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">11-Oct-21 11:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="897137609229348904" id="message-897137609229348904" title="Message sent: 11-Oct-21 11:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「……啊、好的！」
+由於太過專注在建設格局藍圖之中，乃至於連上菜的聲音也聽不到的月代，在伯母的提醒下終於把資料放到另外一邊，並且鬆開跟戀人相連的手拿起叉子準備開動了。
+
+「我開動了……。」月代雙手合十，在說完之後便開始吃義大利麵了。
+
+……怎麼辦呢，要在這邊問一下陽正有沒有打算領養小孩……嗎？
+
+因為腦袋還在想著剛才的事情，所以月代吃飯的動作顯得非常的緩慢。
+可是在這種場合上問好像也有些奇怪呢？再加上這些感覺也不是現在就要考慮的問題。
+
+「……。」一點一點吃著義大利麵，月代始終還是保持著那個有些糾結的表情。</span>
+
+                                <span class="chatlog__edited-timestamp" title="12-Oct-21 11:10 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">12-Oct-21 11:54 AM</span>
+
+            <div class="chatlog__message " data-message-id="897331356684668968" id="message-897331356684668968" title="Message sent: 12-Oct-21 11:54 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯，我開動了～」說罷，雲井拿起餐具準備開動時看了看那壺果汁。
+
+糖分飲料對比上白開水，對於後者沒什麼興趣的他伸手給自己倒了一杯、又順手準備了所有人的份。
+
+「來，請用～」個別送上後，雲井這才開動吃麵。
+接連吃了幾口後，他一邊細嚼慢嚥口中的食物，一邊思考。
+
+味道好像比起以前有點不一樣？
+
+「……月代會不會覺得——」
+轉頭注意到月代糾結的表情，以為對方也吃出味道的不同。
+
+「麵的味道果然不一樣對吧，好像比起以前鹹了一點。」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">12-Oct-21 12:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="897334063118037042" id="message-897334063118037042" title="Message sent: 12-Oct-21 12:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「……誒？啊……好像是呢？」專注在思考之中，完全沒注意到味道有什麼不同的月代，在對方的提醒下才開始察覺到麵的配方有改變了。
+
+真的鹹了一點呢……。
+「這是換了配方……？」陽正那碗也是這樣的話應該不是廚師不小心加多了鹽吧。
+
+「陽正，是比較喜歡之前那個味道嗎？」雖然是真的比以前鹹了一點，但感覺一般人很難察覺到這個的月代便推測對方是比較喜歡以前的那個味道所以才注意到這點的。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">12-Oct-21 07:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="897451690545004616" id="message-897451690545004616" title="Message sent: 12-Oct-21 07:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">月代那一盤也是一樣狀況嗎？
+唔姆……這樣，就算讓餐廳給他們換一盤，說不定接著上的還是一模一樣的狀況。
+……算了吧？
+
+雲井側頭想了想，說：「嗯……還是以前的味道比較習慣。」
+
+說完繼續用叉子捲麵拌著醬吃。
+反正他對這家店最大的期待值是甜品。
+甜點完美，這一餐也就完美了！
+
+在你們討論餐點問題中途，雨森努力抑止自己的「有問題就該反應」的急性子衝動。
+
+以她的個性肯定在發生問題的當下就把服務員抓過來的。
+但在聚餐場合表現太強勢會讓氣氛變僵，她也不想給人留下的第一印象是「強勢」。
+
+於是她沒有跟自己的兒子討要調味有問題的食物，繼續吃她午餐。
+
+這麼說來……烤餅的味道有點淡，是心理作用嗎……
+
+在關西生活多年，口味不知不覺也變得重鹹的雨森汐，安靜的吃飯。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">12-Oct-21 08:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="897455156361297931" id="message-897455156361297931" title="Message sent: 12-Oct-21 08:06 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯……，雖然現在這個味道我不討厭，可是這個配搭真的有些過鹹了呢……。」作為鹹食派的月代當然並不討厭這種味道的食物，但這個義大利麵的味道很顯然已經超出了&quot;有一點鹹&quot;的範圍，破壞了義大利麵本身所應該有的風味了。
+
+……也許真的是廚房有什麼狀況出現了？
+再次捲了一口義大利麵進嘴裡，稍微瞄了一眼對座的雲井母親。
+
+「……。」其實……我是不是應該去搭個話呢？
+總感覺除了一開始跟點餐時以外自己並沒有跟伯母有過多的交流的月代現在陷入了要不要搭話的漩渦之中。
+
+可是要怎麼搭話呢……，房子……呃……還是說自我介紹之類的？？
+想著自己好像沒有自我介紹過的他，現在腦袋變得有點小混亂。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">14-Oct-21 11:37 AM</span>
+
+            <div class="chatlog__message " data-message-id="898051758419492955" id="message-898051758419492955" title="Message sent: 14-Oct-21 11:37 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">或許是或多或少感覺到了對座注意的目光，解決一半午餐的雨森抽來餐巾紙擦擦手，拿起水杯喝了一口，接著挑起話題。
+
+「說起來——」放下水杯，用視線點了點兩位年輕人：「你們現在是住在一起嗎？」
+
+聽到問題的雲井的頭明顯頓了一下，但他正好滿嘴麵沒能接話。</span>
+
+                                <span class="chatlog__edited-timestamp" title="14-Oct-21 07:06 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">14-Oct-21 11:53 AM</span>
+
+            <div class="chatlog__message " data-message-id="898055820464513035" id="message-898055820464513035" title="Message sent: 14-Oct-21 11:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「誒、啊……沒有，雖然我們都有對方家裡的鑰匙，但也沒有到真的住在一起……。」
+
+本來還在煩惱著應該要怎樣搭話的月代，在聽到伯母提問就慌忙的把自己嘴裡的食物吞了下去，喝一口果汁之後便顯得有些慌張的回應了對方。</span>
+
+                                <span class="chatlog__edited-timestamp" title="14-Oct-21 07:25 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">14-Oct-21 06:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="898163055609937950" id="message-898163055609937950" title="Message sent: 14-Oct-21 06:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嘿誒——月代君的家，嗯～好好奇～」
+看自家小孩被問題突擊還沒辦法回話、手忙腳亂的模樣。
+見此，雨森故意地拋出會讓人更慌張的問題。
+
+「嗯嗯，我知道我知道啦～」在雲井開口之前，她揮揮手把對方的話堵了回去。
+
+「所以月代君也知道了，這小子的睡相很差，早上人也很難叫醒，對吧？」
+
+啊——這個人根本！沒有！搞懂！任何事！
+
+雲井的臉上寫滿了無奈，用帶了點哀怨的表情望向月代。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">14-Oct-21 07:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="898169463969558570" id="message-898169463969558570" title="Message sent: 14-Oct-21 07:24 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「唔呃、我的家……因為下面有在經營診所的關係所以也不太算是住宅呢……。」對於自己的家也不知道該怎樣介紹才好的他，只能有些彆扭的把非常單一的資訊說了出來。
+
+「誒？阿…嗯……，其實也沒有到很差呢……」至少沒有到我那麼糟糕的地步「陽正他每天早上也會乖乖的依照鬧鐘的時間起來，有時候還會被我提前弄醒……。」
+
+說著說著，莫名感覺自己好像在人家母親面前秀了點恩愛的月代，現在除了慌張以外，臉上也開始有些羞澀之情浮出來了。</span>
+
+                                <span class="chatlog__edited-timestamp" title="14-Oct-21 07:25 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">14-Oct-21 11:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="898228742059601930" id="message-898228742059601930" title="Message sent: 14-Oct-21 11:20 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「哎呀，住家跟工作地方是同一棟呀？」有著與雲井相似的雙眼眨了眨：「這樣挺方便的呢。」
+
+「誒——小陽變得這麼規矩啦～果然戀愛中的人會變呢……」
+
+反向詢問獲得可愛反應的雨森，臉上沒在藏的笑靨中能窺見歲月的皺紋。
+
+「我本來就沒有……」不同意老媽挖苦的雲井癟癟嘴，瞥向越解釋臉越紅的月代，心情也一下子放鬆了。
+
+「嗯嘿——」啊——看著小情侶間的默契，感覺自己都要變年輕了。
+目前看起來，月代好像是會事事順著兒子意的個性啊。不會給人吃虧了吧？月代君。
+
+「是說——我還沒聽陽正跟我講過，你們是怎麼在一起的呢。」
+
+她忍不住輕推了一把：「月代君願意跟阿姨透露一點點點嗎？像是這小子的哪裡，是你喜歡的？」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">19-Oct-21 07:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="899976207356035142" id="message-899976207356035142" title="Message sent: 19-Oct-21 07:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯嗯，雖然這樣是很方便，但其實同時也犧牲的家裡不少空間呢……。」
+
+眼睛，果然……很像呢。
+在月代點點頭回著話的時候，由於那一雙與戀人相似的眼睛吸走了一點他的思緒，導致他對於接下來的回應比剛才的回應時的速度還慢了一拍。
+
+「那個……說起來有可能會有些複雜呢…。」感覺整件事情應該會很慵長、再加上有些地方不太方便跟伯母說的他，腦內正默默的處理著有哪些事情可以把它省略或者簡化掉。
+「簡單來說的話，就是……我之前其實是一直喜歡著陽正，但因為這種還是第一次所以就……繞了一點彎路，然後在陽正幫我解答了這種感情是什麼之後，我們就正式交往了。」
+
+感覺這樣簡潔過頭的講解反而會令人摸不著頭腦的月代，本來還想追加解釋一下的，但一想到會越講越混亂事情會變得更加麻煩，最終他也只好放棄了。
+
+而對於自己喜歡雲井哪裡的問題，月代在思考了一陣子之後才給出了答覆：
+「我……喜歡他的性格。」
+「不管是願意接納這樣的我的溫柔、很多時候會支撐著我的可靠、雖然有時候很不看場合但的確會讓我放鬆很多的白……健談也是。」差點就在人家母親面前說他兒子&quot;白目&quot;的月代，在言語吐出口之前有些驚險的轉了個彎。
+
+「當然……陽正這些性格其實也不全然是只好的一面，可是……」
+「可是無論是怎樣的他，我都覺得無比的憐愛……。」說到這邊，月代雖然臉已經被羞澀的弄到紅得一蹋糊塗了，可他的眼睛始終直視著雲井母親。
+
+「伯母，我這樣說也許會顯得有些為時過早。」鼓起勇氣，月代便宛如宣言一般的向雲井母親說：「我絕對會讓陽正得到幸福的，所以......我繼續待在他身邊也可以嗎…？」</span>
+
+                                <span class="chatlog__edited-timestamp" title="25-Nov-21 09:38 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">22-Oct-21 01:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="900977472575766538" id="message-900977472575766538" title="Message sent: 22-Oct-21 01:22 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">嗯唔，在一旁聽到問到點上的雲井停下用餐，看向無聲、一臉表示「小子安靜，做球給你們呢」的老媽。
+打消了插嘴的念頭，靜靜的聽戀人講述。
+
+啊——說起來他們倆確認關係的那一晚，也是來這家餐廳吃飯。
+
+月代說的「一直喜歡」是從什麼時後開始的呢？從相遇的那晚嗎？
+
+……可是他給人的第一印象肯定超級莫名其妙的吧。
+人大半夜睡在火燒屋的廢墟，醒來後還很沒形象的哭出來……
+
+這是第一次聽到月代喜歡上自己的契機，雲井難得配合正經的氣氛，沒插進話題的傾聽。
+直到對方差點爆出「白目」，他的身軀禁不住地，反射性的抽了一下。
+
+啊哈哈……還真是難辭其咎……
+
+有自覺的雲井從側面觀望臉頰紅透透的戀人。
+等對方努力的撐到宣示結束後，他放在檯面下的手拍了拍月代的大腿，手朝上示意想要牽手。
+
+「哎呀——放輕鬆點嘛，月代君，」對上年輕人拼勁全力的告白，作為其中一方的長輩，雨森閉上眼點點頭。
+「至於那個許可，我很想說『好』，但戀愛，是只屬於你們彼此之間的事啊——」
+
+「歡笑的時光、煩惱的事情全都是只有你們能知曉的重量。」
+「『沒有人有資格對彼此相愛的戀人說三道四』，本該是如此的……」
+
+在安靜幾秒過後，她從短暫的回憶中抽身，抬起頭看向月代：「你是很乖巧的孩子……我希望你能獲得幸福。當然，陽正也是。」
+
+「作為母親我，能做的、也最擅長的是看著孩子成長。」
+她拿起擺在餐桌邊上的手機，晃了晃：「如果有我能幫的，或是有什麼想聊的也能找阿姨說喔？」</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Nov-21 05:08 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">18-Nov-21 09:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="910890355040342066" id="message-910890355040342066" title="Message sent: 18-Nov-21 09:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">因緊張過度而逐漸被推至極限的精神，在大腿上傳來輕力拍動後才稍微有了喘息的空間。
+
+在講那一番話出來的時候，月代除了伯母的反應以外，其實也對於自己戀人會有什麼反應這件事情感到了一些壓力。
+
+我會不會說錯什麼令陽正也討厭自己呢？
+
+腦海裡出現的疑問，到彼此的手相連在一起時已蕩然無存。
+十指相扣的左手像是為了更加傳達自己對對方的愛意一般，緊緊的握緊著。
+
+「……。」雖然緊張已經消退了不少，但臉上的泛紅依舊還沒有完全消失的月代向雲井投以了帶有戀心與感謝的眼神後，重新看向叫自己放鬆一點的伯母。
+
+『本該是如此的』……。
+看著眼前與自己心愛之人有幾分相似的臉龐，月代不知為何從話語中聽出了有一絲悲傷、或者說是落寞的情緒。
+
+那應該是因為……他們夫妻的事情吧……。
+多多少少察覺到事情是怎樣的月代，只能為了自己讓對方想起不好的回憶而感到抱歉的低了低頭。
+
+「伯母……」眼睛跟著對方手上的手機左右搖了搖，大概用了兩秒左右回神的他，在察覺到這應該是要交換聯絡方式後才慌忙地用右手有些笨拙的穿過左手手臂，拿起自己的手機。
+
+「呃、啊……這這個……」明明前面已經好不容易的撐了過去，月代卻還是在最後交換聯絡方式究竟是要手機號碼還是LINE之類的地方漏了氣。</span>
+
+                                <span class="chatlog__edited-timestamp" title="25-Nov-21 09:38 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">19-Nov-21 11:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="911271809956061204" id="message-911271809956061204" title="Message sent: 19-Nov-21 11:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">看月代用非慣用手有些不流暢的掏拿出手機，知曉接下來要進入了交換聯絡方式環節的雲井很看空氣的鬆開緊握的手。
+
+看對坐的人笑瞇瞇的……自己應該不至於被自己媽媽賣掉吧？應該吧……？
+
+「月代君有用 LINE 嗎？」雨森眨眨眼，伸手將手機靠近手機：「有的話搖個好友吧？」
+看她熟練的模樣，好像相當熟悉流行科技的軟體，搞不好還是還是重度使用者。
+
+「無論是傳訊息，或是網路電話都很方便呢……可以盡量跟阿姨說悄悄話哦，陽正不會知道的。」
+
+不好意思？我就在這哦？我都聽到了哦？
+
+當事人搖搖頭，但對於自家人的熟悉知道只是玩笑話，也沒有特別放在心上的喝他的果汁。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">25-Nov-21 11:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="913457457660035102" id="message-913457457660035102" title="Message sent: 25-Nov-21 11:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">雖然慣用手已經被解放了，但因為這過於緊張的情緒，就算是用左手月代的動作還是跟剛才一樣有點不順暢。
+
+「有、有的！」
+「呃…阿…… ，這個。」
+把雙手捧著的電話湊過去雨森的手機、而頭往螢幕那邊靠、然後如同找不到功能在哪裡那般僵直了幾秒才按下去追加好友的選項，此刻的月代已經從懂電話怎麼樣用的年輕人退化成比雨森還要不懂電話的老爺爺了。
+
+按了確認加為好友後聽到伯母說「可以跟她說悄悄話」的月代在愣了一下之後看了看雲井的方向，然後才點了點頭有些不好意思的說：「……好、好的！如果之後有什麼的話…。」
+
+與熟悉自家人的雲井不同，月代倒是沒有把這句話當成是玩笑話。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">26-Nov-21 09:23 AM</span>
+
+            <div class="chatlog__message " data-message-id="913600916018585673" id="message-913600916018585673" title="Message sent: 26-Nov-21 09:23 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://images.plurk.com/4Ht4x3P7mBT8V3ptA8fDX0.png">
+                                <img class="chatlog__attachment-media" src="https://images.plurk.com/4Ht4x3P7mBT8V3ptA8fDX0.png" alt="Image attachment" title="Image: 20211126-092343.jpg (43.75 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">26-Nov-21 09:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="913603952577237022" id="message-913603952577237022" title="Message sent: 26-Nov-21 09:35 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">在確認雙方互加好友後，雨森汐馬上傳了一個打招呼的貼圖。
+
+雲井是顏文字常駐，她則是貼圖……該說不愧是母子嗎？
+感覺之後聊天視窗會變得五顏六色啊。
+
+不曉得是不是職業關係，對方的姓名後方還加上了讀音註解。
+アメモリ　シオ，會是糖份、還是鹽份佔比較多呢？
+
+同時，雨森看所有人的盤中清得差不多了，於是招來服務生請人上甜點。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">26-Nov-21 09:43 AM</span>
+
+            <div class="chatlog__message " data-message-id="913605770086592545" id="message-913605770086592545" title="Message sent: 26-Nov-21 09:43 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">盤中盛著手掌心大小的、外觀有點像貝殼，一共有兩個，應該是你和雲井點的千層酥。
+
+端上桌便能聞到滿滿的糖霜和奶油香氣，從切開的裂口滿溢出來的卡士達醬上裝飾了幾顆糖漬櫻桃。</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://images.plurk.com/3ibqwZ9ZVbLtU7sGhotnoY.png">
+                                <img class="chatlog__attachment-media" src="https://images.plurk.com/3ibqwZ9ZVbLtU7sGhotnoY.png" alt="Image attachment" title="Image: 641.jpg (45.12 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="913606771006910506" id="message-913606771006910506" title="Message sent: 26-Nov-21 09:47 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊，這些你們分一些走吧，我沒想到會這麼多。」
+擺在雨森面前的橫盤放著五種口味的奶油捲餅。
+
+薄脆的管狀外皮被滿滿的鮮奶油灌滿了。
+雖然每份不過一隻食指的大小，但對她來說還是太多了。</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="https://images.plurk.com/1bsTJgiyS59foGPmNHSeKS.png">
+                                <img class="chatlog__attachment-media" src="https://images.plurk.com/1bsTJgiyS59foGPmNHSeKS.png" alt="Image attachment" title="Image: 641-1.jpg (44.28 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 08:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="940586859275362334" id="message-940586859275362334" title="Message sent: 08-Feb-22 08:36 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">好可愛的貼圖！還有那個配色……跟伯母一模一樣！
+
+月代呆呆的看著手機畫面中向自己揮揮手的刺蝟。
+過幾秒後才回過神的他為了回應伯母的可愛小貼圖便開始翻找自己根本沒有翻過的貼圖，嘗試找一個可愛的小圖案來回應對方。
+
+呃、原來是要下載的？
+啊啊……怎麼找不到那個刺蝟……。
+用一個比較可愛的……不、禮貌一點的貼圖……。
+
+經過月代慌忙地翻了差不多一分鐘後，他最終選了一個羊駝鞠躬傳給了伯母作為回應。
+
+這個貼圖的話應該……沒問題？
+他眼帶著不安地看向坐在自己對面的雨森，心裡默默祈禱著自己傳的東西不會讓對方感覺到被冒犯或者不禮貌。
+
+而很不湊巧的，在月代千辛萬苦把貼圖發出去的時候，雨森剛剛好把注意力放在了送來的甜點上了。
+
+「看起來很好吃呢！可是我應該也吃不到那麼多……。」其實只是不想拿人家母親食物來吃的月代把球推給了在自己旁邊的甜食魔人、雲井。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 09:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="940595699807047712" id="message-940595699807047712" title="Message sent: 08-Feb-22 09:11 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊，看起來不錯吃！」
+雲井很順的接到月代傳來的球，況且對象是自家人，他也就沒在跟人客氣的伸手去拿。
+
+喀滋喀滋，看來那裹滿鮮奶油的餅皮是脆的。
+
+「月代君也不用客氣哦？」雨森笑笑的說，但語氣裡也沒強推硬送的意思。
+
+「啊……說起來。」她從盤中拿起灑滿巧克力豆的煎餅，用其中一端朝臉頰鼓鼓的雲井點了點。
+
+「——你的臉是不是有比以前還圓啊？陽正。」「咕！」
+
+聽到老媽直白的發言，原本正在跟下滑鮮奶油奮戰的人這下完全分了神，一坨沾了堅果的鮮奶油就這麼摔在雲井面前的盤子上。
+
+「跟上次視訊通話比起來，感覺你……」「呃沒、沒有吧！」
+
+為表示自己沒有變胖，他拉了朝夕相處的戀人作為援軍：「就跟以前一樣，對吧月代？」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 09:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="940598439979409428" id="message-940598439979409428" title="Message sent: 08-Feb-22 09:22 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊嗯，真的、沒關係的！」有些生硬的婉拒了伯母的邀請後，月代開始默默的吃著他自己那份的甜點。
+
+……嗯？圓？
+雖然月代是想繼續專心吃飯完之後再閒聊的，但可惜連東西都還沒有放進自己的嘴裡、他就已經被雨森的發言給吸引了過去。
+
+陽正有變胖嗎……？
+帶著一絲困惑的表情，月代仔細看著自己戀人的側臉。
+
+好像……真的有一點。
+是因為最近吃太甜了，然後也沒有運動的關係嗎。
+
+以自己之前為他準備的飲食和對方最近去健身房的頻率，擅自在心理下了判斷的月代對於戀人的求助就這樣很自然地回答說：「陽正跟以前一樣，很帥氣喔。」
+
+嗯，無論有沒有胖、也都非常帥氣！</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-Feb-22 09:41 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 09:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="940602339159597067" id="message-940602339159597067" title="Message sent: 08-Feb-22 09:37 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「是不是！」雲井腦中所有的不安，在得到戀人支持的那一刻全都驅散了。
+
+看著對坐的傻兒子一臉「看吧！我才沒有變胖！」的傻臉，雨森汐忍不住笑了。
+
+啊——小倆口感情真好啊——
+
+「好～還是很帥啦～那就請陽正繼續努力哦？」說完，她又把兩卷高卡路里的點心往雲井的盤子裡放。
+並且表示不接受反對意見的咬下自己手上的那一份。
+
+「嗯姆，知道啦。」好久沒聽老媽挖苦自己，雲井看向盤中增加的點心，除了砂糖的味道外還多了份不習慣和久違參半的滋味。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 09:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="940604833327628318" id="message-940604833327628318" title="Message sent: 08-Feb-22 09:47 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯嗯，但是陽正要記得去健身房喔。」
+依舊沒有明說&quot;其實陽正真的有點胖了&quot;的月代笑笑的向陽正說了一句之後便開始吃剛剛自己放到嘴邊的甜點。
+
+吃東西的同時，他眼睛也有看著對方盤子裡面的食物，並開始猜測著這些東西的卡路里有多少。
+
+嗯……，以這個份量來說應該跑一兩個小時就可以了？
+是說我也應該要去運動一下了呢……。
+
+月代的右手悄悄地往下移動，摸了摸自己長了一點肉的肚子。
+……今天的晚餐，還是不做甜點比較好呢。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 11:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="940628169709477958" id="message-940628169709477958" title="Message sent: 08-Feb-22 11:20 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「呼耶？」不曉得戀人是在用極照顧自己的心靈勸說減重的雲井，心大地將糖霜和奶油等碳水化合物吃下肚。
+
+做為母親的雨森也不點破掃興。畢竟今天是來見兒子的男朋友嘛～
+太過吵鬧的，給人留下太強勢的印象的話，害羞的月代君會不會退縮呢……之類的考量。
+
+雨森將自己盤中的餐點清空後，這才注意到了手機左上角閃爍的通知燈。
+
+手機解鎖，瞧見聊天室新加入的羊駝夥伴時，她拿起水杯遮掩上揚的嘴角。
+
+等兩人——主要是雲井——用完餐之前，效率如雨森汐已經拿筆填完顧客意見單了。
+
+「對了，如果有空來大阪走走可以先聯絡我，」她收了筆尖晃了晃說：「我知道不少能讓人減肥失敗的店喔？」
+
+啊，這樣說誰要聯絡妳啦！
+聽聞，雲井露在外邊的眼睛很失禮的轉了一圈。</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Feb-22 10:31 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 11:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="940631845152899092" id="message-940631845152899092" title="Message sent: 08-Feb-22 11:35 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">接下來的用餐都沒有再主動說什麼的月代跟雨森差不多的時間吃完了甜點。
+沒有什麼東西可以做的他在等待自己戀人吃完飯的空閒也順便填了一下顧客意見單。
+
+知道對方母親是個大忙人的月代自然不想影響到伯母的工作，但如果真的要去大阪玩的話，還是長期居住在那邊的伯母比較清楚：「嗯……希望到時候不會打擾到您。」
+
+「那個……今天真的非常感謝您抽空過來。」把填好的顧客意見單放在一旁，回應完伯母後月代再次慎重地向雨森表達了感謝。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 11:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="940633928883109938" id="message-940633928883109938" title="Message sent: 08-Feb-22 11:43 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「不會的，完全不會打擾喔。」雨森笑瞇瞇的說：「隨時歡迎月代君來玩！也謝謝你的蛋糕啦～」
+
+她看了下手機上顯示的時間後，變將之收回包裡，抽走了擺在桌上的帳單：「我差不多得準備出發了，你們要再坐一下也可以喔。」
+
+說完，雨森便背起包包，一手拿著裝著點心的提袋前去櫃檯結帳。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 11:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="940635534995374090" id="message-940635534995374090" title="Message sent: 08-Feb-22 11:49 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊、嗯！陽正要再待一會嗎？」本來想去送伯母的月代在起身之前問了一下坐自己旁邊的雲井。
+
+如果陽正想再吃點東西的話，那就我一個人去送吧。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">08-Feb-22 11:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="940636504785571881" id="message-940636504785571881" title="Message sent: 08-Feb-22 11:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯木用，我豪惹。」搶付帳失敗、嘴巴塞著千層酥的雲井喝了口水，人也準備起身。
+
+只見他碎碎念道：「呼，老媽也溜太順了，是算好的吧……」</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Feb-22 12:01 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">09-Feb-22 12:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="940638261385261086" id="message-940638261385261086" title="Message sent: 09-Feb-22 12:00 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯……，伯母不愧是多年在社會裡打拼的人呢。」月代抽了張紙巾擦了擦沾在雲井臉頰上的屑屑，語氣中帶有些無奈地說道，同時抬頭去看了看雨森現在是否還在櫃檯前。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">09-Feb-22 12:10 AM</span>
+
+            <div class="chatlog__message " data-message-id="940640839695204382" id="message-940640839695204382" title="Message sent: 09-Feb-22 12:10 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">雨森人還在櫃檯前。見到兩人離位走近，讀懂人心的她露出一抹微笑。
+
+三人出了店內，只見雨森手指向對條街，隨手揮了揮：「我車停很近，不用送啦！快快去享受兩人世界吧，年輕人們～」
+
+說完她就逕自地過馬路離開了。
+
+「唔，接下來月代有想去哪逛逛嗎？」就在雲井思考之後的行程時，月代的手機震了一下。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">09-Feb-22 12:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="940642603710443531" id="message-940642603710443531" title="Message sent: 09-Feb-22 12:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啊、還是一一」讓我們送您到停車場吧。
+
+他的話都還沒有說完，雨森就已經過了馬路，留下了速度不夠快只能呆呆的看著對方離開的月代。
+
+啊啊……，不僅是一開始的見面、連最後離別都搞砸了啊。
+「我……沒有呢。」心裡有一點小失落的月代一邊說著一邊拿出了自己剛剛震的一下的手機。
+
+是有什麼訊息嗎？
+反射性認為應該是父親或者母親的訊息的他點開了螢幕。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">09-Feb-22 12:25 AM</span>
+
+            <div class="chatlog__message " data-message-id="940644441713164309" id="message-940644441713164309" title="Message sent: 09-Feb-22 12:25 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">螢幕的通知欄顯示最新一則的訊息是雨森汐傳的。
+
+［陽正就…］
+
+如果滑開通知欄，便能看到完整的訊息：
+
+［陽正就拜託你了，月代君。］
+
+「這樣啊……嗯，好像也沒什麼要買的？」在一旁的雲井眨了眨眼：「還是說，回家？」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6H4FiVFJxEQsT9oTbciSfj.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="明津月代" data-user-id="明津月代" >明津月代</span>
+
+
+        <span class="chatlog__timestamp">09-Feb-22 12:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="940648342797582376" id="message-940648342797582376" title="Message sent: 09-Feb-22 12:40 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">果然……伯母跟陽正真的很像呢。
+
+看著伯母傳來的訊息，從中感覺到了一絲熟悉感的月代臉上不禁揚起了暖心的笑容。
+
+「我都可以喔。難得的假日，不管是去購物還是在家裡休息也都很不錯呢。」月代一邊打著訊息一邊回應了雲井的詢問。
+
+［我會盡我所能讓陽正幸福的，伯母大人。］
+
+「只要是跟陽正在一起的話，哪裡都可以喔。」把訊息傳出去並把手機收回褲袋裡後，月代再次牽起了雲井的手。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="雲井陽正" data-user-id="雲井陽正" style="">雲井陽正</span>
+
+
+        <span class="chatlog__timestamp">09-Feb-22 12:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="940650206016471050" id="message-940650206016471050" title="Message sent: 09-Feb-22 12:48 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">聽聞，雲井也笑著回握戀人暖暖的手心：「嗯，那繞去我家吧，稍微休息一下……」
+
+第一次，毫無掩藏內在的外出。
+第一次，見到雲井陽正的家人。
+
+未來，他們的生活中，也會像這樣，有著許多的「第一次」。
+而他們也會一起攜手共享、度過吧——</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">End.</</div>
+</div>
+
+</body>
+
+</html>
