@@ -1,0 +1,4816 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>エモクロア 共鳴異象TRPG - 你要記得嗎</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-family: Whitney;
+            font-weight: 300;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-family: Whitney;
+            font-weight: 400;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-family: Whitney;
+            font-weight: 500;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-family: Whitney;
+            font-weight: 600;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-family: Whitney;
+            font-weight: 700;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #36393e;
+            color: #dcddde;
+            font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+            image-rendering: high-quality;
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        .preamble {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            max-width: 100%;
+            padding: 1rem;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 1rem;
+        }
+
+        .preamble__entry {
+            margin-bottom: 0.15rem;
+            color: #ffffff;
+            font-size: 1.4rem;
+        }
+
+        .preamble__entry--small {
+            font-size: 1rem;
+        }
+
+        .chatlog {
+            padding: 1rem 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chatlog__message-group {
+            margin-bottom: 1rem;
+        }
+
+        .chatlog__message-container {
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message-container--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message-container--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__message {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            padding: 0.15rem 0;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__message:hover {
+            background-color: #32353b;
+        }
+
+        .chatlog__message:hover .chatlog__short-timestamp {
+            display: block;
+        }
+
+        .chatlog__message-aside {
+            grid-column: 1;
+            width: 72px;
+            padding: 0.15rem 0.15rem 0 0.15rem;
+            text-align: center;
+        }
+
+        .chatlog__reference-symbol {
+            height: 10px;
+            margin: 6px 4px 4px 36px;
+            border-left: 2px solid #4f545c;
+            border-top: 2px solid #4f545c;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .chatlog__short-timestamp {
+            display: none;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__message-primary {
+            grid-column: 2;
+            min-width: 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            margin-bottom: 0.15rem;
+            align-items: center;
+            color: #b5b6b8;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-avatar {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25rem;
+            border-radius: 50%;
+        }
+
+        .chatlog__reference-author {
+            margin-right: 0.3rem;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link .hljs {
+            display: inline;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+            color: inherit;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25rem;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__header {
+            margin-bottom: 0.1rem;
+        }
+
+        .chatlog__author {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .chatlog__bot-label {
+            position: relative;
+            top: -0.1rem;
+            margin-left: 0.3rem;
+            padding: 0.05rem 0.3rem;
+            border-radius: 3px;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3rem;
+            color: #36393e;
+            font-size: 0.75rem;
+            font-weight: 500;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__content {
+            padding-right: 1rem;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15rem;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .chatlog__attachment {
+            position: relative;
+            width: fit-content;
+            margin-top: 0.3rem;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 999;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #dcddde;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05rem;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            max-width: 45vw;
+            max-height: 500px;
+            vertical-align: top;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            max-width: 520px;
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border: 1px solid #292b2f;
+            border-radius: 3px;
+            background-color: #2f3136;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3rem;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25rem;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: #202225;
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0.6rem;
+            border: 1px solid rgba(46, 48, 54, 0.6);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            background-color: rgba(46, 48, 54, 0.3);
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author-container {
+            display: flex;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author {
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__embed-author-link {
+            color: #ffffff;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .chatlog__embed-description {
+            color: #dcddde;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5rem;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6rem;
+            font-size: 0.875rem;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 50px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .chatlog__embed-field-value {
+            color: #dcddde;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            max-width: 80px;
+            max-height: 80px;
+            margin-left: 1.2rem;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6rem;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6rem;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-footer-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.2rem;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            max-width: 45vw;
+            max-height: 500px;
+            vertical-align: top;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6rem;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__sticker {
+            width: 180px;
+            height: 180px;
+        }
+
+        .chatlog__sticker--media {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            margin: 0.35rem 0.1rem 0.1rem 0;
+            padding: 0.125rem 0.375rem;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background-color: #2f3136;
+            align-items: center;
+        }
+
+        .chatlog__reaction:hover {
+            border: 1px solid hsla(0,0%,100%,.2);
+            background-color: transparent;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35rem;
+            color: #b9bbbe;
+            font-size: 0.875rem;
+        }
+
+        .chatlog__reaction:hover .chatlog__reaction-count {
+            color: #dcddde;
+        }
+
+        .chatlog__markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .chatlog__markdown-preserve {
+            white-space: pre-wrap;
+        }
+
+        .chatlog__markdown-spoiler {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chatlog__markdown-spoiler--hidden {
+            cursor: pointer;
+            background-color: #202225;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .chatlog__markdown-spoiler--hidden:hover {
+            background-color: rgba(32, 34, 37, 0.8);
+        }
+
+        .chatlog__markdown-spoiler--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .chatlog__markdown-quote {
+            display: flex;
+            margin: 0.05rem 0;
+        }
+
+        .chatlog__markdown-quote-border {
+            margin-right: 0.5rem;
+            border: 2px solid #4f545c;
+            border-radius: 3px;
+        }
+
+        .chatlog__markdown-pre {
+            background-color: #2f3136;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .chatlog__markdown-pre--multiline {
+            margin-top: 0.25rem;
+            padding: 0.5rem;
+            border: 2px solid #282b30;
+            border-radius: 5px;
+            color: #b9bbbe;
+        }
+
+        .chatlog__markdown-pre--multiline.hljs {
+            background-color: inherit;
+            color: inherit;
+        }
+
+        .chatlog__markdown-pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+        }
+
+        .chatlog__markdown-mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(88, 101, 242, .3);
+            color: #dee0fc;
+            font-weight: 500;
+        }
+
+        .chatlog__markdown-mention:hover {
+            background-color: #5865f2;
+            color: #ffffff
+        }
+
+        .chatlog__markdown-timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #a3a6aa;
+        }
+
+        .chatlog__emoji {
+            width: 1.325rem;
+            height: 1.325rem;
+            margin: 0 0.06rem;
+            vertical-align: -0.4rem;
+        }
+
+        .chatlog__emoji--small {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .chatlog__emoji--large {
+            width: 2.8rem;
+            height: 2.8rem;
+        }
+
+        .postamble {
+            padding: 1.25rem;
+        }
+
+        .postamble__entry {
+            color: #ffffff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.chatlog__markdown-pre--multiline').forEach(e => hljs.highlightBlock(e));
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
+                const imageDataUrl = e.getAttribute('data-source');
+
+                const anim = lottie.loadAnimation({
+                  container: e,
+                  renderer: 'svg',
+                  loop: true,
+                  autoplay: true,
+                  path: imageDataUrl
+                });
+
+                anim.addEventListener('data_failed', () =>
+                    e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>'
+                );
+            });
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('chatlog__message-container-' + id);
+            if (!element)
+                return;
+
+            event.preventDefault();
+            element.classList.add('chatlog__message-container--highlighted');
+
+            window.scrollTo({
+                top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                behavior: 'smooth'
+            });
+
+            window.setTimeout(function() {
+                element.classList.remove('chatlog__message-container--highlighted');
+            }, 2000);
+        }
+
+        function showSpoiler(event, element) {
+            if (!element)
+                return;
+
+            if (element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+
+            if (element.classList.contains('chatlog__markdown-spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__markdown-spoiler--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="attachment-icon" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"/>
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"/>
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"/>
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"/>
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://images.plurk.com/4oQs7M2AJLHTIqmn7rQBlP.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">エモクロア - 你要記得嗎</div>
+
+            <div class="preamble__entry preamble__entry--small">❥劇本：筱玥　❥DL：筱玥　❥NPC：雨森汐　❥PC：雲井樹</div>
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968483625010073600" class="chatlog__message-container " data-message-id="968483625010073600">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png " alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雲井陽正</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 08:08 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">醫院事件後，你又開始了四處流浪的日子，看來可以不愁一陣子的生活費
+但那句老話是怎麼說的來著——冤家路窄
+
+幾個月後，在路上閒逛的你見到了一個熟悉的身影，雲井陽正
+隔著幾步遠的距離，對方似乎也看到自己父親的身影，不過先前在醫院一副不耐煩樣子的他，這次卻逕直朝你走來</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968485338286800946" class="chatlog__message-container " data-message-id="968485338286800946">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 08:14 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">遠遠瞧見兒子的步伐帶有目的性質的往自己的方向而來，雲井樹憶起與「親家」明津瀧川的約定。
+
+……雖然說，當時約好借錢的代價是不再與兒子見面、打擾陽正的生活。
+但對方都主動找上門，也沒必要刻意迴避吧……
+
+於是他選擇留在原地、直盯著對方，閉口不言的等待對方開口。</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 08:15 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968486107203371038" class="chatlog__message-container " data-message-id="968486107203371038">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png " alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雲井陽正</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 08:18 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">來到你面前的陽正也絲毫不想廢話，開口便直奔重點
+「你最近有跟老媽聯絡嗎？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968487729480478730" class="chatlog__message-container " data-message-id="968487729480478730">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 08:24 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">……一上來就是衝突話題啊……
+
+「汐？」雲井樹人很老實的搖了搖頭：「……沒有，我們沒聯絡。」
+
+即使肌肉記憶讓他不用靠通訊錄也能輸入雨森汐的號碼，但自從他倆斷絕緣分後，就沒再聯繫了。
+
+「汐她，怎麼了嗎？」他順著話題的流向回問。</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 08:27 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968488609097343086" class="chatlog__message-container " data-message-id="968488609097343086">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png " alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雲井陽正</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 08:27 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雖然對方用疑惑的眼神看著你，但也沒馬上說出「騙人吧」之類的推斷
+「老媽突然聯絡我，問要怎樣才能找到你。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968489915736289291" class="chatlog__message-container " data-message-id="968489915736289291">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 08:33 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">聽聞，雲井樹的面露訝異之色。
+
+這還是第一次。
+沒想到汐會主動找我……但會是什麼事？
+
+「……汐她，有說為什麼嗎？」
+
+數年前離婚，他們的資產、物品，甚至人際，全都劃分的清清楚楚。
+
+他應該不欠她什麼了才對……吧？
+還是有什麼疏漏，讓雨森給找到了？</span>
+
+                            <span class="chatlog__edited-timestamp" title="27-Apr-22 07:44 AM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968491691424219176" class="chatlog__message-container " data-message-id="968491691424219176">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png " alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雲井陽正</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 08:40 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">陽正搖搖頭
+「她只說想找到你，還有……」
+
+他停頓一下，皺著眉像是想起了奇怪的地方
+「真難得她會直接叫你的名字，不是用大叔代稱。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968494077282758688" class="chatlog__message-container " data-message-id="968494077282758688">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 08:49 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">……原來在那之後，她是這樣稱呼自己的啊。「大叔」。
+
+光是從代稱彷彿能看見雨森汐說話的表情，雲井樹心情頓時有些複雜。
+
+「這樣嗎……」
+
+他閉眼長吁了口氣，隨後抬眼看向兒子，話語在喉間滾了幾圈，這才從口中吐出連自己聽了也不信、毫無重量感的承諾。
+
+「……知道了。有空再說吧。」
+
+等下……先打電話探探汐那邊的狀況吧。</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 08:51 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968496782269096006" class="chatlog__message-container " data-message-id="968496782269096006">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png " alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雲井陽正</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 09:00 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">深知自己父親混帳程度的陽正嘆了口氣，但也不好當街發作
+驚動警察這種事發生一次就夠了
+
+「……你現在的電話是幾號？」
+從母親的話中得知雲井樹把號碼換了，和對方見到面這種巧合可不一定在短期內連續發生</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 09:08 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968498750370754630" class="chatlog__message-container " data-message-id="968498750370754630">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 09:08 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……。」
+電話號碼一報出去，感覺自己與明津醫生之間的「勿擾約定」也越來越遙遠了。
+
+……也罷。
+約定什麼的，除了截稿日之外，尚且存在可破壞的彈性——雖然好幾年沒執筆的他沒有稿債壓身就是了——
+
+「是……090-7……」
+雲井報出自己目前的預付卡號碼，隨後反問：「汐現在用的號碼，還跟以前一樣？」</span>
+
+                            <span class="chatlog__edited-timestamp" title="27-Apr-22 09:37 AM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968501509119701002" class="chatlog__message-container " data-message-id="968501509119701002">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png " alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雲井陽正</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 09:19 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「一直都一樣。」
+又不能像某人直接失蹤……陽正把後半句話吞了回去，會反過來氣到自己的話題還是少開吧</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968504027144941618" class="chatlog__message-container " data-message-id="968504027144941618">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 09:29 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……嗯，我再打給她。」
+話雖如此，但雲井樹此刻還是覺得別踩入前妻的生活為妙。
+
+對雨森汐的記憶最後還停留在絕望、決裂的他給不起更多的承諾。
+
+他看著雲井陽正，沒再多做表示、也沒向對方多送慰問。
+只是用肢體態度表現「如果沒別的事，我人可以走了嗎。警察先生」的被臨檢市民的氣場。</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 09:33 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968506169813528586" class="chatlog__message-container " data-message-id="968506169813528586">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/6uHKFA7ZggExkBOvJuLdKM.png " alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雲井陽正</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 09:37 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……沒事了，掰。」
+看著雲井樹和在醫院別無二致的態度，想著該說的也都說了，陽正頭也不回的離開現場
+還不忘邊走邊調整自己的心情，畢竟可不能讓月代再繼續替自己擔心。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968508519454212137" class="chatlog__message-container " data-message-id="968508519454212137">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 09:47 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">見雲井陽正離去，雲井樹也放下了這段出乎意料的相遇插曲，前往自己原本預定前往的場所。
+
+在常去的平價咖啡廳中，點了低消的一杯黑咖啡，坐在無人打擾的角落。
+
+他拿出新手機，盯著九宮格數字鍵。
+接著，輸入了雨森汐的手機號碼，撥出通話。</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 10:21 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968509716638621777" class="chatlog__message-container " data-message-id="968509716638621777">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 09:51 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">電話很快就被接起，不論對象是客戶抑或親人，雨森汐總是如此
+
+「你好，這裡是雨森。」嗯，雖然聲音比較蒼老，但連招呼聲都是記憶中的
+只不過這是對其他人的，對雲井樹自然有另一套模式</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968512359368908850" class="chatlog__message-container " data-message-id="968512359368908850">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 10:02 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……是我。」接通的聲音對他而言既熟悉又陌生。
+雲井樹思忖是電磁通訊壓損了聲線，還是歲月痕跡佔得比較多。
+
+並且再被對方誤認成「是我啦詐騙」之前附上澄清，同時也為可能發生的衝突做準備：「聽陽正說妳想找我，汐。」
+
+將話筒拿離耳朵，垂頭看向當前空盪盪的左手無名指的雲井樹，在2.5公分的距離等待前妻對他的非難。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968514923263053874" class="chatlog__message-container " data-message-id="968514923263053874">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 10:12 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">本以為又是一場即將到來的腥風血雨，聲音卻比雲井樹預計的小了很多
+「終……你……樹。」
+說起來，在大吵一架前雨森汐的說話方式確實是對他很柔和的
+因為將話筒拿遠的關係，雲井樹反而聽不清楚電話另一頭在說些什麼</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968516623453540352" class="chatlog__message-container " data-message-id="968516623453540352">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 10:19 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">因為聽不清對方的聲音，雲井樹再度將話筒貼近耳畔。
+
+反正汐也不是會玩「驚奇嚇一跳」的人……應該吧。就他對雨森汐的瞭解程度來說。
+
+「……嗯，」他望向漆黑一片，毫無波瀾的咖啡，語氣平淡的直奔重點：「妳那邊，發生什麼事了？」</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 10:20 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968520155736969236" class="chatlog__message-container " data-message-id="968520155736969236">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 10:33 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「只是在想啊……要不要約出來見個面？」
+還沒等雲井回過神來，雨森又接著繼續說下去
+
+「啊，我知道我們已經離婚了，
+但是啊……我覺得就這樣避不見面也太過分了。只是像普通的老朋友一樣出來逛逛也可以吧。」
+
+電話中雨森的聲音柔和地像是已經忘記了兩人關係的結局一樣，讓雲井樹想起了兩人過去時常相約的情景
+明明是已經決定老死不相往來的對象，你卻像是觸動了對過往的留戀一般，沒來由地感到一陣歡喜
+
+共鳴判定（強度4/上升1）∞共鳴情感：喜悅（情念）（情感同根，骰子+1）</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968520759725150229" class="chatlog__message-container " data-message-id="968520759725150229">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 10:35 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">.2 1d10 共鳴判定</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968520764385005578" class="chatlog__message-container " data-message-id="968520764385005578">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/157KJhAfLOlnAKuNUpUvDz.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(224, 42, 107)" title="Dice Bot" data-user-id="5441138">Dice Bot</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">26-Apr-22 10:35 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">#1： 1d10：共鳴判定1[1] = 1
+#2： 1d10：共鳴判定9[9] = 9</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968523779519160340" class="chatlog__message-container " data-message-id="968523779519160340">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 10:47 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">……約見面？
+
+對完全出乎意料之外的提議，雲井樹伸向咖啡杯的手停頓了一下。
+
+記憶深層的過往被雨森汐的央求給翻了出來，望向無人座位的他此時竟感到一陣難墨的……喜悅？
+
+「朋友嗎……」在如此之糟的衝突過後，兩人還能當朋友嗎……
+
+或許是上了年歲，又或許不希望兩人就此不聞不問的迎來終末。
+雲井樹同意了對方見面的提議：「行吧……偶爾的話。」</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 10:54 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968525404354773073" class="chatlog__message-container " data-message-id="968525404354773073">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 10:54 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「那……周末前這幾天你想去哪裡呢？我看看能不能從大阪趕過去。」
+
+雖然不知道前夫現在在哪裡，不過以雨森汐的性格來說，只要是在日本境內就會想辦法吧，所以才會將日期選在案子可能很少的平日</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968529073955569704" class="chatlog__message-container " data-message-id="968529073955569704">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 11:08 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「從大阪……這麼遠的嗎。」原來汐人現在住大阪，這下真的是給人舟車勞頓了。
+
+對此並沒有太多罪惡感的雲井樹的視線轉向窗外，思考著「朋友關係」合適的散心地點。
+
+——這時節的櫻花，應該還能多撐幾日吧？
+
+「——妳還記得，安來公園的夜櫻嗎……？」
+
+那也是幾十年前，他倆一同去過的場所。
+
+如果只是賞花、散步的敘舊行程，氣氛應該不至於太尷尬吧。</span>
+
+                            <span class="chatlog__edited-timestamp" title="28-Apr-22 04:34 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968530086544424981" class="chatlog__message-container " data-message-id="968530086544424981">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 11:12 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「記得，當然記得。」
+電話中的雨森汐是不是露出了懷念的笑容，你並不知道，你只知道你們約定好了
+「那就周三吧，同一個地方見囉。」</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 11:14 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968533705322803270" class="chatlog__message-container " data-message-id="968533705322803270">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 11:27 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">至此敲定，縱遊情場的雲井樹觸到杯耳染上了溫熱，這才驚覺自己居然緊張的鬆不開手。
+
+「……嗯，週三見了。」
+
+說罷，他搖了搖頭，選擇啜嚥了口咖啡將本心掩蓋。
+
+就只是散個步，聊聊天……沒什麼大不了的。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-968533890094469130" class="chatlog__message-container " data-message-id="968533890094469130">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">26-Apr-22 11:27 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——————
+在電話切斷前一刻，話筒中忽然出現一個清脆，如水滴落銀鈴般的聲音
+少女的聲音彷彿不是在雨森汐那一頭，而是在電話中，輕聲細語著
+<strong>「這一次……希望你們能捨棄不好的回憶。」</strong></span>
+
+                            <span class="chatlog__edited-timestamp" title="26-Apr-22 11:28 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-971018933069029386" class="chatlog__message-container " data-message-id="971018933069029386">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">03-May-22 08:02 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……。」是汐的朋友？
+啊啊，原來是有朋友相勸，這才心血來潮的翻出舊情嗎，汐。
+
+聽出溫柔中帶著一點旁觀的祝福，感覺不像在挖苦人。雲井樹下一秒就把少女的插話拋諸腦後。
+
+感情是雙向的。
+回憶，也是跟人一輩子的。
+
+既成事實的傷害，其痕跡是不可能消失。
+但他倆或許能做點新嘗試？
+就像油畫那般，用不斷堆疊而上新的色彩拼出新的輪廓吧——
+
+放下手機的雲井樹繼續品味著為剩不多的苦澀。
+就連接下來接的副業時段也顯得有些心不在焉。
+
+也沒積極對女性客戶建立起新的相互關係……也能算是事前培養情緒的尊重？
+
+在與雨森汐見面之前，複雜的人際關係稍微收斂下吧……</span>
+
+                            <span class="chatlog__edited-timestamp" title="04-May-22 08:26 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973559168197857310" class="chatlog__message-container " data-message-id="973559168197857310">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 08:16 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">週三，晚
+你依約來到了安來公園的正門，不出所料，雨森汐已經在入口前了
+
+雖然已經多年未見，但和孩子不同，還是能依稀看出前妻的輪廓
+若要說最大的不同點，就是已經開始泛白的頭髮吧
+
+她身上穿的還是印象中的那套OL制服，看來是在下班後直接趕過來的
+如果約在大阪是不是就能看到她精心打扮的樣子呢？可惜後悔也來不及了</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973562660186640475" class="chatlog__message-container " data-message-id="973562660186640475">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 08:30 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……晚安。」雲井樹穿著最為習慣的深藍色長罩衣，單手看似隨性的一揮。
+
+另一隻插在口袋裡的手腕上掛著便利店的皮帶，裡頭是隨身的點心包和啤酒。
+
+但願晚點別出現需要用酒精壯膽的場面吧。但願。雲井樹心想著，同時將目光放在有著歲月蹉跎的面容上。
+
+<em>他們都老了啊……</em>
+
+久違的見上一面——或者說，雲井樹從未想過對方還會想再看到自己——
+雖然習慣上處處有昔日的影子，可面容……果然變化很大。</span>
+
+                            <span class="chatlog__edited-timestamp" title="11-May-22 08:04 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973566385424830474" class="chatlog__message-container " data-message-id="973566385424830474">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 08:45 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哎呀！好久不見了，樹。」
+雨森汐雙手交疊放在身前，縱橫交易之間的她，有時候也會因為習慣而對雲井樹使用敬語
+大概有些事即使隔了多年也……也可能是因為兩人真的成了陌生人
+
+對方驚訝的表情只在最初一閃而過，大概是看出了回憶中那個人的身影吧</span>
+
+                            <span class="chatlog__edited-timestamp" title="10-May-22 08:45 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973568605599961088" class="chatlog__message-container " data-message-id="973568605599961088">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 08:54 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯……很久了。」
+
+十幾年了吧？有沒有二十年了呢……從他倆習慣即使目光交錯，也會自然而然地轉為平行的徵兆開始。
+
+但這回他們都沒有別開視線，這可以當作他重新被接受了？
+
+「……走吧，汐。」雲井樹微微點了點頭，指向對內的公園出入口說。
+
+雖然以他的近年的生活來說，也拿不出多少值得一談的趣事消磨散步時間就是了。
+
+接下來……就交給落櫻跟老天的臉色吧。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973573059921453116" class="chatlog__message-container " data-message-id="973573059921453116">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 09:11 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雨森汐點點頭，亦步亦趨地跟在你身邊
+兩人緩緩走在夜晚的公園，不只老天賞臉，今天的遊客也格外稀少，顯得這裡清靜
+
+淺粉色的花瓣從樹梢飄下，襯著旁邊設置的一排昏黃色路燈，顯得格外柔和
+兩人在行走時十分默契的不發一語，卻也沒催促對方
+不知何時，兩人之間的距離在行走中逐漸縮短
+
+和諧又有些冰冷的氣氛最後是雨森打破的
+「樹……經過這麼久，你……還是討厭我到不想見面嗎？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973576793359523880" class="chatlog__message-container " data-message-id="973576793359523880">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 09:26 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「也不。只是偶爾見面的話，我無所謂。」
+
+這麼說話會顯得有些自己太無情嗎。
+但在他摸清雨森究竟是抱有何種目的重拾舊情之前，也別把路收太窄了。
+
+「說起來，妳那最近還平安？」
+
+文學小說、影視電影接觸過多的人第一時間聯想到的總是很俗套的理由。
+
+「沒什麼大病大痛吧？」
+
+如果從雨森口中出現了超王道向的回答。
+嗯……嗯……他還真不知道該如何反應啊。
+或許會因此感到很沉重吧？不好說……</span>
+
+                            <span class="chatlog__edited-timestamp" title="10-May-22 09:27 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973582871556153365" class="chatlog__message-container " data-message-id="973582871556153365">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 09:50 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雨森低下頭，從同時抬起的右手和顫抖的肩膀可以看出她在忍笑
+「沒有你想的那麼嚴重啦。」
+
+她抬頭看了看身旁的雲井樹，原本就偏細長的雙眼瞇成一條線，讓人看不透窗戶內的靈魂
+「只是覺得，年紀一大有些事就記不住了，有時候還要陽正來提醒我呢。」
+
+對她這個親力親為，逐漸不依賴人的女強人來說，能以平常心看待這一切的變化嗎？
+「有些事在記憶模糊之後，變得好像能接受了……也不知道是好事還是壞事，所以就想連絡你。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973588392895991808" class="chatlog__message-container " data-message-id="973588392895991808">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 10:12 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">只是稍微提了點開頭，卻能給人看清整篇架構脈絡這該算是小說家的成功還是失敗呢。
+
+但，有點懷念啊。
+以前，他們也是有過類似的默契。言語用不著多完整，卻總能感受到彼此想傳達的時光——
+
+「……確實是會那樣的，」關於遺忘的距離美感，雲井樹感同身受的回道：「能理解。」
+
+男人收在大衣內的手指搓了搓，無名指之間少了被圈縛的觸感像是在提醒他是自由的。
+
+「可我從沒忘掉，」雲井樹停下的步伐彷彿在宣告他仍無法拋下過往前行：「那一天，在警察局前的事。」
+
+雖說，結局有過半是他招惹的。
+他們，在那天之後正式離婚了。
+
+「妳確定和我見面，不會有問題嗎？」
+
+——不會感到難受嗎？還是，已經完全不在乎了？汐。</span>
+
+                            <span class="chatlog__edited-timestamp" title="10-May-22 10:13 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973593647633276998" class="chatlog__message-container " data-message-id="973593647633276998">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 10:33 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「警察……局？」
+回應你的，只是雨森汐突然停下的腳步、疑惑的眼神和聲音
+
+「在警察局，發生過什麼事嗎？」
+這句話讓你感到非常疑惑——再怎麼健忘的人，有可能忘記人生中的關鍵轉折嗎？</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973598232825446471" class="chatlog__message-container " data-message-id="973598232825446471">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 10:51 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">接下意外的反問，雲井樹心生困惑之際，也為自己的下一步感到遲疑。
+
+窗紙不揭破，故事結局就會完全不一樣了。
+無論是古典名著還是他看破人與人之間的、自學領略的交際訣竅，都告訴他了——
+
+　<em>別說。什麼也別說。</em>
+　<em>好不容易才忘掉，為什麼要想起痛苦的回憶。</em>
+
+「……妳不記得了嗎？汐。」
+
+男人嗓音彷彿是想將不適時的櫻雪全融了那般的低沉。
+他犯過的錯誤不需要浪漫的濾鏡點綴，他知道自己做錯了。
+
+當時的他明知道自己選錯了路。為終結痛苦，他還是選了——
+
+「當時我們大吵一架，我離開家，」夜晚的路燈，好炫目、好刺眼，好刺眼：「之後我被警察找到、帶回警局，他們聯絡妳來……」
+
+還有陽正。
+……接下來的畫面真的是很具教育意義。反面的意味。
+
+「我推開了妳，我打了妳。」或許時光真帶走了點什麼吧，他沒想過自己聲音竟聽起來如此平靜。
+
+「妳不記得了？」</span>
+
+                            <span class="chatlog__edited-timestamp" title="11-May-22 04:32 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973600774041002015" class="chatlog__message-container " data-message-id="973600774041002015">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 11:01 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">//嗯……雖然很突然，但是過個偵查吧</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973601182708793345" class="chatlog__message-container " data-message-id="973601182708793345">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 11:03 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">1b10s&lt;=5 偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973601186873749556" class="chatlog__message-container " data-message-id="973601186873749556">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/157KJhAfLOlnAKuNUpUvDz.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(224, 42, 107)" title="Dice Bot" data-user-id="5441138">Dice Bot</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">10-May-22 11:03 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">(1b10&lt;=5) → 2 
+→ 成功數1 ；　偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-973604580019552256" class="chatlog__message-container " data-message-id="973604580019552256">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">10-May-22 11:17 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雨森茫然地搖搖頭，完全不知道你在說什麼
+即使是發生在自己身上的事，一旦忘記就如同在地球另一端般遙遠，更別提還加上雲井樹平靜的聲音和輕描淡寫的敘述
+
+今天晚上的路燈感覺格外刺眼，黃色中染了一些橘，彷彿秋收的柿子，又宛如夕陽將落
+美得……不像是人工光線會有的色彩
+
+在兩人的疑惑中，你們不知不覺走回了公園起點
+恍惚中，你也忘了自己是怎麼回家的
+不過，如果兩人要再次見面，似乎也並不是不可能</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974279819334414387" class="chatlog__message-container " data-message-id="974279819334414387">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 08:00 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">在不解狀態下回到暫時落腳旅館的雲井樹茫然的將公園短聚期間內發生的是，混著酒精從頭到尾、來來回回梳理了好幾遍。
+
+不曉得為什麼雨森汐不記得離婚當天發生的事，且從她表現出來的態度不像在說謊。
+
+他該去提醒一下兒子，帶人去身心科或外科檢查一下嗎？
+還是配合著前妻一起演齣不知何時才能落幕的胡戲？
+
+……妳到底還想要我怎麼做啊。汐。
+
+直到酒意將人拖入夢鄉，雲井樹這才放開腦內纏成一團的線團。
+
+有什麼事，交給明天再說。
+
+隔日早晨，男人早早洗漱完畢離開旅館。
+他買了顆便宜的飯糰，佔用便利商店的用餐席位準備著手處理棘手的往日舊情。
+
+……透過陽正聯絡，搞不好事情會繞得更遠、更麻煩，還是直接找本人吧。
+
+於是，雲井樹拿出手機撥通了雨森汐的手機。</span>
+
+                            <span class="chatlog__edited-timestamp" title="15-May-22 07:16 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974287680269590528" class="chatlog__message-container " data-message-id="974287680269590528">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 08:31 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">電話依然響沒多久後就被接起
+
+「啊，樹……」汐的聲音多了一點遲疑
+
+「對不起，我還是沒什麼印象，雖然說陽正可能知道些什麼，但是想了想，還是不要因為這種事打擾兒子好了。」
+就連糾結的點也出奇的一致</span>
+
+                            <span class="chatlog__edited-timestamp" title="12-May-22 08:31 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974291422377283585" class="chatlog__message-container " data-message-id="974291422377283585">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 08:46 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">或許讓陽正出面處理比較妥當，但警察的工作性質實在很難隨時隨地往返島根和大阪縣之間。
+
+「嗯……我想，或許能上醫院檢查一下？看能不能查出原因。」
+
+確定不是一時半刻忘了，或許是長期記憶區出了問題。
+雲井樹用粗略的門外漢知識胡亂瞎摸瞎猜。
+
+「需要我陪……」
+因為窗景外的五顏六色車流導致一瞬間的走神，險些鑄成大錯的他及時的止住了發言，但也為時已晚。</span>
+
+                            <span class="chatlog__edited-timestamp" title="12-May-22 08:46 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974299203524247562" class="chatlog__message-container " data-message-id="974299203524247562">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 09:17 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「不用啦，我自己去就沒問題了。」
+電話另一頭的汐聲音平靜又堅強，或許，在歲月中逐漸磨練出來的某些東西也不是能輕易忘卻的
+
+通話結束後你思索著，看向手機剛傳來的承租邀約，是不是……該先處理一下自己的經濟來源了</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974301389499031572" class="chatlog__message-container " data-message-id="974301389499031572">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 09:25 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯，那再聯絡吧……」
+
+如果真給醫生查出了點什麼的話。
+……換位一想？或許不再聯絡才是明智。
+
+「我有點事，得先掛了。」
+簡單、帶有些許刻意的冷淡問別後，結束通話的雲井樹打開工作專用的信箱查看出租網站轉發的內容。</span>
+
+                            <span class="chatlog__edited-timestamp" title="15-May-22 07:09 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974302595487248415" class="chatlog__message-container " data-message-id="974302595487248415">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 09:30 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">最新的需求只有一件，時間是今天下午，地點在一間你很熟悉的旅館內，似乎並不是那幾位老相好的樣子</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974304349503229962" class="chatlog__message-container " data-message-id="974304349503229962">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 09:37 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">這幾年混在出租行業，對不認識的人突然的約見面也不再感到好奇或期待了。
+
+他一如往常的照著流程「赴約」，用行事曆記錄下約定好的時間和地址。
+
+……稍微抓早個十分鐘到現場吧。
+
+看來他對待工作的態度還是挺認真的。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974308921374294147" class="chatlog__message-container " data-message-id="974308921374294147">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 09:55 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">下午，當你來到指定的房門前，並敲了敲門後，木板的另一端傳來了頗為年輕又清澈的聲音
+
+「诶！大叔已經來了？等、等、等我一下。」
+對方應該是透過貓眼看到了門外的人
+
+過了一會，門上傳來嘩啦嘩啦的聲音，以你的經驗，那是絞鍊和門鎖被撤除的聲音
+門被打開後，是一位20歲左右的女性
+「請進～」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974312141496651846" class="chatlog__message-container " data-message-id="974312141496651846">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 10:08 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">相較於女性的慌亂，站在門外等待的男人顯得冷靜過頭了。
+
+約在旅館的房間碰面，也不是什麼新鮮事。
+
+「妳好……」雲井樹看向外表比自己小了快要三十幾歲的女性，人前為表禮貌的做驚訝貌。
+
+沒有人會拒絕驚喜，而籌備驚喜的人所獲得的成就比起接收方來得高很多……或許吧。
+
+「打擾了。」
+
+只見他動作微小的點了點頭。
+特別向房內看了看，留意有沒有其他人在房內後才跨門進房。</span>
+
+                            <span class="chatlog__edited-timestamp" title="12-May-22 10:08 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974317574361853952" class="chatlog__message-container " data-message-id="974317574361853952">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 10:30 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">等你進來後，女性將門關上
+「你能來真是太好了，我還以為會被拒絕呢。」
+
+她穿著一身黑色的洋裝，灰色的長髮被精細打理過，披散到肩膀下幾公分的地方
+當然，年輕人各式各樣的打扮你也見過不少
+進入室內後，她便直接在床尾端正做好
+
+「因為想和大叔聊聊就直接在網站上邀約了。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974321042917036043" class="chatlog__message-container " data-message-id="974321042917036043">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 10:43 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「或許我倆也算是有緣吧。」他除非緊急情況很少推掉工作預約。
+人活著總得滿足各項欲求，譬如，求生欲。
+
+待對方坐定，雲井樹先是巡了一回屋內的擺設隨後拉來書桌組的椅子置於床邊。
+
+「接下來是妳的時間……」他給彼此留下適合談話的距離。
+入座的雲井樹兩手相握、仰後靠著椅背：「妳想說什麼都可以。」
+
+過去他也接待過二十代的年輕人，要作為傾聽者，或是賣故事、賣希望的人生前輩，他都有把握能做好。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974322004452855909" class="chatlog__message-container " data-message-id="974322004452855909">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 10:47 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「該從哪裡開始呢，嗯……大叔最近幾天過得開心嗎？」
+她傾身向前，似乎很期待聽到你的回答</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974324077407899668" class="chatlog__message-container " data-message-id="974324077407899668">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 10:56 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「我？這幾天？」啊啊，想從我身上起話題啊：「……還行吧。」
+
+「或許沒有你們年輕人來的精彩。人平平安安、生活也過得去，這應該算得上開心……」
+
+不，確實是有一兩件稱得上閃光點的小插曲，但他沒打算開場就講自己的婚史。
+
+「妳呢？日子過得……不好意思，還沒請教貴姓大名？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-974327253167116298" class="chatlog__message-container " data-message-id="974327253167116298">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">12-May-22 11:08 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「莫希（ばくき），叫我莫希就好了。」
+女性對你微微一笑
+
+「最近嗎……能幫到別人我就很開心喔！」
+她微微搖晃身子，下一刻卻冷不防地說出那個除當事人外理應沒人知道的事
+
+「例如啊，大叔不是終於和汐姊姊聯絡了嗎，還去看了櫻花。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-975996204666212382" class="chatlog__message-container " data-message-id="975996204666212382">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 01:40 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">從初次見面的人口中聽見自身到私事，小可一笑置之、大則可以報警。
+
+而見多視廣的雲井樹沒有小題大作，只是重新將目光落在女性的五官上。
+
+……那晚他們散步時剛好被人目擊嗎？
+可從莫希的說詞中能確定對方認得自己，感覺也跟雨森汐十分親暱。
+
+「……嗯，妳從汐那聽說的？我們一起出去的事。」聯想到與汐重新聯絡的第一通對話，最後的那聲祝福。
+
+他試著回想女性和電話裡聽到的聲音是否一致。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976091082708369438" class="chatlog__message-container " data-message-id="976091082708369438">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 07:57 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯……算是從汐姊姊那邊聽說的吧。」
+女性用頗為曖昧的方式回答你
+
+你在疑惑中突然想到了一開始的那通電話
+回溯從電話中聽到的那個聲音，大致上是同一個人……吧
+會如此不確定的原因除了電話中的聲音會變調外，那時聽到的聲音應該還要比眼前的女性年輕個幾歲才對——至少在你的印象中如此認為
+當然，不排除對方在電話中裝嫩的可能性</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976094305284395008" class="chatlog__message-container " data-message-id="976094305284395008">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 08:10 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「這樣啊，」雲井樹點點頭，順應著對方的回答道：「聽起來妳幫了汐不少忙。」
+
+失憶的狀況暫且不提，能讓討厭自己討厭到不相往來的前妻，轉為想要主動聯繫前任，眼前這位是談判的天才嗎。
+
+「……妳跟汐說了些什麼，改變了她想約我見面的想法？」
+而且特意把人約出來，是想打聽那天夜遊的事嗎？
+但，既然跟雨森很熟，直接問她的結果不也一樣嗎？為什麼要……</span>
+
+                            <span class="chatlog__edited-timestamp" title="17-May-22 08:11 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976097192085426206" class="chatlog__message-container " data-message-id="976097192085426206">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 08:21 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「什麼也沒說喔，只是讓她忘了而已。」
+
+眼前的女性笑瞇瞇地，像是在說一件稀鬆平常的事</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976099493776879706" class="chatlog__message-container " data-message-id="976099493776879706">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 08:30 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「忘了？」收到與預期相差甚遠的答案，男人不禁一愣，追問了下去：「妳是指讓汐忘了……什麼？」
+
+讓雨森汐忘了自己過去有多混帳嗎？
+可過往的所有不愉快，也都是當時為了保護當時兩人精神的選擇。
+
+人確定已經不再愛了，放手離開才是最好的結果吧……
+
+至於現在再論及關係……重修舊好？複合？不不不不，這太荒唐了。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976101860198989875" class="chatlog__message-container " data-message-id="976101860198989875">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 08:40 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">看著雲井樹逐漸暗沉的表情，女性不解地歪著頭
+「某天汐姊姊做了惡夢，是關於警察局的事，所以我讓她忘掉了喔。」
+
+像是不明白這意味著什麼，她用清脆的語調繼續說著
+「怎麼了嗎？如果還是很痛苦的話，我也可以讓她忘記你們離婚的事喔。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976104871700873296" class="chatlog__message-container " data-message-id="976104871700873296">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 08:52 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">……忘掉了，忘記了。
+
+「不。妳為什麼要這麼做？」
+
+他看向女性純粹的雙眼語中滿是愕然，與雙臂相連的肩膀也不自覺的僵硬：「這根本不是在幫她、我們……」
+
+雖然不懂女性的話中戲言佔比多少，可見識過雨森人確實不太對勁的雲井樹，對此實在無法當作聽過就算了。
+
+「這……像是欺騙。欺騙汐『我們還能當朋友』。而實際上我們以前的事……事情發生了，就是已經發生了啊。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976111819431231568" class="chatlog__message-container " data-message-id="976111819431231568">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 09:19 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「但是『如果沒發生』的話，雖然還是回不到以前，但是比現在好一些，不是嗎？
+我只是希望汐姊姊能從此做個好夢而已。」
+
+原本在床尾的她輕盈地移動步伐，在雲井正前方的另一張椅子坐下，與男人正眼相對
+「大叔如果很痛苦的話，你也忘記不就好了嗎？」
+
+從她的一言一行來看，這句話似乎不僅僅是玩笑</span>
+
+                            <span class="chatlog__edited-timestamp" title="17-May-22 09:20 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976116875421417482" class="chatlog__message-container " data-message-id="976116875421417482">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 09:39 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">妳再怎麼神通廣大……
+之類的話說出口，彷彿對方真的做得出來，讓人失憶之類的事。
+
+作為撰稿人，以前研究小說題材時有稍微接觸過精神催眠資料。
+他知道人腦為了保護精神，強鎖記憶確實不僅止於科幻架空，而是人隨著複雜的環境所演化的其中一項。
+
+「免了，我一點也不覺得痛苦。」
+
+人坐正與女性拉開戒心距離的同時，雲井樹攥緊了右手的手心：「我想妳或許有些誤會了，莫希小姐。」
+
+「說白了，汐她生活中如果少了我會更好。她一點也不需要我。」
+
+「我也不打算忘記過去的事，妳也別費心了。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976118495215493150" class="chatlog__message-container " data-message-id="976118495215493150">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 09:46 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">女性抿著嘴唇，似乎懷抱著什麼矛盾的感覺，好一會才開口
+「可是啊……汐姊姊在忘記後那幾天，好像放下了什麼東西一樣輕鬆，這樣不好嗎？」</span>
+
+                            <span class="chatlog__edited-timestamp" title="17-May-22 09:46 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976122243732082728" class="chatlog__message-container " data-message-id="976122243732082728">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 10:01 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「說是輕鬆也只是一時。」
+
+雲井樹臉不紅氣不喘的為雨森代言：「而且，想不起重要的事，汐她會很困擾的。」
+
+人的未來是有了過去的鞏固，才能往上攀。
+
+「能請妳把屬於汐的記憶，還給她嗎？」
+
+那晚，即使他在公園裡說破了嘴也不見雨森有絲毫想起來的跡象。解鈴還須繫鈴人。
+
+如果對方拒絕……他本身也不太確定由其他名精神醫生出面，能不能治催眠症就是了。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976123552220741662" class="chatlog__message-container " data-message-id="976123552220741662">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 10:06 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「汐姊姊她……想要這麼做嗎？」
+面對你的請求，莫希遲疑了</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976125585225027624" class="chatlog__message-container " data-message-id="976125585225027624">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 10:14 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯，真的。汐她已經在找了，關於在警察局發生的事。」
+
+目測對方不是不能溝通，本意也是出於善念。雲井樹放軟語氣勸道：「記憶缺失對人很不健康，也很危險。」
+
+說回來，如果雨森汐最後想起失去的記憶，他倆最後也不過是回歸當初完全不聯絡的狀態。
+
+沒有虧損。
+這樣就好。這樣才對大家都好——</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976127671383756890" class="chatlog__message-container " data-message-id="976127671383756890">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 10:22 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……我想知道汐姊姊的意願。」
+因願而來，因願而還，或許她想遵守的只是這麼單純的道理
+
+「明天晚上我會去找她，大叔要一起來嗎？」</span>
+
+                            <span class="chatlog__edited-timestamp" title="17-May-22 10:23 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976129325449490432" class="chatlog__message-container " data-message-id="976129325449490432">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 10:29 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——自己插手是不是會讓整件事變得過於複雜？
+
+可失憶的汐或許會分不清事情輕重，最後被莫希「這樣不也很好嗎！日子過得開開心心！」給糊弄過去也說不定。
+
+「……嗯，行啊。」至於汐目前的住址，等會兒再問吧。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976131924097654794" class="chatlog__message-container " data-message-id="976131924097654794">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 10:39 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「那麼，時間也差不多了吧。」
+你發現在桌上不知何時已經多出幾張紙鈔，剛好就是這段時間你的「薪水」
+
+「……不過啊，大叔。」
+你抬起頭，莫希已經到了門口，一隻腳已經踏出門外
+
+「你們在那天一起躲雨時聊得明明就很愉快，現在真的連朋友都當不了嗎？」
+看來，她對你們倆的熟悉程度不只是知道結局而已
+不等你回應——可能你要回應的對象也不是她——便邁出身子，將房門乾脆俐落地關上</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976135896137080873" class="chatlog__message-container " data-message-id="976135896137080873">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">17-May-22 10:55 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「躲雨……？」在說什麼呢。昨天沒下雨啊？
+
+或許是時間距離過於久遠的關係，縱使房門「喀」一聲帶上過了數秒，雲井樹只是一臉困惑的無語收起鈔票。
+
+不用等服務人員來趕，他自動且自覺的踏出房門，撈出手機撥通了雨森汐的電話。
+打算詢問明晚是否方便讓他加進與莫希的聚會，還有她在大阪的住址是……
+
+——等下，
+
+遲鈍的人這才想起莫希指的是他跟雨森在大學相識、初次獨處的事。
+
+當晚的系上夜遊，因為突來的大雨給打亂行程。
+而他跟汐也是從那晚開始……
+
+——<strong>都講了什麼跟什麼！</strong>
+
+男人幾乎是以逃跑的時速跑離旅館，彷彿這樣就能將歷史甩到記憶角落似的。</span>
+
+                            <span class="chatlog__edited-timestamp" title="18-May-22 07:47 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976817453415944243" class="chatlog__message-container " data-message-id="976817453415944243">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 08:03 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">逃離旅館後，雲井看著已經顯示通話中的電話
+雨森不知道是什麼時候接起來的，當你湊近話筒時正好聽見她的疑問聲
+「喂？是樹嗎？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976820688608432138" class="chatlog__message-container " data-message-id="976820688608432138">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 08:16 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……嗯，是我。汐……」心裡奔騰過「汐妳到底跟莫希小朋友講了多少陳年舊帳」的他暫時利用著眼點強迫自己面對現實。
+
+「……妳的朋友中是不是有位名叫莫希的人？」雲井樹單手拂過有些發熱的腦袋，調整好心態後打算將問題一個個處理。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976822705800249365" class="chatlog__message-container " data-message-id="976822705800249365">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 08:24 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「莫……希？那是誰啊，我不認識這個名字。」
+電話另一頭傳來雨森不解的聲音</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976825900438028369" class="chatlog__message-container " data-message-id="976825900438028369">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 08:37 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">啊……「莫希」是網名？或者打從一開始她就是用假名跟他接觸？
+
+呼……唉，也罷。
+
+並未在租客身份多加關注的他，將話題帶回重點：「事情是這麼回事……那位叫莫希的女人知道了妳丟失記憶的狀況後，說是或許能幫忙妳解決問題。」
+
+雲井樹刻意把稀奇古怪的部分抹除，只為避免麻煩的解釋：「她想明晚過去找妳，妳什麼時間有空？」</span>
+
+                            <span class="chatlog__edited-timestamp" title="19-May-22 08:45 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976828489728655411" class="chatlog__message-container " data-message-id="976828489728655411">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 08:47 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「是……是這樣嗎，雖然不知道為什麼會有別人知道這件事……」
+雨森想了一會後還是答應了這個奇怪的邀約
+
+「算了，一個老太太也沒什麼好騙的，可以呀，剛好明天周五，只要不超過半夜都沒有問題喔。」
+在電話中自嘲的同時也帶了幾分笑意，彷彿要告誡自己別想太多一樣
+「樹也會一起來嗎？我在想要不要告訴陽正。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976832516990324786" class="chatlog__message-container " data-message-id="976832516990324786">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 09:03 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯好，我明天也會到場。妳再傳地址給我吧。」
+
+至於他們的兒子要不要參與其中……感覺事情會變得額外複雜？
+先不論擅自將人催眠鎖記憶的莫希會不會被當場逮捕的問題，要是他們全家都給那女人催眠就不妙了。
+
+「這件事我想或許……不用麻煩到陽正吧？」
+撫著下巴的鬍渣思考的人，在心底默默的將《莫希式圓滿大結局》退貨。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976834668232048731" class="chatlog__message-container " data-message-id="976834668232048731">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 09:12 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯……那好吧，明晚見。」
+
+結束通話後沒多久，你就收到了雨森傳來的地址
+——— ——— ———
+時間感比你所想的還要稀薄，這一天你幾乎是恍惚著度過的
+很快，就來到了約定的晚上</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976836549826215956" class="chatlog__message-container " data-message-id="976836549826215956">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 09:19 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">隔日當晚，除了心理建設之外沒做任何準備的雲井樹依約來到雨森給的住址。
+
+——但願一切順利。
+
+確認自己沒找錯戶後，他按響了門鈴。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976838952197689364" class="chatlog__message-container " data-message-id="976838952197689364">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 09:29 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">門鈴響起沒多久後，伴隨著開鎖的喀擦聲——她好像還先透過貓眼看了一下——雨森汐才將門完全打開
+「唉呀，我還以為你們會一起來。」
+
+看來莫希還沒到，懷著這個想法的你先和雨森進了屋內
+簡約的風格，一人份的家具，看來在陽正有了自己的家後，眼前的前妻確實都是一人度過的</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976845600769327114" class="chatlog__message-container " data-message-id="976845600769327114">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 09:55 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「晚安，」之於同行的說法，雲井樹搖了搖頭：「不，我跟她也沒說到很熟……」
+
+人環視了一圈前妻的生活空間，對於沒有共居跡象的結果可以說意外、同時也不意外。
+
+若把人的價值觀比作抽疊樂積木塔，「伴侶」積木肯定被雨森汐擺在靠近頂層的位置吧——只是當事者的片面感想——
+
+因為她一個人也能好好的生活。
+
+離婚前已經吃夠挫敗感的男人，實在不想將話題導向離婚後的生活，可又不得不如此：「……是說，汐妳在找陽正聯絡我之前，有發生什麼奇怪的事嗎？」
+
+「例如，做惡夢之類的。」
+人會夢到討厭的過去，或許她的精神面也沒有表面上看起來的無懈可擊吧。</span>
+
+                            <span class="chatlog__edited-timestamp" title="19-May-22 09:58 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976848013974712412" class="chatlog__message-container " data-message-id="976848013974712412">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 10:05 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯，或多或少都有點吧，但具體夢到什麼我也忘了。」
+這也是人類其中一項奇怪的特徵，前一秒彷彿觸手可及的幻境，下一秒卻像潮水般迅速退去
+
+「不過最近都沒有做惡夢呢，能好好睡一覺也不是什麼壞事。」
+她開心地看著你，或許遺忘的那部分至今都沒有造成她任何麻煩吧
+
+因為不常用，所以存在自然淡薄，大部分人過往的回憶確實如此</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976854219241971773" class="chatlog__message-container " data-message-id="976854219241971773">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 10:29 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……嗯，能睡上安穩覺確實很好。」
+倘若記憶恢復後，不知道雨森會不會重溫惡夢。
+
+間接知道了惡夢內容與自己有關，雲井樹望向與過去脫離的前妻，態度認真的詢問：「忘掉不愉快輕鬆的生活，或許很好……」
+
+「但就算是難過的回憶，它還是屬於妳跟我的回憶。」
+
+只打算利用雨森汐目前對自己的接受好感當作推進點的人，少見的浮出自我批判的心情。
+
+不管怎樣，至少在莫希人來之前，先行了解本人的想法吧。
+
+「妳會想找回來嗎？失去的那段記憶。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976858432969768971" class="chatlog__message-container " data-message-id="976858432969768971">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 10:46 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">已經習慣和人客套維持話題的雨森，此時卻陷入了沉默
+「坦白說，要不是你提起，我可能會就這麼繼續過日子。」
+
+你突然回憶起在公園呆愣的她，失憶前的她還在耿耿於懷嗎，還是這份痛苦已經溶入潛意識裡了？
+
+「但是，那是對樹很重要的事吧，你甚至不希望我忘掉。」
+
+「雖然你說是很痛苦的事，但你知道嗎？我很久沒遇過這麼真情流露的樹了。」
+
+你回想起在那件事爆發前，也就是現在的雨森汐對你的最終印象——
+一個大部分時間都和她在冷戰，甚少表達出自己想法的男人
+
+「樹，我真的很怕，怕我恢復記憶後會非常討厭你，我覺得那就是我們實際上離婚的主要原因。」
+
+「但是啊……」
+
+矮小的她捧起你的臉，堅定地說
+
+「我們確實曾相愛過，我怎麼可能只讓你一個人痛苦呢。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-976863372467404800" class="chatlog__message-container " data-message-id="976863372467404800">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">19-May-22 11:06 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">男人的臉頰被比體溫稍高幾度的兩掌貼服的同時，也因雨森話中的堅持升起了不安。
+
+　<em>大叔如果很痛苦的話，你也忘記不就好了嗎——</em>
+
+此情此景，雲井樹順著聯想到昨日莫希的發言，人不禁打了個冷顫。
+
+「——但都已經是過去式了，汐。」
+
+他抬手反握住對方纖細的手腕，將依存的暖意從自己身上帶開。
+
+以行動表現決定——<strong>劃清界線。</strong>
+
+「我們已經離婚了。」</span>
+
+                            <span class="chatlog__edited-timestamp" title="21-May-22 09:49 AM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978632048937934869" class="chatlog__message-container " data-message-id="978632048937934869">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 08:14 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">在雨森愣住的同時，外面響起了輕脆的敲門聲
+雖然聲音很小，但在目前一片死寂的室內，你們聽得非常清楚</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978634150913409125" class="chatlog__message-container " data-message-id="978634150913409125">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 08:22 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">順著突如介入的敲門聲，雲井樹鬆開了雨森汐的雙手，目光自然自在到彷彿已經忘記口吐的上一句話有多絕情。
+
+「大概是人來了吧。」渾身是謎的莫希，來得正是時候……
+
+「我去看看。」不是屋主的人，卻表現的比屋主本人還主動——也可能是他不想面對自己搞砸的氣氛——
+
+雲井樹前往玄關，在門口的貓眼確認敲門的來人是誰。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978635838223155230" class="chatlog__message-container " data-message-id="978635838223155230">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 08:29 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">透鏡中映照著大學生般的人影，一樣的黑色洋裝和灰白頭髮，看來訪客確實是莫希沒錯</span>
+
+                            <span class="chatlog__edited-timestamp" title="24-May-22 08:29 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978638162450599946" class="chatlog__message-container " data-message-id="978638162450599946">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 08:38 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">確定是莫希後，他人便解開門鎖放人進屋。
+
+「——妳來了。」他回望雨森觀望對方的反應，而後帶上門。
+
+就如同莫希說的，最重要得還是看本人的意願，而他剛才也把能說的話都說清楚了。
+
+接下來，就看汐的選擇了……</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978641158215442452" class="chatlog__message-container " data-message-id="978641158215442452">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 08:50 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗨！大叔。」
+莫希向你打了個招呼
+
+看著眼前的女性，雨森露出了一副對方似曾相識的困惑表情
+「請問妳是……」
+
+「啊！這個樣子是為了見到大叔才用的。」
+
+正當你還在思考「這個樣子」是什麼意思時，熟悉的視野已經沒了對方的身影
+「這樣汐姊姊就記得了吧。」
+驚訝的你循著聲音往下一看——
+
+穿著黑洋裝的灰髮小女孩正穿過關門的你身邊，進了屋內</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978643128913375262" class="chatlog__message-container " data-message-id="978643128913375262">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 08:58 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——這是怎麼，發生了什麼事？
+
+即使是閱人甚多的他，此生也從沒見過眼前的異象。
+比魔術還要神奇的現場表演，令雲井樹整個人不禁看呆了。
+
+從莫希的招呼聽起來，她們兩人應該是認識的？
+
+「……汐妳認得這孩子？」他跟著變成小朋友的背影回到屋內，向雨森問道。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978644224268456027" class="chatlog__message-container " data-message-id="978644224268456027">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 09:02 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雨森默默地向你點點頭，但語氣聽起來不是很堅定
+「我還以為……那只是個夢。」
+
+莫希笑嘻嘻地，輕盈地漫步著來到雨森身邊
+「嗯……確實只是個夢呢！」
+
+當然，聽到如此答覆後，雨森顯得更困惑了，但可以確定的是，她確實見過莫希的這副模樣</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978647823107129365" class="chatlog__message-container " data-message-id="978647823107129365">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 09:17 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雲井樹花了好一番功夫才把注意力從超常現象上移開。
+
+雖然他不知道她倆指的夢是什麼，也不曉得夢裡發生的詳細。
+但從旅館的談話中至少能明白雨森與莫希接觸後被拿走部分記憶。
+
+現在還是把重點放在待解決的事上：「汐妳忘記的事情的原因，跟這孩子做的事有關。」
+
+他指向小女孩，說出連自己聽了也覺得過份荒唐的話：「只要妳願意拿回記憶，她……會幫忙的。」</span>
+
+                            <span class="chatlog__edited-timestamp" title="24-May-22 09:21 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978653261819170846" class="chatlog__message-container " data-message-id="978653261819170846">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 09:38 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雨森看著莫希
+「我知道，妳在夢裡也是這麼說呢，只要我想的話，就能幫我忘掉。」
+
+莫希回應的方式則是一陣點頭如搗蒜
+
+「在那之前，請先等我一下。」
+雨森這次轉而看向你
+「樹，我們先把剛剛的話說完吧。」
+
+該來的疑問總是避不掉
+
+「那是很重要的回憶吧，請告訴我，為什麼你既希望我想起來，卻又在關鍵時刻一次次的推開我？」
+
+又是敬語呢
+但這次究竟是她的壞習慣，還是她知道必須要以客觀的外人身分你才有可能吐實呢</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978658270761852928" class="chatlog__message-container " data-message-id="978658270761852928">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 09:58 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「……正因為是重要的回憶，我以為想妳會想留住的。」
+聽到最初是雨森主動捨棄掉警察局衝突的記憶時，雲井樹感到頭痛了，他不解的回望對方。
+
+「事情並不會片面的遺忘而變成『從未發生』，我會一輩子記得，陽正也不會忘記，當時所有在場的人都知道當時發生的事。」
+
+而遺忘所造成的影響，稍早前他也確實領受過了。
+汐居然會重新擔心起，已經斷掉聯繫的十幾年的人的感受，完全不正常——
+
+「或許能換得幾夜好夢，可每當發生了不愉快就將它丟掉，最後人的內在又能剩下什麼呢？汐。」
+
+「我們，已經沒辦法回到過去了。」或許，是有些遺憾吧……
+
+但已經習慣後悔的他將私欲壓下，試圖將結果導向「對兩方都好」的方向。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978666007990251600" class="chatlog__message-container " data-message-id="978666007990251600">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 10:29 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「也許我不是單純的想忘記。」
+雨森平靜地望著你
+
+「可能是我覺得忘掉這段回憶後，才能去找你，然後等你的真心話吧。」
+她閉著眼，像是在回想什麼
+
+「就像你出軌那時候我一直在等你回心轉意一樣，我們兩個……都不怎麼坦率啊。」
+
+她再次睜開眼睛
+「樹……你真的這麼後悔遇到我嗎？記憶錯亂這麼重大的事情，你連編句謊言都不肯。」
+說到最後，雨森的口氣有些埋怨又有些好笑</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978671562150514688" class="chatlog__message-container " data-message-id="978671562150514688">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 10:51 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雲井樹靜靜的聽雨森把想說的話說完，才開口回應對方的心情。
+
+「也因為是重要的事，才不能隨口帶過吧……」
+
+「……我沒有後悔遇到妳。」他看向自己曾經愛過的人，深深吸了口氣：「但現實影響了妳我，我們對愛的追求也不再交集。」
+
+「最後……連維持關係都變成痛苦的話，又何必再繼續下去？」
+
+如果被討厭……就討厭吧。
+至少這壓在他心頭的重量比起「喜歡」來得有踏實多了。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978673617112019004" class="chatlog__message-container " data-message-id="978673617112019004">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 10:59 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">出乎意料地，把話接下去的不是雨森，而是一旁的莫希
+
+「大叔，你是不是怕汐姊姊想起那件事後會被打，太親密的話也會很尷尬，才乾脆先不理人家？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-978675658861473892" class="chatlog__message-container " data-message-id="978675658861473892">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">24-May-22 11:07 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">當場被童言童語貫穿靶心的人，快藏不住心虛的抬手調整了一下眼鏡的位置。
+
+「……我沒有不理她。」回嘴的力道比小學生吵架的力道還要弱。
+而被忽略不提的部分幾乎就是間接招認了。
+
+自認理虧的雲井樹只能用「別跟看起來像小孩子的人較真」讓心理平衡一些了。</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-May-22 03:31 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-979356778674421760" class="chatlog__message-container " data-message-id="979356778674421760">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">26-May-22 08:14 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">女孩在看到雲井樹明顯不同的反應後，毫不留情地開始了新一輪的攻勢
+
+「虧你還敢說喜歡她……大叔怎麼會覺得汐姊姊沒想過回復記憶的後續呢？」
+
+畢竟對方可不是什麼花瓶系弱女子，而是一個人也過得好好的雨森汐啊</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-979359689970176030" class="chatlog__message-container " data-message-id="979359689970176030">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-May-22 08:25 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">說是喜歡，也是過去式的喜歡。
+……或許這問題對於小女孩、對年輕人來說很難理解吧。
+
+「有想過沒想過……不管怎麼樣，最後只要汐能恢復記憶的結果都好吧。」雲井樹搖搖頭，視線隨著抬頭轉而落在前妻身上。
+
+「討厭也好，有別的想法……我沒所謂。」
+本就怕麻煩的人差點一時逞快，管事管到雨森那感受的他有自覺的即時住嘴了。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-979361641659506698" class="chatlog__message-container " data-message-id="979361641659506698">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL</span>
+
+
+                        <span class="chatlog__timestamp">26-May-22 08:33 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「就算……汐姊姊回復記憶後開始不討厭你了？」
+
+莫希看著你，有點著急的樣子，明明是孩子的外表卻露出很複雜的表情
+或許，這已經不是她第一次見到這種事了</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-979364408025313352" class="chatlog__message-container " data-message-id="979364408025313352">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-May-22 08:44 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">男人搓了搓指尖，語氣有些乾澀的說：「……我沒有權利管到別人怎麼想。」雖然說起來很難受，但這就是現實。
+
+雲井樹看了一眼莫希，目光再度聚焦在雨森身上：「汐妳之後，有什麼打算嗎？」
+
+對於糟糕透頂的他，還打算說什麼嗎？又或者她覺得他們之間已經無話可說了？</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-May-22 08:45 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-979370069006094337" class="chatlog__message-container " data-message-id="979370069006094337">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">26-May-22 09:07 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「你還是這麼固執啊……就一如往常的過吧，熟悉的工作，偶爾聽聽兒子那邊的新鮮事。」
+說起陽正他們小倆口，雨森的笑意又多了幾分
+
+她看看你的臉，只是平靜地說
+「老了加上現在記憶沒了，企圖惹我發火或難過的話現在還是省省吧。妳也是喔。」
+
+正當你還在疑惑最後一句的意思，雨森已經把手伸出去，摸了摸已經哭成淚人兒的莫希
+女孩低下頭——這讓汐更方便碰到她的腦袋了——低聲問著
+
+「我還……還做得不夠好嗎？為什麼你們要用這麼悲傷的方式結束……」</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-May-22 09:07 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-979373890847514684" class="chatlog__message-container " data-message-id="979373890847514684">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-May-22 09:22 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">本性固執的人以沉默回應雨森的發言，想法也未因此產生動搖。
+
+陌生人的淚水自然也無法撼動其半分：「很多事是經不起重來的。」相較於女孩的啜泣，成年人式的灑脫顯得格外絕情。
+
+他是真的找不回來了，兩人的最初。
+那股眼裡只有彼此，時間什麼的隨它流逝、世界什麼的隨它更迭……
+
+在現實面前折過腰，碎過心的感情再怎麼縫補也回不道最初了。
+
+至少雲井樹是如此，或許在他的預設立場下，認為雨森汐也是如此。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-979382208131371090" class="chatlog__message-container " data-message-id="979382208131371090">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/23NZB6FuoNcs3iNVTKfoPe.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 雨森汐</span>
+
+
+                        <span class="chatlog__timestamp">26-May-22 09:55 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「是啊，但至少我們可以選擇結束的方式。」
+雨森很無奈眼前這位男人的處事風格，不過，也僅僅是無奈而已
+如前夫所言，有些事是真的沒辦法挽回了
+
+她短短地嘆了一聲，像是已經沒了遺憾，同時默默地拭掉了女孩臉上的淚珠
+「對不起，有些故事沒辦法有幸福快樂的結局，但是妳做得很好喔，我已經得到自己想要的答案了
+現在，該把那段記憶還給我了。」
+
+莫希點點頭，拿出了一個小小的，上頭繡著荼靡的束口袋，在她面前打開……
+
+「樹，謝謝你，願意在最後陪我約會一次。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-979386332956725249" class="chatlog__message-container " data-message-id="979386332956725249">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/7mkLBK1regUEEOWApMS60u.png" alt="雲井樹" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="雲井樹" data-user-id="2474">雲井樹</span>
+
+
+                        <span class="chatlog__timestamp">26-May-22 10:11 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">在櫻花見證下的約會，已經好幾年沒有過了。
+那段時光……回想起來特別的美好、也特別陌生。
+
+「……不，也謝謝妳來找我。」聽起來像是客套的句型，可這真的是雲井樹打從心底的感謝。
+
+縱使未來不再有交集，在被凡塵俗事佔滿的留白之間，他會想起的吧。
+
+曾經愛過他的人。
+他曾經愛過的人——
+
+「再見了，汐。」最後選擇將兩人的結局停在衝突之前的雲井樹，識相的先一步離開了對方所住的公寓。
+
+喀的一聲帶上重重的鐵門，春日夜裡的寒風撲面而來，綣走殘存於肌膚表面的熱度。
+
+——順便也把她的期待帶走吧，風啊。
+
+未經歷失憶，心生詩意的人踏上回家的歸途。
+
+雖然他的家，很早以前就不再了。</span>
+
+                            <span class="chatlog__edited-timestamp" title="26-May-22 10:22 PM"></span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-979389920831479858" class="chatlog__message-container " data-message-id="979389920831479858">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://images.plurk.com/2rQLk8pW1IFm2s8pH0rmTO.png" alt="DL" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(111, 169, 222)" title="筱玥" data-user-id="4756">DL 筱玥</span>
+
+
+                        <span class="chatlog__timestamp">26-May-22 10:25 PM</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">—————————
+
+通關獎勵：∞殘響（雨森汐）</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Normal End：今日，是否如昔 ？</div>
+</div>
+
+</body>
+
+</html>
