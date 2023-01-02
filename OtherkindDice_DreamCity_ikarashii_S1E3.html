@@ -1,0 +1,1911 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>新世界 - 五十嵐想太</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.325em;
+    height: 1.325em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+    pointer-events: none;
+}
+
+.chatlog__reference-content > a:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > .emoji {
+    width: 1.325em;
+    height: 1.325em;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    vertical-align: middle;
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__embed-youtube-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-youtube {
+    border: 0;
+    border-radius: 3px;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #5865F2;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #00aff4;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* Preamble */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: #36393e;
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: #202225;
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: #dcddde;
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: #dcddde;
+}
+
+.chatlog__embed-footer {
+    color: #dcddde;
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://images.plurk.com/61cq16rFT4gmUr46UVucBa.png " alt="異類骰 - 新世界 Dream City">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">異類骰 - 新世界 Dream City</div>
+        <div class="preamble__entry--small">🆇 系統規則：異類骰　🆇 世界觀、劇本作者、主持人：Dola　🆇 玩家、團錄整理：五十嵐想太</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">17-Dec-22 11:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="1053696241814474872" id="message-1053696241814474872" title="Message sent: 17-Dec-22 11:32 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">五十嵐很快地就適應了SMC生物科技研究所的生活
+
+研究所方為了讓受試者們放鬆壓力，前面幾天的生活沒有任何的實驗內容
+每天只要吃飽睡睡飽吃，並且任何的休閒娛樂只要提出申請幾乎都會被批准
+缺點是不能外出跟行動終端被強制保管，完全地喪失了與外界聯絡的方式
+
+這樣的生活在部分人的眼中跟監獄生活沒什麼不同
+但是一個月的實驗生活結束之後可以獲得不小的金額
+因此被帶來的所有人對這樣的待遇都沒有不滿</span>
+
+                                <span class="chatlog__edited-timestamp" title="17-Dec-22 11:33 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="五十嵐想太">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="24" style="color:#78C2C4">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">12-Nov-22 09:26 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="1040980893315104810" id="message-1040980893315104810" title="Message sent: 12-Nov-22 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">【目標】5d6 取三（主持人分配目標）
+- 調查研究所內部
+- 達成實驗目標
+- 隱瞞寄生蟲體質
+
+擲骰結果：<img class="chatlog__attachment-thumbnail" src="https://images.plurk.com/6wr5qxRxA76APxkUWsRCd.png" alt="Image attachment">
+							
+</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">24-Nov-22 12:14 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="1045190641765847131" id="message-1045190641765847131" title="Message sent: 24-Nov-22 12:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="quote">調查研究所內部
+</div>研究所內部沒有任何窗戶
+裡面有各種設施：廚房、休閒室、實驗室
+平常都是完全開放的，只要有需要都可以直接使用
+
+工作人員出入都會經過兩階段的安檢門
+(類似無塵室那樣有兩道門，確認過才會放人出入的)
+
+<div class="quote">達成實驗目標
+</div>每個被帶過來的人都會以三人為一組進行實驗
+實驗項目內容是猜撲克牌花色
+同一組的另外兩人都是百猜百中，五十嵐就是瞎猜
+
+<div class="quote">隱瞞寄生蟲體質
+</div>在第一天進到研究所的時候每個人都有被抽血
+但是這幾天你不覺得有被特別對待</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">18-Dec-22 03:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="1053941121123876904" id="message-1053941121123876904" title="Message sent: 18-Dec-22 03:45 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「——不覺得實驗室的那些人至少該留一扇窗給人透氣咩？」五十嵐執意空揮拍的同時向他的短期室友兼球友抱怨道。
+
+「怎麼？覺得熱嗎？要不叫人弄個空調？」
+
+「不不，也不是這麼說唄，問題出在……啊——！」雖說話題是五十嵐起的頭，但焦慮到瀕臨爆炸的他已經很難給人體貼的回應。
+
+如果有天窗就好辦多了，他跟研究員多要幾個桌球桌疊一疊就能逃出去了。
+
+至於研究員，似乎還沒人注意到他體質特殊的事，至少現在還沒出現想把他剖開研究的人，謝天謝地。
+
+話說回來，行動終端被扣押也是個問題。這段期間如果他漏接了如來發派的任務……嗯，後果他想都不敢想。
+
+五十嵐用指甲尖端挑起全新桌球拍的膠粒與木拍之間的貼合處，心想著如果接下來幾天能給他找著逃脫的縫隙就好了。
+
+「不是有個叫斯什麼的紀錄片咩，把人逼瘋的實驗……」「斯坦福監獄實驗？啊，我知道那部片！」
+
+斯坦福監獄是美國心理學家發起的人性心理實驗。其有名的程度在娛樂性的改編、翻拍之下廣為人傳。
+
+半數的受驗者扮演囚犯，另一半則扮演獄卒。在本無階級的有限空間下，人與人之間出現了高低之差，進而衍生出接連不斷的衝突。
+
+「我看不像啦～是你想太多了吧。因為我們現在也沒有被區分對待啊？」
+
+「唉嗯，也有可能只是你跟我還不知道而已唄？那些穿白衣的又沒明說要在我們身上做哪些實驗。」
+
+「……你這麼說也沒錯啦？」
+
+過去有接受人體實驗經驗的五十嵐想太無法樂觀思考，想當初他也是很天真的以為裝個胃鏡給人觀察兩個星期，從沒想過連自己的後半生都賠進去了。
+
+「唉——如果有扇天窗事情就簡單多了。人造的室內陽光最終還是比不過太陽咩。」
+
+「怎麼又扯回天窗的話題了？真是個怪人……啊！球是你掉的，別想混過去喔？快去撿回來啊。」
+
+五十嵐想太無法樂觀思考。
+
+無論是在撿乒乓球的時候，還是與人對上視線的時候；
+在廚房料理食物執刀的時候，還是閉眼等待睡意襲來的時候。
+
+一邊得提防共同生活空間的距離，一方是來自研究人員的潛在目的。而無論哪一項都能把五十嵐的精神推至極限。
+
+　<em>為什麼是我？為什麼我會在這裡？</em>
+
+在五十嵐到 SMC 實驗室之前，曾混進了一場藏有毒品陰謀的對外開放實驗，但沒來得及抽身就被運到這間與世隔離的實驗室。
+
+他明明連一次試駕測試都沒成功過，是不是哪裡弄錯了？的確……可能是那位綁著捲馬尾的傻大姐又搞錯什麼了唄。
+
+「一切都是誤會，你們弄錯了。讓我離開。」如此向研究人員解釋是不是就沒事了呢？看過血液檢查結果這些科學家還能放過他嗎？</span>
+
+                                <span class="chatlog__edited-timestamp" title="20-Dec-22 06:36 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="1053941142409973760" id="message-1053941142409973760" title="Message sent: 18-Dec-22 03:45 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">唉，斯坦福的前輩們都是熬到第幾天才放棄自我的呢？那他是不是也該忍到……不，應該說「希望他能撐到那時」才正確。
+
+　<em>接下來的日子裡，他該怎麼做……</em>
+
+🆇
+
+幾天後，第一場實驗開始了。
+
+如果不是實驗室的工作人員正二八經的向他們解釋實驗環節，五十嵐肯定會把眼前的一幕當成一場玩笑。
+
+所有實驗對象以三人成組，實驗場就在研究所內的生活空間內分頭進行。
+
+幾張簡易的簡易的桌椅將各組各別區分開，沒有圍欄位遮掩能讓人一眼看明所有人接受的測試都是同樣的內容。
+
+兩手放在腿間，身體重心前傾，坐姿像是一隻大貓的五十嵐抬眼向坐在對面的研究人員洗牌、切牌。
+
+「我希望你們能試著告訴我花色。」
+
+與他同組的是先前沒多少交集的金髮少年，另一位則是留著鬍渣、看起來沒什麼精神的大叔。
+
+白袍研究員動手推了推有些下滑的眼鏡，用不太熟練的手法將牌展成一道弧形，並從中隨機選出一張牌推至桌子中心：「用你們的直覺。」
+
+「……黑桃，」「Spades K！」
+
+「那這張呢？」
+
+「紅……」「Hearts 6！」
+
+　怎麼可能？這些人到底都是吃什麼長大的！
+
+五十嵐愣愣地看著的同桌的夥伴們花式炫技，心中則閃過無限的哀嚎。
+
+　難不成這些接受實驗的人個個來頭不小咩？難不成只有他是這群人中唯一比較正常的——
+
+「該輪到你了。」實驗人員發出的牌與命令強迫五十嵐面對現實。
+
+研究員的食指貼唇，即時阻止了來自少年的躍躍欲試搶答，目光重新望向從一開始就很安靜的青年：「這張牌是什麼花色？」
+
+　<strong>對不起！我壓根不知道這張牌是什麼！拜託你們——放——我——走——</strong>
+
+「……應該是黑桃？」
+
+或許是比較心態作祟，又或者是求生欲望使然，也有可能是連五十嵐自己也說不上來的直覺，被迫火箭上弦的他不知道哪根筋不對地跟著加入實驗。
+
+研究員面無表情的開牌，當五十嵐窺全撲克牌的邊角後，緊繃的肩頸這才放鬆了下來——牌是黑桃沒錯。居然給他矇中了！
+
+「嗯，繼續。」研究員把黑桃三挪至一旁的棄牌堆，繼續抽發牌。
+
+憑著記憶力與腦內概率心算的五十嵐有驚無險的通過了第一階段的測試。
+
+實驗結束的當晚，他湊到了手指抖個不停的頹廢大叔那討教猜牌的訣竅。
+
+<img class="chatlog__attachment-thumbnail" src="https://images.plurk.com/5bCE6RYUaWrRRD4tgIAJI6.png" alt="Image attachment">
+
+「……訣竅？哪有什麼……我只是<strong>看著</strong>，僅此而已。」
+
+根據當事人的說法，一副全新未拆的牌必有固定排序，只要記住位置、發牌手不管怎麼切牌、洗多少次牌，結果都一樣。
+
+「……需要這麼驚訝嗎？這很普通吧？」<strong>「一點也不普通！大叔你其實是神對唄！」賭博之神。</strong>
+
+五十嵐想太越來越沒自信在這群神啊魔的群體中生活了。</span>
+
+                                <span class="chatlog__edited-timestamp" title="18-Dec-22 09:20 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">19-Dec-22 12:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="1054253754603536474" id="message-1054253754603536474" title="Message sent: 19-Dec-22 12:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「不用這麼麻煩也可以啦。」
+<img class="chatlog__attachment-thumbnail" src="https://images.plurk.com/6ru2aEkVlB6CqHaQ8L207U.png" alt="Image attachment">
+另一名室友表現出對這個話題很有興趣的樣子也湊了過來。
+「那個研究員超緊張的，眼睛都只盯著牌面看，手上握什麼牌都可以直接從他眼睛裡面看到反射，根本就簡單到不行啊！
+還是說你是那種不好意思直視別人眼睛的那種人？那看旁邊那台攝影機也可以啦，那個角度還不裝遮光罩，根本就是故意讓我們作弊的吧。
+總覺得來到這裡住過幾天之後感覺超順的，果然這裡的環境才能夠發揮出我的全部實力！
+這裡空氣清新，食物又好吃，不愧是專業廚師，我那裡的大鍋菜完全沒辦法比。
+說到這個，你好像都是拿食材自己煮？幹嘛這麼麻煩，明明專業廚師煮出來的就很好吃啊，還是說你是那種不吃別人碰過的食物的潔癖仔？
+啊，我知道了，你該不會是瞧不起我們，不屑跟我們吃同一種食物吧？」
+
+自顧自地說著，還把話題轉到容易樹敵的方向，這種小混混式的找碴技巧居然在這裡也遇的到。偏偏這種人是自己的室友，如果是在外面的話根本就懶得理他。</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Dec-22 12:29 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">19-Dec-22 01:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="1054269765226610698" id="message-1054269765226610698" title="Message sent: 19-Dec-22 01:31 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「唔咩？你說攝影機……但呃、作弊也可以咩？實驗……」是說，兩位的眼睛也太好了唄？
+
+被室友突然插話的五十嵐呆愣愣的眼頭回望眼前比起一同打球時更多了幾分自信的室友。
+
+同時，五十嵐這才想起他完全不曉得其他參加實驗的人的名字、以及他們是從哪來的。
+
+或許這群人已經默認了「為期一個月的實驗結束後，彼此之間就再無瓜葛」，因此完全沒有自我介紹的必要了吧。
+
+五十嵐的瞇眼，連忙擺手拍掉被莫名貼上的不合群標籤：「嗯哎也不是唄，我只是喜歡自己煮。做餐飲養成習慣了咩。」
+
+才怪。
+要不是為了提防 SMC 研究所的人在食物裡添加奇怪的藥，他才不想下廚呢——五十嵐做的幾乎是罐頭料理，避免沾到容易被泡藥的生鮮食材——
+
+畢竟是會在公然場合堂而皇之拿出毒品餵給一般民眾，SMC 這間企業實在值得懷疑，五十嵐也很好奇其背後的動機。
+
+「你有興趣的話下次我分你一點唄。雖然我想味道是比不上這邊的伙食啦……」
+
+五十嵐用食指比了比室友和話看起來很少的大叔：「話說回來你們原本是做什麼的哇？怎麼會來參加 SMC 研究所的實驗？」</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Dec-22 05:43 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">20-Dec-22 12:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="1054613415806648320" id="message-1054613415806648320" title="Message sent: 20-Dec-22 12:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「......SMC的......」
+「當然是為了這個啊」
+小混混室友毫不在意地打斷了其他人的對話還一邊比出money的手勢。
+「只要參加一個月的實驗，在老家就可以奢華過一輩子啦！
+本來就是來夢想城市賺錢的，沒想到真的讓我遇到這好康的。
+原本還以為就只能在貧民區混一輩子了，遇到這個機會根本中大獎了！
+通過嚴苛的試驗才能成為測試人員，人數還僅僅不到30人，你說我們這不就是天選之人嗎？」</span>
+
+                                <span class="chatlog__edited-timestamp" title="20-Dec-22 12:18 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">20-Dec-22 01:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="1054628118159179826" id="message-1054628118159179826" title="Message sent: 20-Dec-22 01:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">原來這人也是貧民區的人啊，臉挺生的。
+
+五十嵐肯定來此之前他們彼此並不認識，不然他是不太容易忘記性格外放、講沒兩句就得拆地雷的麻煩社交。
+
+短短幾天到底發生了什麼事讓人自信心膨脹成這樣，啊，麻煩——
+
+承上理由，他沒打算跟室友走鄰里套情路線——跟口風不實的人也很難在無備案下對以真情——
+
+「說的沒錯！能遇上有錢輕鬆賺的好差事，真是太幸運了。」
+五十嵐接下，陪笑的態度表示理解的同時用食指搓搓大拇指，而後比了個幸運7的手勢：「我也有感覺這裡才是能讓我們一展所長的天職。」
+
+只是把談話對象喜歡的話題複讀、給予肯定的高帽子，不一定有用，但至少不會太錯。
+
+五十嵐收回手，故作回味的新闢話題：「說到試驗，駕駛台的水槽設計真夠嗆……」
+
+拋出試探的同時，五十嵐仔細觀察大叔和青年的反應：「啊，還有那顆紅色的藥丸，怎麼看都很奇怪啊……」
+
+「你們有吃那個紅色的藥咩？」那可是毒品啊，成癮可是會變成廢人啊。
+
+如果兩人還不知道嗑藥帶來的後果，他該冒著走漏消息的風險警告他們嗎——</span>
+
+                                <span class="chatlog__edited-timestamp" title="20-Dec-22 01:27 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">20-Dec-22 01:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="1054632595264110622" id="message-1054632595264110622" title="Message sent: 20-Dec-22 01:33 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「喔喔，你說那個怪女人給的那個紅色天使嗎，那個超讚的啊。
+那個吃完之後全世界都慢了下來，在那個狀態下要我下腰閃子彈八成也不是什麼難事。
+沒想到那個這麼讚，應該多要一點才對，不過反正這裡就是在做適應性實驗，之後應該還有機會拿到吧。
+誒，該不會你有那東西吧？分一點分一點，多少錢我都買！」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">20-Dec-22 02:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="1054642041696559195" id="message-1054642041696559195" title="Message sent: 20-Dec-22 02:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「啥、」下腰閃子彈……哈啊？
+
+曾有幸在第一視角體驗對面閃子彈給他看的五十嵐聽到室友的回答，表情沒能收斂的定格在驚訝上好幾秒。
+
+「……呃，怪女人是？」難道是暴力怪虐的代表——觀世嗎？那女人已經飢渴到攔路給人做實驗了咩……不，無論是與否都不是目前的重點。
+
+「嗯姆，這樣啊，原來你已經沾了咩。」五十嵐閉眼深吸了一口氣，下一秒人已切換成平常做生意的模式。
+
+他撓撓頭、兩手一攤表達其中的困難：「我知道誰有紅色天使，也有辦法弄到手。但現在終端機扣在研究員那，想辦法把東西弄進來也不容易……這麼著唄，」
+
+「如果你能協助我把終端機弄出來，我們再看看怎麼談？」
+
+只不過，五十嵐搞到手機後要做的第一件事就是向外求救。他不打算留在這跟科學家們開毒趴。
+這項計畫的優先級數即使得不到其他人的幫助，他仍會去嘗試。
+
+「——啊，反正順便唄。大叔你也要來一點咩？」五十嵐看作隨口問問的態度，試探對方會作何反應。</span>
+
+                                <span class="chatlog__edited-timestamp" title="21-Dec-22 05:13 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="五十嵐想太">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="24" style="color:#78C2C4">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">12-Nov-22 09:26 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="1040980893315104810" id="message-1040980893315104810" title="Message sent: 12-Nov-22 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">【目標】6d6 取三組
+- 取得小混混的協助
+- 取得大叔的協助(1/2)
+- 取得大叔的協助(2/2)
+
+【優勢】
+- 成功讓室友覺得是自己人
+
+擲骰結果：<img class="chatlog__attachment-thumbnail" src="https://images.plurk.com/2m1nqCRDxuk6twsrpqcmY.png" alt="Image attachment">
+							
+</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">20-Dec-22 09:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="1054755281227219064" id="message-1054755281227219064" title="Message sent: 20-Dec-22 09:40 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「喔喔，行動終端嗎？行啊，我之後想辦法幫你弄回來吧。說好囉，無限量供應喔！」
+
+「......啊......我就不用了」
+獨自在一旁看書的大叔很明顯是不想跟你們扯上關係。
+此時宣告熄燈時間的音樂響起，大家簡單做個總結之後就各自回床上睡覺。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="五十嵐想太">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="24" style="color:#78C2C4">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">12-Nov-22 09:26 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="1040980893315104810" id="message-1040980893315104810" title="Message sent: 12-Nov-22 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">【目標】5d6 取三組（劣勢：捨去1顆最大值結果骰）
+- 隔天的實驗(反應向)
+- 偷出行動終端向如來求救
+- 找尋逃出研究所的路線
+
+【劣勢】
+- 沒睡好(明明一覺到天明，但是腦袋還是昏沉沉的，只有你這樣)
+
+擲骰結果：<img class="chatlog__attachment-thumbnail" src="https://images.plurk.com/78tfBqeEC8vPEN5mGC2t58.png" alt="Image attachment">
+							
+</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">24-Nov-22 12:14 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="1045190641765847131" id="message-1045190641765847131" title="Message sent: 24-Nov-22 12:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="quote">- 隔天的實驗(反應向)
+</div>3 你的反應不夠好
+一行人在休息的時候喝了研究人員給的水
+後半場的反應表現就很好，神清氣爽看東西都變精明了
+(沒有副作用)
+
+<div class="quote">- 偷出行動終端向如來求救
+</div>2 你看到有研究人員在使用行動終端
+想偷竊，卻失敗，以下選一
+- 被抓去小黑屋一陣毒打 (劣勢：受傷)
+- 被口頭告誡+上電子項圈
+
+<div class="quote">- 找尋逃出研究所的路線
+</div>5 你可以自由描述 (最大可以到：獲得逃出方式，但是白天無法實行)</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">21-Dec-22 12:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="1054973715999367219" id="message-1054973715999367219" title="Message sent: 21-Dec-22 12:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">無限量供應天使碎片？你加入鳳鳴幫搞不好比較快呦，雖然可能會因為代價流點血就是了。
+
+五十嵐將兩人極端的反應看在眼裡，他沒有坦承實際面向，人選擇笑笑地默認把話題帶過。
+
+大叔的手指末端不可抗地抖個不停八成是某種戒斷症，再跟努力與意志力拉拔的人勸誘毒品、酒精確實太不解風情。
+五十嵐沒再多加提問、也不為自己的行為辯解，在燈熄前回自己的床舖就寢。
+
+🆇
+
+隔日——
+
+「痛！嘶、」該死！
+
+睡眠不足的他被菜刀刺到的瞬間整個人都醒了，五十嵐無言地盯著冒血的無名指根部，感嘆自己居然連個蘋果也削不好的同時抽了幾張紙巾為傷口做了簡單的處理。
+
+啊唉……腦袋好重，什麼都不想思考……好想睡回去。
+可是剛才研究員宣布了，等休息時間結束後早上將進行下一階段的測驗。好痛苦，人生真是太痛苦了。
+
+承載過多負能量的五十嵐沒有餘力去考慮自己跟周圍氣場格格不入的問題，心力交瘁的他乾脆板起寫著「有長眼就別來煩我」的臉，速速解決了早餐離開了用餐公共區。
+
+看似漫無目的地的散步，其實心底揣著不純動機的五十嵐踏出的每一步都在為脫逃做打算。
+
+他記下了研究所內部攝像機的死角，也大致記住了實驗室工作人員一週的工作規律。
+
+依觀察，目前能通往外面的唯一入口是研究員們每天上下班都會通行的正門，同時也是令人難以探路的關卡。
+只是刷識別證的話還好說，如果是上升到需要指紋或是虹膜之類的檢驗肯定沒戲唱。
+
+煽動同樣想離開的志願者一起合作也是條路，但五十嵐目前沒有足夠的時間摸透其他人的來歷。一上來就談及逃亡有被出賣的風險。
+
+挖牆之類的脫獄計劃也別想了，想也知道毒蟲室友不會放過他……
+
+最後，五十嵐把腦筋動到了絕對不會裝設監視器的場所。
+
+　——如果攀上隔板，應該可以搆著唄。
+
+他坐在衛生隔間的馬桶蓋上仰望天花板的排氣扇，思考從通風管逃出研究所的可行性。
+
+　上鎖的十字螺絲釘可以用有厚度的塑膠卡轉開，或者拆了外套的拉鍊柄磨平也行。以他的體型應該有機會鑽——
+
+唰嘩啦……
+
+　嗯，必須等深夜人少的時候再做初步實地勘查，一不小心打草驚蛇就麻煩了。
+
+行動大致規劃完畢的五十嵐，留在隔間等門外的人離開洗手間後才做做樣子的沖水走出衛生間。
+
+看著清鏡中一副精神不濟的慘樣時他忍不住失笑。用冷水洗了把臉提振精神的五十嵐收了心，前往實驗場。</span>
+
+                                <span class="chatlog__edited-timestamp" title="24-Dec-22 10:43 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">21-Dec-22 07:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055089779592667177" id="message-1055089779592667177" title="Message sent: 21-Dec-22 07:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">這回實驗主要是測試反應能力。
+
+SMC 不曉得何時在休閒區架起了數個獨立間，且考量每個人都有充分發揮的空間，受試者們被單獨分開分批測試。
+
+透明的立方體內除了標準規格的攝影機之外，隱約還能看到幾支像是長腳活動式砲台的機器人。AI 多半是根據生物熱能感應以及動態捕捉，會朝特定範圍內的活物發射裹著顏料的橡膠彈。
+
+他們要做的，就是閃過不知從何而來、何時會發動的射擊。
+
+　<em>不可能！辦不到！這玩意兒普通人怎麼可能閃得過！</em>
+
+在五十嵐腦海閃過無數否定的同時，他的背和腿同時又中了兩發漆彈。
+無力面對雙向夾擊的五十嵐一個蹲越閃至掩體後爭取片刻的喘息。
+已經變成活靶的人自然不會去在意袖口多幾道彩，他用袖口粗略的抹去護目鏡上的髒污。
+
+心裡其實沒什麼好打算的他在決心落下喉嚨之前身後的護板也「嘰——」被遠控撤下。
+
+　……世界上，十個科學家裡有九個是虐待狂唄。<strong>肯定。絕對！</strong>
+
+拖著疲憊的身體，連體感時間也失準了的五十嵐在接到測試結束的通知後，這才如獲新生的走出被狠狠虐菜的實驗場。
+
+可在歸還裝備時聽聞「半小時休息過後還得進行第二輪測試」後五十嵐立馬笑不出來了。
+
+就在他一臉認命的靠著護具墊休息時，一道陰影蓋過了五十嵐的注意力。
+
+「一切都還好嗎？想太君✿」
+
+身著白大掛，綁著高高的卷馬尾的女性俯下身，將手中寶特瓶裝的礦泉水關心多餘玩笑的貼近形同死木、眼神放空到不知道去哪個次元遊歷的臉頰。
+
+「唔，謝了……」五十嵐遲疑了幾秒，這才抬手接過明明應該是善意，卻莫名令他備感壓力的互動開頭。
+
+從研究員身上掛的識別證，他這才知曉她名叫羅倫佐。
+
+「嗯唉——怎麼看都不像順利的樣子唄。」比起反應力測試的成績，五十嵐有更加在意的事。
+
+「嗯，沒錯✿剛才結果看起來並不順利，」女研究員纖細的手指按著裙擺，跪坐在五十嵐身旁打氣：「但是啊～每個人的起步點都不一樣嘛✿放輕鬆也——沒問題～」
+
+「誒……」才不是沒問題呢！其中的問題可大了！怎麼可能沒問題：「呃是說，妳知道我操作機器人的結果唄……所以？我在猜，難道不是哪裡搞錯了咩？」
+
+　他不應該在這裡啊！
+
+五十嵐打出直球試圖從泥濘中脫困，卻換來了毫不意外的雞湯。
+
+「嗯——不是的呦，想太君✿」
+
+「我知道想太君的潛力，想太君能辦到的，我相信想太君。」
+
+　啊哈……是「壓撒西，信基嚕」經典廢言格式。不行了，已經不行了。
+
+肉體帶動精神層面的疲倦已經承受不了單向溝通的五十嵐別過眼迴避羅倫佐光彩耀眼的視線，垂頭喪氣地轉著手上的水瓶。
+
+　這女人明知不實還把他送進實驗室，自主撤離計畫失敗了。
+　雖然說，他只要測試成績再爛下去搞不好也不用費心逃獄，人直接被 SMC 刷掉丟出去也是十分有可能——差別只在於站著出去，還是躺著裝袋推出去。</span>
+
+                                <span class="chatlog__edited-timestamp" title="28-Dec-22 07:34 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">22-Dec-22 02:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055367308404592660" id="message-1055367308404592660" title="Message sent: 22-Dec-22 02:12 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「嗯——嗯，眼前的目標固然重要，但背太多壓力也很傷身的。」看五十嵐把臉藏縮進臂彎的模樣，不明其中緣由的羅倫佐伸手拍了拍對方的背安慰。
+
+「所以呀✿好好休息，好好吃飯，好好睡覺，凡事盡力而為。未來啊，順其自然就好了嘛✿」
+
+「想想實驗結束之後享用的美食，想想之後想做的事……像我呀✿很喜歡工作完成後只屬於自己的時間。」
+
+她挽著自己的手，垂眼觀送拇指相互纏圈的同時用懷緬的語氣細聲訴諸：「有時是黃昏，有時是清晨；無論是在工作室，還是在外地。迎接我的從來不會是一模一樣的景色……」
+
+她一點也不介意自白融入周遭背景的交談裡，對於羅倫佐來說心念亦或者是言語都是棄時及消的存在。
+
+她喜歡任之漂泊，不帶任何的預期去收穫沉默或驚喜。
+
+「想太君一定也有吧✿想做的事，期待的事——」
+
+　想做的事咩……
+
+雖然五十嵐實在沒有餘力照顧到互動，但羅倫佐所陳述的心情他多少能體會一些。
+
+他拆開頂部的塑膠封膜，扭開瓶蓋攝飲比人的體溫差距一截的礦泉水，腦內翻滾的算計也因此稍停了一陣。
+
+「我想離開這裡……」鬆口之際拋出的試探，羅倫佐會如何回應呢？
+
+五十嵐側過頭望向面帶微笑，肢體語言保守到或許能用無懈可擊來形容的女性研究員。
+
+對方肯定有聽清楚他的話，所以才選擇選擇靜默的審視，那副姿態不經讓人聯想到夜梟一類的猛禽。
+
+他不曉得她看得多透，看得多遠，只知道對方還沒出爪。暫時的。
+
+「離開新世界，環遊世界是我的夢想。」在沉默達到飽和的寸前五十嵐拋出下文。同時用補充幾口水的舉動暗示兩人的話題差不多到頭了。
+
+「——那是相當美妙的願望呢✿」
+
+領會的羅倫佐嫣然一笑，起身離去之前拋下一如往常飄泊的話語。
+
+「我相信想太君能辦到哦✿」
+
+休息時間結束，下半場測驗即將開始。
+
+或許是有過實戰經驗，又或許是實驗人員看他上一場被砸的太慘降低了難度。
+再次出發的五十嵐這回開了全力竟然能閃過大部分的攻擊。
+
+　——機器人的反應跟射擊率好像有調整過？嗯嘛不管怎樣幫了大忙！快快打完收工唄。
+
+「好咧！」他撐手翻過矮牆，拜與漆彈以極近距離擦過推增的腎上腺素所賜，也不需要再依賴障礙物的掩護了吧。
+
+五十嵐搓熱手心，抓準呼吸頻率的吸吐換氣，在受限範圍內繼續配合人工智能跳完追逐與逃亡的戲碼。
+
+他自認表現的還行，除了幾次被激起玩心沒抓好時機之外，幾乎沒犯什麼失物。
+相較先前踏出房間的解脫感，此時五十嵐甚至產生了股還不滿足的詭異欲求。
+
+　啊啊——這下真是從頭到腳大動特動了一番啊，今天肯定很好睡……
+
+「哼——怎麼？你才這點本事嗎！」
+整完裝備的小混混室友踏出的每一步都洋溢著過漲的自信，準備上場前還不忘阻斷了五十嵐的去路：「等下讓你見識什麼叫做全能！」
+
+「是，是。武運昌隆。」差不多已經習慣對方講話調調的五十嵐也只是表面陪笑，拍掉搭在肩上的手後人走回觀戰區脫裝、休息。</span>
+
+                                <span class="chatlog__edited-timestamp" title="24-Dec-22 09:54 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">22-Dec-22 06:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055432523922018354" id="message-1055432523922018354" title="Message sent: 22-Dec-22 06:32 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「噢！我們的上神選手這回的表現也是精彩絕倫啊，竟然能在那麼近的距離閃過射擊！難以想像！神乎其技！」
+
+「即使用的是橡膠彈，在那麼近的距離下被轟到瘀青瘀定了！就跟我一樣哈哈哈！」
+
+「目前成績最佳的失誤三發，他有機會打破記錄嗎？大家願意給這前途一片光明的年輕人一個機會嗎！一賠四、一賠四，再三十秒後咱們就要收盤啦，下好離手，下好離手！」
+
+「哎呀、哦哦？不妙囉不妙囉！這下不妙囉，上神同學。快多開，危險啊！」
+
+「他他他再一次的閃過啦！還繞到對手的背後……啊！那個站位絕讚！上啊！給那些 0 跟 1 的鐵皮人一點顏色瞧瞧！」
+
+　……不是咩，實驗人員有告知過他們只能躲、不能反擊了唄。
+
+原本只想放鬆休息，出於有趣才跟風收聽其他人的播報的五十嵐忍不住失笑，他翻坐起身仰頭觀望螢幕投放的現場轉播時，正巧對上了堪稱神奇的一幕。
+
+他的室友，那個人反應速度怎麼看都已經超常了吧？
+
+　<em>——感覺全世界都慢了下來，</em>
+　<em>要我閃子彈八成也不是什麼難事——</em>
+
+對。沒錯，他記得對方昨晚確實說過類似的話……
+
+　<span class="pre pre--inline">「喂喂！就這點程度嗎！我還沒拿出真本事呢！</span>
+　<span class="pre pre--inline">「再多來幾台也可以啊！我說真的！」</span>
+　<span class="pre pre--inline">「放馬過來……」</span>「抱歉，」
+
+五十嵐攔下距離研究團隊最遠的一名研究員，指向對方手中的平板：「請問，所有的測試紀錄你們都會留對吧！」
+
+「嗯？啊，對啊……」「借我看！拜託了！」
+
+事實在查閱後得到實證，看過自己的測驗影像紀錄後五十嵐覺得此時此刻他的全身浸泡在透心涼的惡寒之中。
+
+　——不是測驗門檻降低，是他的速度變快了……怎麼可能。
+　怎麼會，不可能啊，他早些前明明還……
+
+擺脫不了錯愕的他用手勢迴避了研究員的關心，人慢慢的走回休息區頹喪地縮回角落。
+
+周遭的喧囂，投影的畫面。全都納不入五十嵐的眼，此時他正全力思考著發生在自己身上的未知。
+
+直到下一波鼓噪來襲，五十嵐才瞥向整身潔白、無傷出關的室友，研究員遞給對方一瓶礦泉水，熱情的請求配合追加測試……
+
+　<em>水……是那瓶水……</em>
+　<em>他已經盡量小心了，卻還是被 SMC 擺了一道。</em>
+
+五十嵐腦中的猜想不斷擴大，情緒的渲染幾乎淹過了理性。他面無表情的目送人們遠去的背影，什麼也沒做的離開了實驗會場。
+
+即使當面對質「是不是在水裡跟伙食裡下藥」，研究所一方只要概不承認，那他的反抗就是無力的。
+
+得等待，得找其他方法——
+
+🆇
+
+「為了即時掌握受試者們的身體最新狀況，我們將發放電子項圈，還請各位配合配戴。」
+
+人在寢室的五十嵐沒多做抵抗，在研究員的監督下戴上了項圈。
+
+「請放心，我們向各位保證，配戴電子項圈不會影響各位接下來的測驗。」
+
+雖然五十嵐沒什麼學歷，但《大逃殺》、《彌留之國的愛麗絲》之類的漫畫也看了不少，多少能猜到給人戴項圈背後的用意。
+
+唉嗯，他一時衝動摸走研究員的行動終端的行為觸動了 SMC 的警戒網——贓物已經被他擦掉指紋、關機丟到公共垃圾筒了——
+
+很不走運的，那台手機居然設了指紋鎖。沒路用也就算了，現在還多了一個可能會壞事的頸圈。
+
+「……這玩意，碰水也沒關係唄？是說硬拆會爆炸咩？」他用指尖碰了鎖在脖子上的項圈，半開玩笑式的發問。</span>
+
+                                <span class="chatlog__edited-timestamp" title="24-Dec-22 09:58 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">22-Dec-22 09:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055482055384895559" id="message-1055482055384895559" title="Message sent: 22-Dec-22 09:48 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「哈哈，沒有這麼恐怖啦，如果真的有什麼不舒服的情況，這東西隨時都可以拿下來。
+但是屆時就會視為實驗中止，當然報酬部分也就視為放棄。」
+研究員把頸環用力拉開，彈力環帶的部分就擴大到可以從頭部取下的尺寸。
+「我們已經確保這個帶著的時候不會有任何不適感，你們就忘了它的存在，即使直接帶去洗澡也沒問題。」
+
+在確認所有人都配戴好項圈之後，研究員就帶著幾名受試者準備離開。
+
+「欸欸欸，今天開始我們就要分開啦！
+測驗成績優異，我要先行一步去進入第二階段啦！
+聽說可以再玩到之前的那種完全沉浸式VR體驗哩！」
+小混混興沖沖地跑來跟室友們道別。
+「啊，所以說那個行動終端的約定可能沒辦法啦，拍謝捏。
+好啦，我先走囉，有機會再見嘿。」</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">22-Dec-22 10:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055491914281001110" id="message-1055491914281001110" title="Message sent: 22-Dec-22 10:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">五十嵐聽完研究員的解說，嘗試性的動手些微調整了項圈的鬆緊，初步確定一個指圍的程度還在默許範圍後便停止了試探。
+
+或許已經造成了什麼肉眼不可見的影響，只是他目前尚未知曉罷了——
+
+「噢，那真是恭喜！」心裡有鬼的五十嵐在有第三者在的場合也只能裝出一副「我不是很清楚你指的約定是什麼」的尷尬模樣。
+只是計畫上損失一名幫手也確實可惜，對此，他還真有幾分捨不得。
+
+「那就祝你順順利利，保重身體，再見了。」
+
+五十嵐招招手送別小混混前室友，回頭確認了下的目前同寢還剩哪些人後，便仰躺在自己的床位，默不作聲地著手製作能代替螺絲起子的小道具。
+
+他預計先去男廁隔間探探從通風管的逃生路線是否可行。考慮到電子項圈或許有定位的功能，他得把控逗留時間不讓研究所一方起疑。</span>
+
+                                <span class="chatlog__edited-timestamp" title="23-Dec-22 01:23 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="五十嵐想太">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="24" style="color:#78C2C4">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">12-Nov-22 09:26 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="1040980893315104810" id="message-1040980893315104810" title="Message sent: 12-Nov-22 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">【目標】5d6 取三
+- 製作道具
+- 探路
+- 情報
+
+擲骰結果：<img class="chatlog__attachment-thumbnail" src="https://images.plurk.com/78xvOqcvY9UKuQPhQWV9MM.png" alt="Image attachment">
+							
+</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">23-Dec-22 12:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055708042760556624" id="message-1055708042760556624" title="Message sent: 23-Dec-22 12:46 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">檢查過廁所裡面沒有人之後，五十嵐爬上馬桶蓋開始拆排氣扇。
+雖然是利用自己的衣服零件勉強弄出來的類螺絲刀，但是要拆這種制式裝置還是不成問題的。
+
+把最後一個螺絲卸下的瞬間，排氣扇的重量整個落到了五十嵐的手上。超乎想像的重量加上馬桶蓋本來就不穩定，腳下一個沒踩穩滑了下來，伴隨著巨大的聲響，馬桶蓋整個被排氣扇給砸破了。
+驚慌失措的五十嵐怎麼樣都找不到最後拆下的那個螺絲，但是時間緊迫，巨大的聲響等等肯定會吸引到人來查看。總之先把排氣扇給裝回去再說。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">23-Dec-22 01:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055715244531523684" id="message-1055715244531523684" title="Message sent: 23-Dec-22 01:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">居然連師都還沒出就陷入如此不利的局面，他的運氣實在不是普通的背——！
+
+在如此分秒必爭的場合，五十嵐沒空反省也沒空抱怨老天，他盡所能的把排氣扇裝回原位。
+
+馬桶蓋破掉一定會惹人起疑，但也沒別的法子了。眼下得優先避免被人目擊他人留在事故現場。
+
+五十嵐把餘下三枚螺絲鎖緊後裝作一副什麼也沒發生的模樣，人匆匆忙忙的離開廁所，前往餐廳。
+
+他旁敲側擊地試探了其他名受試者，詢問「有沒有人吃過紅色天使」以及「住在研究所期間身體是否有感覺變化」。
+
+調查了複數人的反應後，五十嵐理解以下幾點：
+
+　1. 受試者們全都服用過研究員給的紅色天使。
+　2. 沒有人對個人測驗的優異結果感到懷疑（只要測試順利怎樣都行）
+　3. 食用紅色天使後，聽覺和視覺被放大，對外感知類似進入了慢放影片的狀態。
+
+　所以才能先對手一步做出反應唄。
+
+下半場的反應向測驗親身體驗過的五十嵐大致明白他人的形容……
+
+「沒錯沒錯。所以說啦～預判機器人動作什麼的根本小菜一碟！」
+
+　<em>嗯嗯。</em>
+
+「跟你說啊！我還試過閉眼聽聲辨位，呀——真的太爽太刺激了！」
+
+「嗯、嗯……？你說啥咩？」
+
+「不蓋你啊小兄弟！就連呼吸都聽得一清二楚啊。啊～肥皂的香味混著女人香、明明只是聽著呼息卻彷彿距離近到能親手摸到似的，嘿呦！讓人把、」「呃喂真假，你不是認真的唄……」
+
+他感到大腦思考接受速度比隨口應酬的話語還要慢很多。
+如果這番話沒有摻水加料的吹噓成份，那紅色天使真的太誇張、太外掛了。</span>
+
+                                <span class="chatlog__edited-timestamp" title="28-Dec-22 09:41 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">23-Dec-22 05:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055776017437954079" id="message-1055776017437954079" title="Message sent: 23-Dec-22 05:16 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">到了就寢的時間，陪伴著大家入睡的音樂再次響起。
+明明是每天都相同的音樂，五十嵐卻覺得今天的聲音特別柔和，身體周圍有股舒服柔軟的感覺將自己包覆住，很快地就進入了夢鄉。</span>
+
+                                <span class="chatlog__edited-timestamp" title="23-Dec-22 05:18 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Dream City S1EP3 End.</div>
+</div>
+
+</body>
+
+</html>

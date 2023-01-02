@@ -1,0 +1,1302 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>新世界 - 五十嵐想太</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.325em;
+    height: 1.325em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+    pointer-events: none;
+}
+
+.chatlog__reference-content > a:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > .emoji {
+    width: 1.325em;
+    height: 1.325em;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    vertical-align: middle;
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__embed-youtube-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-youtube {
+    border: 0;
+    border-radius: 3px;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #5865F2;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #00aff4;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* Preamble */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: #36393e;
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: #202225;
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: #dcddde;
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: #dcddde;
+}
+
+.chatlog__embed-footer {
+    color: #dcddde;
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://images.plurk.com/61cq16rFT4gmUr46UVucBa.png " alt="異類骰 - 新世界 Dream City">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">異類骰 - 新世界 Dream City</div>
+        <div class="preamble__entry--small">🆇 系統規則：異類骰　🆇 世界觀、劇本作者、主持人：Dola　🆇 玩家、團錄整理：五十嵐想太</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">23-Dec-22 05:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055781055161966646" id="message-1055781055161966646" title="Message sent: 23-Dec-22 05:36 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">在朦朧的意識中，周圍的聲音逐漸清晰，傳來的是各種槍砲聲以及咆哮的聲音。
+
+「別睡了！快起來！」
+五十嵐被人一腳踹醒，發現自己身處於一片斷垣殘壁之中。
+房間像是被轟炸過一樣，天花板早已崩塌，牆壁也到處都被開洞，從外面照射進來的不只有明亮的陽光，還有絡繹不絕的槍砲彈火。
+部分受試者們早已拿起緊急儲物櫃裡面的各種槍械靠在牆邊朝外反擊，自己的室友大叔也在其中。</span>
+
+                                <span class="chatlog__edited-timestamp" title="23-Dec-22 05:44 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">23-Dec-22 06:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055799517380874311" id="message-1055799517380874311" title="Message sent: 23-Dec-22 06:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>等等等！什麼情況？現在到底什麼情況？</strong>
+
+怎麼回事！為什麼他們會被攻擊？
+難道這也是 SMC 安排的實驗的一環？不不不，這些是真槍實彈吧？到底發生什麼事了！
+
+「大叔！」五十嵐握穩了其他人硬塞過來的步槍，在彈雨的夾縫中趕到大叔身邊：「怎麼回事？為什麼會、」
+
+戰火的對面是誰？
+他們又是因為什麼會被人盯上？
+
+還有為什麼生物科技公司的實驗室會囤軍火啊！
+簡直預先知道據點會遇襲似的。
+
+五十嵐在理出頭緒之前手已快一步動作將槍上膛，進入隨時能反擊的備戰狀態。</span>
+
+                                <span class="chatlog__edited-timestamp" title="24-Dec-22 02:51 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">24-Nov-22 12:14 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="1045190702356774922" id="message-1045190702356774922" title="Message sent: 24-Nov-22 12:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">【目標】5d6+2d6
+- 掌握對方身分
+- 理解戰況
+- 第一輪交火
+
+【優勢】
+- 神清氣爽x2 
+							
+擲骰結果：<img class="chatlog__attachment-thumbnail" src="https://images.plurk.com/1ktXFQVPCsX62ViQWw7jgh.png" alt="Image attachment" title="Image: Screenshot_20221124-121735_Healing_Plurk.png (92.66 KB)">
+</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">23-Dec-22 11:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="1055862472936009839" id="message-1055862472936009839" title="Message sent: 23-Dec-22 11:00 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">幸好這裡是二樓，佔據高處在這種時候顯得特別重要。
+不僅能夠快速掌握戰況，在槍戰過程中還能夠擁有射線優勢。
+
+身穿迷彩服的陸戰隊正在進入建築物周圍的庭院區域。
+迷彩服!? 肯定不是警察，但是也沒聽說過夢想城市裡面有軍隊。
+看來大概是之前聽說的警察內部專門處理特殊情況的波洛斯了。
+要是讓他們進到了建築物內部，光憑現在這些人肯定是無法對抗。
+但是雖然這裡有地利優勢，但是對方遠處的掩護射擊不斷，偶爾還有火箭筒打過來，這樣待著也不是辦法。
+
+突然間五十嵐眼睛餘光看到庭院樹叢中一道火光，一顆子彈從中飛出掠過了頭頂，還好自己頭縮得夠快，差點就真的初見殺了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">24-Dec-22 03:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="1055931760829026435" id="message-1055931760829026435" title="Message sent: 24-Dec-22 03:35 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">五十嵐貿然的舉動著實讓大叔驚到分神了些許。
+
+<strong>「快躲」</strong>「兩點鐘方向！樹叢後！」
+
+可在大叔打算伸手拉退之前，五十嵐已經架好槍口，果斷地朝上一秒的狙擊源頭給予回敬。
+
+被打要還手，真打不過就逃。是五十嵐的信條。
+
+退回掩體躲避回擊的他比了手勢表示自己能配合輪流攻守，在五十嵐整裝的間隙，就由紅髮馬尾大叔負責。
+
+　——看局勢分析。鳳鳴幫的計劃終究是外洩，波洛斯才出兵得如此迅速唄。
+
+目的在於重損、奪取 SMC 的研究，或將參加人體實驗的人士全數殲滅。
+
+撤是一定要撤的。
+他本就不該攪和進什麼莫名其妙的實驗計畫，人沒理由留下跟 SMC 一起完蛋。
+但在槍林彈雨中當孤狼只會給敵方送頭，在找尋撤離退路線之前必須全員合作守住前線防線。
+
+他們現在位在的制高點最容易被首當針對。
+目前能做的，是把敵方狙擊的火力打分散擊破，同時要守住戰線，決不能讓波洛斯攻佔一樓斷絕他們的後路。
+
+除了有限的火力之外，如果研究所備有遠端操控的機器人或許能算作戰力。
+但能快速適應、操作的只有上神和少部分的人，能不能投入實戰也是未知。
+
+況且，搞不好他們這些沒達高標閥值的試驗者是被 SMC 用作給波洛斯一個交差的替罪羊。
+連報酬都不用付、榨乾身為實驗動物的最後一滴價值。
+
+……不管真相如何，命是自己的。他還是先守好眼前的戰線吧。
+
+和大叔打配合的五十嵐依照對方所示的方向接手了下一輪的攻防。</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Dec-22 07:37 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">24-Nov-22 12:14 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="1045190702356774922" id="message-1045190702356774922" title="Message sent: 24-Nov-22 12:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">【目標】6d6
+- 第二輪交火
+- 戰況變化
+- 撤退路線
+
+【優勢】
+- 神清氣爽(1)
+							
+擲骰結果：<img class="chatlog__attachment-thumbnail" src="https://images.plurk.com/1u0m46dMFaRPBwjpSZU4l0.png" alt="Image attachment" title="Image: Screenshot_20221124-121735_Healing_Plurk.png (92.66 KB)">
+</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">24-Dec-22 12:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="1056062597025247234" id="message-1056062597025247234" title="Message sent: 24-Dec-22 12:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「喂～地下室還有能用的車子，可以用那個逃走！」
+看來不只這裡在努力，也有人在研究所其他地方掌握現況。
+雖然能不能從火力包圍下衝出去還是個未知數，但是總比在這裡單方面挨打好多了。
+
+注意力被後方訊息的分心的一瞬間，一顆手榴彈從外面丟了進來。
+「危險！」
+大叔飛撲過來將五十嵐推到掩體後方，自己卻沒能跟上，手榴彈爆炸四散的碎片摧毀了大叔的右腳。
+「快去跟地下室的人一起逃走！敵人馬上就要進來了！」</span>
+
+                                <span class="chatlog__edited-timestamp" title="24-Dec-22 12:26 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">24-Dec-22 01:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="1056076045419294760" id="message-1056076045419294760" title="Message sent: 24-Dec-22 01:09 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">爆烈的光炎瞬時銳化了五十嵐過去從未注意過的輪廓細節，可在看清之前視野便被緊隨而來的衝擊覆噬。
+
+極近距離的爆炸造成嗡然作響的耳鳴，險些讓他聽不清大叔的呼喊。
+
+「咕、你…」可就算五十嵐此時再怎麼陷入錯亂，在看到對方踉蹌不穩的身形，及其方才為了掩護他人才被誤傷時也該反應過來了。
+
+「好，閃人了！」
+
+五十嵐咬牙果斷的將槍側過手，跨步上前撐起對方的右肩，打算帶人一起撤退：「<strong>逃唄！大叔。</strong>」
+
+雖然他跟這名前室友並沒多深的交情，向來精算個人利益的五十嵐也知道這次的選擇風險有多高。
+
+但連個道謝或者弔祭的名字都喊不出來，獨自苟活下去的世界線——閃 &#183; 邊 &#183; 去！啦！
+
+　<em><strong><ruby>去他媽的<rt>さよなら</rt></ruby>世界！</strong></em>
+
+
+五十嵐抱著針對新世界的怨氣踹開虛掩的逃生樓梯間的大門，半拉半扶著傷患趕往可能是他們目前唯一逃生希望的地下室。</span>
+
+                                <span class="chatlog__edited-timestamp" title="27-Dec-22 03:46 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">24-Nov-22 12:14 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="1045190702356774922" id="message-1045190702356774922" title="Message sent: 24-Nov-22 12:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">【目標】5d6 取三（劣勢：捨去1顆最大值結果骰）
+- 一樓交戰現況
+- 地下室場面
+- 掌握敵方配置
+
+【優勢】
+
+【劣勢】
+- 傷患大叔
+							
+擲骰結果：<img class="chatlog__attachment-thumbnail" src="https://images.plurk.com/7GBkmQdkMtTjiFY7kJOTmv.png " alt="Image attachment" title="Image: Screenshot_20221124-121735_Healing_Plurk.png (92.66 KB)">
+</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">24-Dec-22 09:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="1056199078393942016" id="message-1056199078393942016" title="Message sent: 24-Dec-22 09:18 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">五十嵐攙扶著室友抵達一樓的同時，二樓發生的巨大的爆炸。
+這股爆炸撼動了整棟建築物，五十嵐一個重心不穩倒在了地上。
+試圖重新站起來的瞬間，眼前出現了詭異的景象，就像是同時有另外一個畫面呈現在眼前，讓大腦無法做出正確的判斷。
+
+深呼吸、站穩腳步、重新感受自己身邊的一切，五十嵐把剛剛眼前的詭異景象拋出腦外，現在最優先的是要跟夥伴一起逃出這裡。
+
+一二樓間的樓梯發生了崩塌，堵住了通往地下室的路。
+沒辦法，只好通過一樓的戰場找尋其他路線，幸好一樓還有其他人在維持戰線，只要跟著他們一起撤退應該就沒問題了。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/WHQ0XKJtx7E8D3Rs6MP39.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">25-Dec-22 01:47 AM</span>
+
+            <div class="chatlog__message " data-message-id="1056266761235865690" id="message-1056266761235865690" title="Message sent: 25-Dec-22 01:47 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">方才遲遲無法重疊的虛實的幻影，五十嵐有一瞬間居然期待會不會是身上殘存的天使效力未退的緣故。
+
+　——簡直不堪到讓人笑不出來啊。發誓絕不沾染的他居然動了靠吃毒來解決眼前困境的念頭。
+
+「哈、哈——…」頭好痛。對，肯定是剛才傷到頭了人才會胡思亂想。還有手也……咳呃
+
+　咳哈，這還真叫人不忍看。
+
+劇痛蔓走全身，早就分不清痛源在哪的五十嵐此時哪有閒功夫包紮，只能用意志力忽略將左手刺出筋骨的玻璃刃，任憑外裸的刺傷鮮血泊泊。
+
+「……大叔。大叔你要抓好啊，如果你…」鬆手，他就輕鬆多了？
+
+五十嵐早不該虛妄自己有足夠的能力載負著兩人份生命的重量，他早該有點自知之明才是……
+
+「大叔，你…唉，」倒是給點反應唄？我知道你走得很辛苦，但我也沒有少出力咩……
+
+五十嵐在灰土飛揚與薄煙瀰漫的一樓混亂戰場尋求逃生的方向。
+他在戴著同樣電子項圈的屍體身上搜到一把轉輪手槍，以中距離的戰線來說，這小朋友比來福槍好使多……
+
+<strong>噠噠噠噠噠噠噠噠噠噠噠噠！</strong>
+
+不比雨點輕巧卻比弓羽更加迅捷的機槍朝兩人的方向突突急掃，五十嵐已經逼盡僅存的腎上腺素，把自己和夥伴拉進最近的遮掩物內。
+
+銅質與鋼板門相擊的悶音震懾驚心。
+五十嵐盡可能的蜷縮身軀並試圖在一面倒的戰況抓到突破口的危機關頭中也終於不得不正視癱伏在自己肩上的、靜得可怕的現實。
+
+　——他過去沒來得及，未來也沒機會問姓名的戰友已經斷氣了。
+
+五十嵐不怕近距離面對死屍。
+在他所認知的絕大部份的場合中，死人甚至比活人還好相處、利用。
+
+幾乎是在動手為逝者瞑目的下一秒他就為盤上心頭的褻瀆死者計畫向對方致歉了。
+
+是啊。一句價值為零、絕對得不到當事人原諒的對不起，遠遠比不過他想對得起自己、想活下去的本心。
+
+耐著椎心之痛拔出手上玻璃碎片的五十嵐托起步槍向攻擊源頭盲目地連續反擊直至子彈全數打空。
+
+接著，他將曾經的夥伴兩手抱著空槍、作為分散敵人注意的誘餌推了出去，自己則躲在門板後屏息以待清算業果的腳步聲逐漸逼近。
+
+右手抵著心門、癱仰在地的五十嵐眼抑制自己的呼吸。
+
+即使身穿防彈背心的軍人向大叔的腦門補上一槍時，他連眼睛都不眨一下。
+
+他沒有別開視線，就這麼看著——
+
+看著軍人，踹開蓋在他身上的障礙。
+看著對手，以居高臨下的、行刑的姿態抬起槍口——
+
+霎那，五十嵐右手反握槍管控住了關鍵的一槍，同時半弓的雙腳朝軍人的下盤重重踢去。
+
+依賴反作用力的牽引五十嵐順勢而起，趁身穿重裝的軍人重穩架勢之前執起手中染血的玻璃長刃封了對手的咽喉。
+
+他不必確認下刀有沒有觸及要害、或深或淺。
+
+五十嵐在沒穿護具的腿部補了一槍後不再耗時間纏鬥，他得在紅外線的灼點再次聚在自己身上之前跟上其他試驗者的腳步。
+
+另外，他很清楚這些領公薪的死公務員全都接種過「如來組織」發散出去的疫苗。
+疫苗成分與他血液中流竄的病毒是成套的組合，五十嵐體內養的病毒只對施打過流感疫苗的個體有效。
+
+　<em>——「公益」萬歲。祝你的大腦早日燒成糨糊。</em>
+
+腦袋暈乎乎的五十嵐連腦海閃過的亂七八糟想法全都抓不到概念、也無心回想。他必須專注在繼續東躲西藏、你追我趕的逃命之途——
+
+幸好老天沒有棄他於不顧，五十嵐成功和幾名倖存者會合。
+
+透過無數夥伴獻出的血、越過由屍體疊成的山嶺，深陷在活地獄中的被獵者們終於見到了一絲曙光。
+
+一樓後門附近自然有軍人鎮守，但比起正門堪稱撒網式的圍捕，存活率稍微高了些。
+
+自製燃燒瓶落地便是信號，臨時小組在此解散，在此之後的未來就全憑本事、運氣、以及個人造化了——
+
+　<em>——尖叫之後好像有人喊了什麼。</em>
+
+　<em>——子彈落在距離自己幾尺的地方擦出的星火是如此美麗的存在咩。</em>
+
+　<em>——他的跑步速度，有這麼慢過嗎。</em>
+
+　<em>——好吵，心跳。胸口，快裂開了……</em>
+
+　<em>——…</em>
+
+　<em>—……。</em>
+
+　<em>……。</em>
+
+　<em>為什麼。</em>
+
+　<em>明明，他還沒掙扎夠、</em>
+
+　<em>給這樣的結局。</em>
+
+　<em><strong>不覺得太過份了咩！</strong></em>
+
+
+年僅二十六歲的五十嵐想太被身後掀起的熱浪推了一把，卻又因為正前方架起的一整排 RPG 被迫止步於此。
+
+　他的人生，終於到頭了。
+
+「啊……」事到如今怎樣都好了唄……
+
+<em>唰——</em>
+
+　都無所謂了，這一切。
+　就在這結束唄。
+
+在啼哭中出生，在流乾眼淚之時逝去。這就是五十嵐不完整的一生。
+
+　<em>——原來從特等席正面接榴彈是這副光景咩。</em>
+
+風壓吹散青年黑色的瀏海。在象徵一日之始的朝陽下，五十嵐想太緊握拳頭迎接死亡。
+
+作為人生，化為犬死。</span>
+
+                                <span class="chatlog__edited-timestamp" title="28-Dec-22 02:35 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="198" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">25-Dec-22 01:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="1056438467132919898" id="message-1056438467132919898" title="Message sent: 25-Dec-22 01:09 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">RPG發出炸裂的火光，五十嵐眼前的景象也再次跟之前的綠色場景重疊。
+當榴彈炸裂的同時，戰爭的場景倏忽消失，僅剩下另一個場景存留於眼中。
+
+五十嵐發現自己被關在生物培養槽之中，而周圍其他的生物培養槽也都關著剛剛一同並肩作戰的受試者們。
+其中，離自己最近的培養槽裡面的人正是剛剛自己親手推出去的大叔。
+大叔的身體赤裸，但是並沒有任何明顯的外傷，但是大腦四周插了數隻電線。
+培養槽旁邊的顯示器正表示著：
+<div class="quote">生命體徵......正常
+連線狀態......正常
+模擬狀態......死亡
+</div>
+環顧周圍，可以看到自己身邊的培養液中也漂浮著數隻電線，肯定是因為這些線路鬆脫，讓自己取回了意識。
+培養槽外面沒有看到任何工作人員，遠處高掛著的大電視則是顯示著：&quot;剩餘人數：20&quot;，旁邊還有一個監視畫面映出許多人拿著槍枝搭上車的景象。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Dream City S1EP4 End.</div>
+</div>
+
+</body>
+
+</html>
