@@ -1,0 +1,1408 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>新世界 - 五十嵐想太</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.325em;
+    height: 1.325em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+    pointer-events: none;
+}
+
+.chatlog__reference-content > a:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > .emoji {
+    width: 1.325em;
+    height: 1.325em;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    vertical-align: middle;
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__embed-youtube-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-youtube {
+    border: 0;
+    border-radius: 3px;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #5865F2;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #00aff4;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* Preamble */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: #36393e;
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: #202225;
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: #dcddde;
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: #dcddde;
+}
+
+.chatlog__embed-footer {
+    color: #dcddde;
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://images.plurk.com/kIM8v9ohjGoCdiXiVZe5T.png" alt="異類骰 - 新世界 Dream City">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">新世界 Dream City</div>
+        <div class="preamble__entry--small">🆇 系統規則：GRUPS改　🆇 世界觀、劇本作者、主持人：Dola　🆇 玩家、團錄整理：五十嵐想太</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="151517268" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">22-Jan-23 12:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="1066572491457314907" id="message-1066572491457314907" title="Message sent: 22-Jan-23 12:18 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">「把這些人手上的貨跟錢都收回來，盡快」
+麻霧的指令總是如此精簡，跟做生意的時候完全不同樣。
+
+名單上面的名字都是麻霧下面的中間人，他們都居住在貧民區內專門販售毒品槍枝給附近的人們。雖然銷售額不高，但是在這行業裡面跟周圍人們打好關係能夠帶來許多意想不到的好處。
+根據五十嵐的理解，麻霧鮮少對如此基層的事務親自下達指令，更何況是這種對組織運作幾乎沒有影響力的末端。但是以自己現在的小弟立場也不好多問些什麼。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7GEkMVb9EISmGeRmhHgV7b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">22-Jan-23 04:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="1066628815213842462" id="message-1066628815213842462" title="Message sent: 22-Jan-23 04:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">從熊貓餐館離職到投身於麻霧正渡底下做事也過了幾個月，這段時間內足夠讓五十嵐想太習慣很多事。
+
+精簡過頭的指令。不管過程只驗收結果。人龍混雜的工作環境。
+若不是給薪夠香，他早就另謀高就了。
+
+［收到了。］回完類極簡畫風的簡訊後，是該擬定下一步打算了。
+
+五十嵐本身並不富有。在任務中用經驗繳學費之類的事再多來幾次，乾脆叫他一腳踩進流沙的中心——死了更為乾脆。
+
+掃過一串名單，其中幾位五十嵐光是看到姓名腦中就浮現出對應的臉孔。
+前幾週還跟人家好來好去合作愉快，現在鬧拆夥還要他出面處理分手實在有夠尷尬。
+
+而且沒明寫貨跟錢之外的目標該如何處置，真要硬搶應該有比跑腿更合適的人選唄？
+
+　問組織裡比較資深的幹員也不見得能有答案，不如從旁試探名單上這幾位有沒有惹上共通麻煩的還比較快……
+
+不抱希望的五十嵐滑過手機一長串的聯絡人清單找尋能幫上忙的人選，最後目光落在一個很久沒聯絡的人名上。
+
+因幡梅之助。順著販毒線索主動找上自己的黑警。
+兩人靠著互通小道消息有過幾次合作，但這段關係在約莫半年前迎來結束。
+
+五十嵐不抱期待的傳了封內容只有美金和信封的表情符號簡訊過去——「要錢？還是要情報？」這是他們之間約好的溝通暗語——
+
+畢竟同是圍著流沙撈金的人，某天人莫名其妙的消失五十嵐也不會感到意外……
+<div class="pre pre--multiline nohighlight">$$$ / <a href="https://www.plurk.com/p/p4yhmh" target="_blank">p4yhmh</a></div>
+　哈……獅子大開口。瞧你的兔子人設皮掉哪去了？
+
+五十嵐沒花時間話家常，直接用文尾的縮址登入聊天室直切重點的攤牌。
+
+［之前欠我的帳難道算了咩？算數再爛也別跟我說你忘了！］
+
+即使是追討的起手式，兩人的對話也沒有在開場就結束。
+五十嵐跟因幡本來就是靠著互通互利合作，跨度黑白的可信情報網實屬可貴。
+基於現實又實際的考量，雙方因為一點摩擦徹底鬧翻就太幼稚了——
+
+問到了警方近期的行動佈局，離開一次性聊天室的五十嵐刪了紀錄，盯著方才抄寫在紙上的紀錄陷入長考。
+
+——過去不被警方放在眼裏的貧民區地下產業鏈，即將面臨一波清洗。
+
+而且因幡給的警方預備突襲檢查的對象，正好與組織開出來的回收名單重合——但麻霧正渡給的名單更長——
+
+單純的巧合？五十嵐不這麼認為。
+
+大概是從哪聽到了風聲，為降低損失下游的生意打算先收攤了再說唄。
+
+粗略瞭解局勢的他決定優先從警方給的名單著手，人動身前往回收目標的住處。
+
+五十嵐在一家著火殃及三棟的違章建築內穿梭，不是第一次來此地的他並沒有因為錯綜複雜的路線迷路。
+
+他在一戶照不到陽光的邊間停了下來，抬起右手敲了敲門。</span>
+
+                                <span class="chatlog__edited-timestamp" title="24-Jan-23 06:58 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="151517268" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">23-Jan-23 02:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="1066783703046565888" id="message-1066783703046565888" title="Message sent: 23-Jan-23 02:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">眼前脆弱的木門立即就打開了，擋在門前的是一個身形極大的巨漢，身形瘦小的五十嵐瞬間還以為這是另一堵牆。
+身穿卡其色的風衣，這是在角色扮演20世紀的偵探嗎？
+
+對方低頭看了五十嵐一眼，雖然戴著墨鏡看不到他的眼睛，但是光憑這身高差距的壓力就讓五十嵐無意間後退了一步，對方就直接走過五十嵐面前離開了。
+
+從敞開的大門往房間裡面看去，自己想找的目標正靠坐在牆邊兩眼睜開但卻一動也不動。五十嵐衝上前去仔細觀察，果然已經斷氣，而腳邊一整片的紅黑色液體表明對方剛被襲擊沒多久，但是這片液體還帶有著些許黏稠性，不是單純的血，而屍體身上也沒有明顯的外傷，這或許不是屍體的血跡。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7GEkMVb9EISmGeRmhHgV7b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">23-Jan-23 11:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="1066919552992153700" id="message-1066919552992153700" title="Message sent: 23-Jan-23 11:17 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">人死了。會是剛才的大個子幹的好事？那傢伙什麼身份？
+而且對方為什麼獨殺了屋內的人又放過了登門的他？單純的私人恩怨？還是……<strong>啊！</strong>
+
+重新站起身的五十嵐腦中的思緒雖仍混做一團，但沒有忘記自己來此的目的。
+
+他手忙腳亂的在室內為數不多的家具中一陣東翻西找，好在有順利的回收貨品。
+把錢、毒品、記帳本全數包進黑色的垃圾袋裡後，五十嵐這才有餘力緩過氣。
+
+他用黑色的衣袖揭去冷汗，提起塑膠袋塞入背包內。準備離去前再度瞥了未能瞑目的屍體一眼。
+
+——殺了毒販，不拿錢財、不搶毒品，還用這麼怪異的殺法。
+南無，這位仁兄您到底是惹上什麼人、攤上什麼大事？
+
+五十嵐從屍體的後口袋翻出行動終端，速查死者的通聯紀錄和內存的照片。
+初步觀察，可見訊息的範圍內並無收穫，其中也沒有關於風衣墨鏡男的線索。
+
+五十嵐拿出手機翻拍近期通訊紀錄後，又對著案發現場以及屍體多來幾張照片留存。
+
+沒錯，他壓根不想蒐屍。
+
+就算五十嵐不是學醫的，但親身經驗足以讓他知道人體內能承載各種各樣花式的惡意。
+天曉得光是剛才幾下近距離接觸是不是也讓自己感染了什麼，凡事小心為上。
+
+他倒空藥瓶用衣角大略擦去藥粉，戰戰兢兢地將混了血液的黑紅色黏稠物質裝入瓶內。
+
+五十嵐打算將採血樣本交給認識的密醫化驗，之後加緊腳步繼續回收工作。
+
+畢竟他們現在不止被警察盯上，也有可能被什麼未知的怪異殺手給找上了。
+
+而親臨不如傳聲來的效率。五十嵐離開房間時，同時電聯有列在警方名單裡的販毒個體戶。
+
+他先一步傳達警告、並且告知對方自己等下要上門回收。
+
+為了避免節外生枝，五十嵐沒有透露可靠消息的來源，只說：「現在有不明勢力盯上了組織，對方不知道從哪搞來的銷售據點名單，你待的地方不安全。」
+
+「你人先去避風頭躲一陣，等事情處理完我會聯絡你。」
+
+「還有，把貨跟錢留在你家我會去收。記住，組織不會忘記你的付出，事後必有回報。」
+
+在驅車前往私診的這段路途，五十嵐仍在聯絡其他下游廠商，儘可能地多通知一人是一人。</span>
+
+                                <span class="chatlog__edited-timestamp" title="23-Jan-23 12:57 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7GEkMVb9EISmGeRmhHgV7b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">23-Jan-23 12:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="1066939491618656346" id="message-1066939491618656346" title="Message sent: 23-Jan-23 12:36 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">五十嵐來到熟識的地下診所，聽過化驗的報價後心情指數又掉了幾分。
+只因無奈他現在正在跟時間賽跑沒本錢跟密醫殺價，最後直接塞錢要對方立刻開工辦事。
+
+驗血立刻有了結果。從醫療紀錄交叉比對後，得出結論：案發現場血跡不是屋主的血，而是來自其他人。
+同時也不是純血，而是人體改造機械義肢使用的體液。
+
+「我不記得那傢伙有做過替換手術。」
+但五十嵐沒工夫折返檢查屍體的皮囊底下是不是鐵骨，只能把亮出剛才翻拍的現場照片讓對方鑑定：「醫生你怎麼看？」
+
+「兄弟你是把我當活神仙來拜了嗎？真是的。」黑市醫生接過手機一張張滑過照片，另一手像是驅趕奉承又像是迴避瘟疫的揮了揮。
+
+「遠距離驗屍？聽都沒聽過。你好歹把這傢伙的胸切開來，扒開肋骨來幾張吧？不然對著一張死人臉我是能瞧出什麼毛病……」
+
+「光看這出血量，你要找的人大概是剛一口氣全身換血的改造人吧。」
+
+「再不然也可能是放血放過頭的蠢蛋，但流這麼多血大概連路都走不啦。」
+
+五十嵐接過手機陷入思考。
+
+　……機械義肢。大量失血。改造人。
+　那名風衣男確實體格高於常人，體能規格八成也異於標準值。
+
+「做過機械改造義肢的話，能從血檢報告回推找到本人嗎？」
+從常規商店購買的義肢應該會留下電磁紀錄，怕就怕如果對方用的是黑市貨就難查了……
+
+「在我這裡只要你想得到沒有不可能，當然委託費也另計…」「算了當我沒說，不查了！今天謝了。之後也請多關照！」
+
+五十嵐本人沒有博愛到把本錢揮霍在不是自己的 DNA 身上，事到如今只能且戰且走。
+
+他急匆匆的趕路，下一個回收點位於商圈外圍的一家肉舖後方的儲物倉庫。
+
+呼——不用翻牆、不用爬樓梯、不用拆門，真是幫了大忙。
+
+五十嵐一面祈禱自己沒來的太晚，一邊解開腰間槍套的固定扣好隨時可以應付突發狀況。
+
+來到鐵皮倉庫門前站定的他二話不說踹開了老舊的門扉。</span>
+
+                                <span class="chatlog__edited-timestamp" title="23-Jan-23 07:04 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="151517268" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">23-Jan-23 01:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="1066954808734519296" id="message-1066954808734519296" title="Message sent: 23-Jan-23 01:37 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">沒有營業的肉鋪相當冷清，聽不到平常震耳欲聾的切割機聲音，只有冷凍庫壓縮機的噪音迴繞在倉庫裡。五十嵐熟門熟路地來到倉庫後面隱藏的密室，金錢相關的東西都會收在這裡，順利的話應該可以拿完轉身就走，一分鐘搞定這地方！
+
+打開密室，躲在裡面的毒販被這開門聲嚇個半死，整個人躲在桌子底下露出屁股當鴕鳥，五十嵐毫不客氣的踹了他一腳。
+
+「咿咿咿！！搞什麼，五十嵐啊？不先出個聲音想嚇死誰啊！？東西我還在整理中，你在旁邊先等一下吧。」
+
+照桌上的散亂程度來看，沒個幾十分鐘應該是不大可能整理好，真虧這傢伙可以負責一整個倉庫的營運。五十嵐抓了一把椅子坐在旁邊看他收拾東西，才剛坐下來，密室的門被撞了開來，衝進來的襲擊者直接一拳打飛了毒販。</span>
+
+                                <span class="chatlog__edited-timestamp" title="24-Jan-23 12:19 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7GEkMVb9EISmGeRmhHgV7b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">24-Jan-23 01:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="1067316700913074228" id="message-1067316700913074228" title="Message sent: 24-Jan-23 01:35 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">雖然在黑幫組織底下活得不是多光彩，可光看敵人一套緊隨壓制的封喉的動作行雲流水，此人的身份也絕不比他們良善幾分。
+
+五十嵐入行幾年見識不多不少，來此之前也在腦中模擬了無數次的應對，直面衝突時他已盡己所能的採取行動。
+
+握穩槍柄的他此時此刻心中萬分慶幸破門的入侵者的注意力和手中槍口瞄準的對象不是自己。
+
+<em>碰鏘。</em>
+
+「啥、」<strong>嘖，不是吧！腦殼什麼時後進化到可以防彈都不用事先打招呼的喔這算作弊了唄！</strong>
+
+一槍爆頭、腦漿塗地的畫面並未如期而至，慌不擇路的五十嵐眼下除了堅持遠距離牽制之外也沒其它應對手段。
+
+五十嵐很肯定自己有瞄準，但耳聞和眼見卻是實實在在過於超現實。他最終還是沒能沉著應對，居然在存亡關頭分心吐槽：「你也太耐……嗯？」
+
+不知為何敵人遲遲不採取行動，在確定對方沒有反擊的跡象後五十嵐這才收槍上前一探究竟。
+
+當他親自確認了襲擊倉庫的傢伙不是秉持著站死的武士，而是有著機械骨架的人形後立忙抄起工作台上的粗鐵鍊和大鎖先把人捆實了再說。
+五十嵐沒天真到以為能憑著一發打凹眉心的挫傷能構成重創，而手上的傳來的肢動也證實他的猜想沒錯。
+
+「噢，別太激動，」五十嵐先一步將敵人的槍踢走，再度拔槍指向瞄準對方的頭，同時慢慢後退：「回答問題，或是我把你那頭鐵殼掀了自己找。」
+
+嗯，只是隨口說說。在密閉空間裡近距離對鐵塊開槍，他先該擔心自己會不會被反彈的子彈波及。
+
+「你什麼人？有什麼目的？」
+襲擊倉庫的這位兄台跟風衣墨鏡巨人走的是類似的路數：殺毒販、不捲錢、不搶貨。
+
+「還有，是誰告訴你這個地點？」
+
+跟警方賽跑已經夠他忙了，現在還要耗神跟來路不明的勢力周旋，唉：「——別急，我跟你還沒完呢。」
+
+感覺殺手不願鬆口、寧可來個魚死網破的意圖，五十嵐先發制人連開數槍廢去對手的行動能力，重新裝填子彈。
+他一邊把控不被奇襲的安全距離，垂眼打量在混凝土地板上擴散的黑紅色濃稠血漬。
+
+「全身機械義肢是你們的標配咩？真虧你們受得了。」五十嵐的毫無起伏的語氣、重新抬起的槍管算是間接預告了自己的打算。
+
+「不想說就算了。」這自然是虛張聲勢，但他盡量說得像一回事。
+畢竟有些人的口風跟脾氣跟蚌殼一樣硬，五十嵐也沒時間慢慢拷問：「身高超過兩百的高個男也是你的同夥唄，等我們逮到他再…」
+
+「什麼！那傢伙人在哪？」
+
+眼見男人態度劇變驚慌的模樣五十嵐只覺得莫名其妙。有提問權的應該是他才對唄？
+
+注意到那對被恐懼淹沒的雙眼，五十嵐自認應該沒辦法再問話後，相當乾脆的抄起桌上的鐵鎚擊暈了對方。
+
+確認過毒販同夥還有呼吸後，五十嵐接手了打包作業，同時打給了麻霧正渡，傳達工作上遇到的困境。
+
+「是我，五十嵐。據點被人盯上了，我們的人也被對方幹掉了。」當前比數，一死一傷。
+
+「對方是有組織的多人同時行動，總人數目前不清楚，但在這樣下去只怕會徒增損失。」
+雖從趴在地板的這位反應來看大概跟巨漢不是一路人。
+同行競爭？隨便唄，兩者都一樣麻煩。
+
+「另外，我剛抓到他們其中一個。麻霧大哥想怎麼處理？」</span>
+
+                                <span class="chatlog__edited-timestamp" title="24-Jan-23 06:24 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="151517268" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">24-Jan-23 11:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="1067470849436819536" id="message-1067470849436819536" title="Message sent: 24-Jan-23 11:48 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">接到五十嵐的聯絡之後，麻霧帶著自己的幾名親信抵達了現場。
+其中一名藍髮少女把某種小型裝置接上了襲擊者的行動終端，立刻就調出了襲擊者的身分資訊。
+
+「身分是警察，但是姓名被塗銷了，這是洗白之後常見的手段。」
+
+「突然的政策改變，加上洗白的執行者嗎？看來這水有點深，應該還有不少後手可以動。」看來麻霧並不把現況視為危機，甚至已經有了可以突破現況的想法。
+
+「這傢伙我帶走，五十嵐你繼續剩下的，有什麼變動再通知你。」指令比自言自語還精簡，雖然已經習慣了，但是聽到的時候還是會有一種很不爽的感覺。
+
+五十嵐離開倉庫的時候，注意到了對街建築的頂樓站了一個熟悉的身影，正是早上遇到的卡其色風衣巨漢。對方似乎注意到了五十嵐的視線，一陣對望之後就轉身離開了現場。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7GEkMVb9EISmGeRmhHgV7b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">25-Jan-23 03:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="1067706409631879278" id="message-1067706409631879278" title="Message sent: 25-Jan-23 03:24 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">麻霧正渡果然接到了警方行動的一部分通知，而五十嵐看對方打算把下一步棋捏著也不多追問。
+既然麻霧評估目前回收作業優先，他乖乖奉命辦事便是。
+
+無奈當人正想活著的踏實，攪滅理想的殘酷現實已主動找上門來——目送背影離去的五十嵐揣著計算忐忑的繼續趕路。
+
+如果大個子真是警察招來的代行，就算五十嵐此刻不追擊，同為跑腿的兩人遲早會再度碰頭。
+
+在前往下一地點途中，五十嵐打了通電話給因幡，試圖進一步摸清警察那邊的盤算。
+
+「是我啦嘿，有點事想跟你請教。」
+他調穩藍牙耳機、油門也催下去了：「反正你們條子都找來一群前罪犯跟我們網內互打了，現在應該閒到不行唄。」
+
+「哈？不是很懂你是指什麼事。但我老家有句俗諺：『帳別亂扣、鍋別亂記』。」
+
+被人劈頭一陣沒頭沒腦的逼問，因幡梅之助表示莫名其妙：「說詳細點，發生什麼事了哈？」
+
+五十嵐把據點被代行警察襲擊，目前遇到的對手都接受了全身義肢改造的過程一一細數：「你們到底投了多少人進來哇？」
+
+「還有，有個看起來特別危險的傢伙混在裡頭。」
+為避免誤事五十嵐打算抄捷徑：「那男人身高約兩百公分，穿著風衣戴著墨鏡還不知道長相。只能確定塊頭大、身體素質異於常人。」
+
+對，流了那麼多血還能繼續活動。
+而且那人只殺毒犯，不回收黑錢跟毒品，簡直可以競選本月的好人好事代表了。說笑的。
+
+「那傢伙到底什麼來頭？」「……我這麼跟你說吧。」
+
+聽完五十嵐急躁的論述，因幡沉吟半晌接過話尾：「這次行動不是我們單位主導，我們只負責提供監視目標的名單。」
+
+「所以，你說的洗白的代行者、行動的整體細節，全都不會過到我們這。」
+
+業務劃分太細節了唄！所以你只要跟你同事多問幾句，整件事就明朗……
+
+「我們以前也跟其他單位配合過幾次類似的行動，讓那群新進的菜兵練練手諸如此類……噢，好，知道了！先這樣吧，我得去忙了，你加油。Bye bye.」
+
+五十嵐沒能打聽到詳細的行動內幕，走在衝突最前線的他只能走一步算一步了。
+
+他在一家閃爍著霓虹燈飾的夜店前停了車，此時天光已經完全被昏黑掩沒。
+
+五十嵐跟守門的打過招呼後人急急直往員工室而去。
+此時他只希望收到警告的下游商夠機靈，東西早打包完畢、人也去避難了。</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Jan-23 04:53 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7GEkMVb9EISmGeRmhHgV7b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">26-Jan-23 04:53 AM</span>
+
+            <div class="chatlog__message " data-message-id="1067910161647288361" id="message-1067910161647288361" title="Message sent: 26-Jan-23 04:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">因此，五十嵐開門見到當事人還留在崗位時，一時難以將之歸類在過於敬業的勇夫，還是沒進入狀況的傻瓜。
+
+「不是叫你人快點走了咩！東西呢？」
+
+雖然打從他進門起一眼就瞧見了地板邊上那袋半開的行李袋，自知問也是白問的五十嵐眼下也只得幫把手加速收拾。
+
+「已經盡量快了嘛！還有五十嵐你在電話裡講得不清不楚，我哪知道是誰要……」
+連解釋都來不及說完，半敞的門後便傳來陣陣騷亂聲。
+
+五十嵐察覺狀況是從舞廳的方向傳來時頓時心生不妙。
+
+「從後門撤！快！」顧不得把包的他果斷地推了還呆在原地的對方一把，另一手抄起袋子準備撤退。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="151517268" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">26-Jan-23 01:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="1068046694937268276" id="message-1068046694937268276" title="Message sent: 26-Jan-23 01:56 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">夜店老闆被五十嵐推出後門的瞬間就撞上了前方的來客，還沒搞清楚狀況就被對方一把抓了起來。
+
+「喔喔～得來全不費工夫啊！你親自出來迎接真是讓我非常的省事啊。」
+五十嵐看到襲擊者的面孔之後愣住了，完全無法理解這個剛剛在倉庫抓到的對手，為什麼現在會在這裡，他不是應該被麻霧給帶回去了嗎？麻霧這傢伙想借刀殺人嗎？
+
+襲擊者在把夜店老闆押回員工休息室時才注意到五十嵐的存在，但是他卻是一副毫不在意的表情。
+「哎呀，還有其他人在啊，我把事情辦完就走，不想一起死的話就別亂來唷～」
+
+被迫退回到休息室的五十嵐注意到監控螢幕上面映著客席的現況：風衣巨漢被工作人員團團圍住，本人倒是神色自若地環視著周圍的狀況。
+
+「嗚！」老闆發出的短促悲鳴把五十嵐的注意力拉了回來，只見被壓制在桌上的他，脖子旁邊多出了一根管子連到了襲擊者的手腕內側，裡面流動著鮮紅色液體，他正在吸取老闆的血液！</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="151517268" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">26-Jan-23 02:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="1068051855151738930" id="message-1068051855151738930" title="Message sent: 26-Jan-23 02:16 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">五十嵐評估了一下現場情況之後，迅速下了決定，取出自己的手槍對著襲擊者開了一槍打斷他的行動之後，頭也不回地迅速往後門方向跑了出去。在穿過走廊即將跑出後門的時候，聽到休息室的方向傳出一聲槍響。</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7GEkMVb9EISmGeRmhHgV7b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="五十嵐想太" data-user-id="五十嵐想太" style="color:#78C2C4"">五十嵐想太</span>
+
+
+        <span class="chatlog__timestamp">26-Jan-23 05:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="1068102720684302407" id="message-1068102720684302407" title="Message sent: 26-Jan-23 05:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>——抱歉你要怨就去怨跟吸血條子私通的吸血老狐狸唄。這局我不跟了。</em>
+
+賭定了麻霧正渡是打算靠白送人頭保住利益的五十嵐燃盡最後一分腎上腺素，帶著回收的物資逃離了夜店、驅車在雲遮的月色下急速奔馳。
+
+　明明那流氓警察被槍打停機、膝關節也被破壞了，還能在這麼短的時間內追上來，當義肢是免洗筷斷掉換一雙就好咩……
+
+還是他在倉庫跟夜店分別遭遇的是兩個雙胞胎兄弟機？哈——啊，什麼亂七八糟的玩意兒。
+
+　話說回來，完全搞不懂採血的意義。警方挑上的這幾個毒販難道各各身懷絕世珍稀的血型咩？
+還是要回收重點正是血裡的東西？
+
+一天內連遭多次衝突的五十嵐就算心臟再大顆今晚也不敢回自家睡，人乾脆去密醫那蹭了個角落待著，順便把入手的新聞跟對方分享討論。
+
+「我是不曉得兄弟你的事業多亂啦，但聽起來不像是完全改造的機械體。」
+
+確實，機械用血液驅動什麼的，可謂是 B 級到家，連三輪戲院都沒在放。
+
+但總結論來說，那些怪胎還是有弱點可循咩！面、小手、身體，喉嚨，劍道般的得分點……開玩笑的。
+
+五十嵐想太壓根不想再與之交手，鐵皮武裝警察根本不是單刷能硬扛下的規格。
+
+反正對方也明說了自己不是優先目標，他照著命令盡量回收物資就行了唄。</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Jan-23 09:07 PM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://images.plurk.com/7FlQlDJ3SLNiUyUS2G2DtI.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GM" data-user-id="151517268" style="color: rgb(233,30,99)">GM</span>
+
+
+        <span class="chatlog__timestamp">28-Jan-23 01:36 AM</span>
+
+            <div class="chatlog__message " data-message-id="1068585378229006406" id="message-1068585378229006406" title="Message sent: 28-Jan-23 01:36 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">五十嵐在診療室的病床上醒來，旁邊椅子上坐著昨天在倉庫見過的藍髮少女，她把放在一旁的金屬手提箱遞給了五十嵐，這個手提箱可以防電波與X光的穿透，是最高等級交易才會用上的。感到疑惑的同時，旁邊的電視新聞播報了一則新聞。
+
+「住宅區外圍的大樓於凌晨時分發生火警，整棟大樓已經被燒為廢墟，所幸沒有任何人員傷亡。根據警方判斷，火災起因為一樓酒吧的電器使用不當所導致。」
+
+五十嵐一眼就認出了新聞內的建築正是麻霧的事務所所在地，而一樓的酒吧早就沒有在營業了，這背後肯定有故事，難道這箱子也有連帶關係嗎？五十嵐止不住自己心中的震驚與不安，緩緩地打開了手提箱，裡面裝的正是昨天連續交手兩次的襲擊者頭顱。</span>
+
+                                <span class="chatlog__edited-timestamp" title="28-Jan-23 01:37 AM"></span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Dream City S2 End.</div>
+</div>
+
+</body>
+
+</html>
