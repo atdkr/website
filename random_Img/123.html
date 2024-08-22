@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Image Display</title>
+    <style>
+        .random-image {
+            width: 200px;
+            /* 設定圖片寬度 */
+            height: 200px;
+            /* 設定圖片高度 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="image-container">
+        <img id="random-image" class="random-image" src="" alt="Random Image">
+    </div>
+
+    <script>
+        // 定義圖片陣列
+        const images = [
+            "output1.png",
+            "output2.png",
+            "output3.png"
+        ];
+
+        // 隨機選擇一張圖片
+        const randomIndex = Math.floor(Math.random() * images.length);
+        const selectedImage = images[randomIndex];
+
+        // 設定圖片的src屬性
+        document.getElementById('random-image').src = selectedImage;
+    </script>
+</body>
+
+</html>
